@@ -1,9 +1,10 @@
 import twilio from 'twilio'
 import ErrorHandler from '../middlewares/errorHandler.js';
 import { sendEmail } from './sendEmail.js'
-const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN)
+
 
 export const sendVerificationCode = async (verificationMethod, verificationCode, name, email, phone, res) => {
+   const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN)
    try {
       if (verificationMethod === 'email') {
          const message = generateEmailTemplate(verificationCode);
@@ -13,35 +14,45 @@ export const sendVerificationCode = async (verificationMethod, verificationCode,
             message: `Verificaton code sent to ${name}'s mail`
          })
       } else if (verificationMethod === 'phone') {
-         const verificationCodeWithSpace = verificationCode
-            .toString()
-            .split("")
-            .join(" ");
-         await client.calls.create({
-            twiml:
-               `
-               <Response>
-               <Say>
-               Your Verification Code is ${verificationCodeWithSpace}.Your Verification Code is ${verificationCodeWithSpace}.  
-               </Say>
-               </Response>
-               `,
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: phone
+         try {
+            const verificationCodeWithSpace = verificationCode.toString().split("").join(" ");
+            const phoneNumber = `+91${phone.slice(-10)}`;
 
-         })
-         return res.status(200).json({
-            success: true,
-            message: `Verificaton code sent.`
-         })
+            await client.calls.create({
+               twiml:
+                  `
+                  <Response>
+                  <Say>
+                  Hello Sneha.Your Verification Code is ${verificationCodeWithSpace}.
+                  </Say>
+                  </Response>
+                  `,
+               from: process.env.TWILIO_PHONE_NUMBER,
+               to: phoneNumber
+
+            })
+            return res.status(200).json({
+               success: true,
+               message: `Verification code sent to ${phoneNumber}.`
+            })
+
+         } catch (error) {
+            return res.status(400).json({
+               success: false,
+               message: 'Invalid phone No. | Service current available for Indian phone numbers only. You can cantact admin for any other issue. '
+            })
+
+         }
+
       } else {
          return res.status(400).json({
             success: false,
-            message: 'Invalid Verification Method'
+            message: 'Invalid Verification Method',
          })
       }
 
    } catch (error) {
+      console.log(error)
       return res.status(500).json({
          success: false,
          message: 'Failed to send Verification Code'

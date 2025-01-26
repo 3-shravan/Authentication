@@ -4,6 +4,7 @@ export const connectToDatabase = () => {
       dbName: 'Authentication'
    }).then(() => {
       console.log(`Connected to databse : Authentication`)
+     
    }).catch((err) => {
       console.log(`Error connecting to databse : ${err}`)
    })

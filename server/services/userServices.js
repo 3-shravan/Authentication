@@ -1,9 +1,9 @@
 import ErrorHandler from "../middlewares/errorHandler.js";
 import { User } from "../models/userModel.js"
 
-export const createUser =  ({ name, phone, email, password }) => {
+export const createUser = ({ name, phone, email, password }) => {
    try {
-      const user =  User.create({
+      const user = User.create({
          name,
          phone,
          email,

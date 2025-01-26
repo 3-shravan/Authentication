@@ -51,8 +51,8 @@ userSchema.methods.comparePassword = async function (password) {
    return await bcrypt.comapare(this.password, password)
 }
 
-userSchema.methods.generateVerificationCode =async function () {
-   const verificationCode =await generateFiveDigitRandomNumber()
+userSchema.methods.generateVerificationCode = async function () {
+   const verificationCode = await generateFiveDigitRandomNumber()
    this.verificationCode = verificationCode
    this.verificatonCodeExpire = Date.now() + 5 * 60 * 1000
    return verificationCode

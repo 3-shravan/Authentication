@@ -37,7 +37,7 @@ export const register = catchAsyncError(
          const user = await createUser({ name, phone, email, password })
          const verificationCode = await user.generateVerificationCode()
          await user.save()
-         await sendVerificationCode(verificationMethod,verificationCode, name, email, phone, res)
+         await sendVerificationCode(verificationMethod, verificationCode, name, email, phone, res)
       } catch (error) { next(error) }
    }
 )
