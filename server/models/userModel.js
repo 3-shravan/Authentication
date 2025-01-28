@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { generateFiveDigitRandomNumber } from '../utils/utilities.js';
 
 const userSchema = new mongoose.Schema({
@@ -17,7 +18,8 @@ const userSchema = new mongoose.Schema({
    password: {
       type: String,
       minLength: [5, `Password should be atlest 5 characters long.`],
-      maxLength: [32, `Password should be less than 32 characters.`]
+      maxLength: [32, `Password should be less than 32 characters.`],
+      select:false
    },
    accountVerified: {
       type: Boolean,
@@ -26,7 +28,7 @@ const userSchema = new mongoose.Schema({
    verificationCode: {
       type: Number
    },
-   verificatonCodeExpire: {
+   verificationCodeExpire: {
       type: Date
    },
    resetPasswordToken: {
@@ -54,8 +56,13 @@ userSchema.methods.comparePassword = async function (password) {
 userSchema.methods.generateVerificationCode = async function () {
    const verificationCode = await generateFiveDigitRandomNumber()
    this.verificationCode = verificationCode
-   this.verificatonCodeExpire = Date.now() + 5 * 60 * 1000
+   this.verificationCodeExpire = Date.now() + 30 * 60 * 1000
    return verificationCode
+}
+
+userSchema.methods.generateAuthToken = async function () {
+   const token = await jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE })
+   return token
 }
 
 
