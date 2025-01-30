@@ -18,4 +18,16 @@ export const generateEmailTemplate = (verificationCode) => {
    </div>
  `
 }
-
+export const generateResetEmailTemplate = (resetPasswordUrl) => {
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 20px auto; padding: 20px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h2 style="color: #4285F4; margin-bottom: 10px;">Reset Your Password</h2>
+        <p style="font-size: 16px; color: #333;">Click the button below to reset your password:</p>
+        <a href="${resetPasswordUrl}" style="display: inline-block; background: #34A853; color: white; text-decoration: none; padding: 12px 18px; border-radius: 5px; font-weight: bold; margin-top: 10px;">Reset Password</a>
+        <p style="margin-top: 15px; font-size: 14px; color: #666;">Or copy this link:</p>
+        <div style="background: #f4f4f4; padding: 8px; border-radius: 5px; word-break: break-all; font-size: 14px;">${resetPasswordUrl}</div>
+        <p style="font-size: 14px; color: #999; margin-top: 15px;">If you didn’t request this, please ignore this email.</p>
+        <footer style="margin-top: 15px; font-size: 12px; color: #aaa;">© 2025 . All rights reserved.</footer>
+    </div>
+    `;
+};

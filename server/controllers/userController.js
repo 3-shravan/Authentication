@@ -6,6 +6,9 @@ import { validatePhoneNo, registrationAttempt } from '../utils/utilities.js'
 import { sendVerificationCode } from "../services/sendVerificationCode.js";
 import { sendToken } from "../services/sendToken.js";
 import { ExpiredToken } from "../models/blackListedTokenModel.js";
+import { sendEmail } from "../services/sendEmail.js";
+import { handleSuccessResponse } from "../utils/responseHandler.js";
+import { generateResetEmailTemplate } from "../utils/emailTemplate.js";
 
 
 
@@ -153,4 +156,33 @@ export const logout = catchAsyncError(async (req, res, next) => {
 
 export const getUser = catchAsyncError(async (req, res, next) => {
    res.status(200).json({ success: true, user: req.user })
+})
+
+export const forgetPassword = catchAsyncError(async (req, res, next) => {
+   const { email, phone } = req.body
+   if (!phone && !email) {
+      return next(new ErrorHandler(400, "Either provide registered email or phone number"))
+   }
+   let user;
+   if (phone) {
+      user = await User.findOne({ phone, accountVerified: true })
+   }
+   if (email) {
+      user = await User.findOne({ email, accountVerified: true })
+   }
+   if (!user) return next(new ErrorHandler(404, 'User not found'))
+
+   const resetToken = await user.generateResetPasswordToken()
+   await user.save({ validateBeforeSave: false })
+   const reserPasswordUrl = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`
+   const message = generateResetEmailTemplate(reserPasswordUrl)
+   try {
+      sendEmail({ email, subject: 'Your Reset Password Link', message })
+      handleSuccessResponse(res, 200, `Reset password link is sent to ${email}`)
+   } catch (error) {
+      User.resetPasswordToken = undefined
+      User.resetPasswordTokenExpire = undefined
+      await user.save({ validateBeforeSave: false })
+      return next(new ErrorHandler(400, error.message || "Failed to sent password reset link"))
+   }
 })
