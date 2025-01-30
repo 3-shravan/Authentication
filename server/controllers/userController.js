@@ -5,6 +5,10 @@ import { createUser } from "../services/userServices.js";
 import { validatePhoneNo, registrationAttempt } from '../utils/utilities.js'
 import { sendVerificationCode } from "../services/sendVerificationCode.js";
 import { sendToken } from "../services/sendToken.js";
+import { ExpiredToken } from "../models/blackListedTokenModel.js";
+
+
+
 
 export const register = catchAsyncError(
    async (req, res, next) => {
@@ -22,21 +26,14 @@ export const register = catchAsyncError(
          if (phone && !validatePhoneNo(phone)) {
             return next(new ErrorHandler(400, "Please enter a valid phone number."))
          }
+         if (phone) {
+            const isExistPhone = await User.findOne({ phone, accountVerified: true })
+            if (isExistPhone) return next(new ErrorHandler(400, "Phone number is already registered."))
+         }
+         if (email) {
+            const isExistEmail = await User.findOne({ email, accountVerified: true })
+            if (isExistEmail) return next(new ErrorHandler(400, "Email Address is already registered."))
 
-         const existingUser = await User.findOne({
-            $or: [
-               {
-                  email,
-                  accountVerified: true
-               },
-               {
-                  phone,
-                  accountVerified: true
-               }
-            ]
-         })
-         if (existingUser) {
-            return next(new ErrorHandler(400, "You are already registered"))
          }
          if (await registrationAttempt(phone, email) > 3) {
             return next(new ErrorHandler(400, "You have exceeded the maximum number of attempts.Please try again after an hour."))
@@ -49,6 +46,8 @@ export const register = catchAsyncError(
       } catch (error) { next(error) }
    }
 )
+
+
 
 export const verifyOTP = catchAsyncError(async (req, res, next) => {
    const { email, phone, otp } = req.body
@@ -106,4 +105,52 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
 
    sendToken(user, 200, "Account Verified", res)
 
+})
+
+export const login = catchAsyncError(async (req, res, next) => {
+   const { email, phone, password } = req.body
+   if ((!email && !phone) || !password) {
+      return next(new ErrorHandler(400, "Either Phone number or Email is required with password"))
+   }
+   if (email && phone) {
+      return next(new ErrorHandler(400, "Please provide either Email or Phone number, not both."));
+   }
+
+   let user;
+   if (phone) {
+      user = await User.findOne({ phone, accountVerified: true }).select("+password")
+      if (!user) return next(new ErrorHandler(400, "Invalid phone number|User Not Found."))
+   }
+   if (email) {
+      user = await User.findOne({ email, accountVerified: true }).select("+password")
+      if (!user) return next(new ErrorHandler(400, "Invalid email address|User Not Found"))
+
+   }
+   const isMatch = await user.comparePassword(password);
+   if (!isMatch) return next(new ErrorHandler(400, "Invalid password"))
+   user.password = ""
+
+   sendToken(user, 200, 'Login Successfull', res)
+
+})
+
+export const logout = catchAsyncError(async (req, res, next) => {
+
+   const token = req.headers.authorization?.split(" ")[1] || req.cookies.token
+
+   try {
+      await ExpiredToken.create({ token })
+   } catch (error) {
+      throw new ErrorHandler(`Error black listing token: ${error.message}`);
+   }
+
+   res.clearCookie("token", { httpOnly: true });
+   res.cookie("token", "", {
+      expires: new Date(Date.now()), httpOnly: true
+   })
+   res.status(200).json({ success: true, message: "Logged out Successfully" })
+})
+
+export const getUser = catchAsyncError(async (req, res, next) => {
+   res.status(200).json({ success: true, user: req.user })
 })

@@ -11,6 +11,7 @@ export const app = express()
 app.use(cors({
    origin: process.env.CLIENT_URL,
    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+   allowedHeaders: ["Authorization", "Content-Type"],
    credentials: true
 }))
 app.use(cookieParser())
