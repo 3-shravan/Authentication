@@ -9,9 +9,7 @@ import { ExpiredToken } from "../models/blackListedTokenModel.js";
 import { sendEmail } from "../services/sendEmail.js";
 import { handleSuccessResponse } from "../utils/responseHandler.js";
 import { generateResetEmailTemplate } from "../utils/emailTemplate.js";
-
-
-
+import { makePhoneCall } from "../services/phoneCall.js";
 
 export const register = catchAsyncError(
    async (req, res, next) => {
@@ -20,15 +18,20 @@ export const register = catchAsyncError(
          if (!name || (!phone && !email) || !password || !verificationMethod) {
             return next(new ErrorHandler(400, 'All fields are required.'))
          }
+
+
          if (!phone && verificationMethod === 'phone') {
             return next(new ErrorHandler(400, "Phone number is required for phone verification."))
          }
          if (!email && verificationMethod === 'email') {
             return next(new ErrorHandler(400, "Email address is required for email verification."))
          }
+
          if (phone && !validatePhoneNo(phone)) {
             return next(new ErrorHandler(400, "Please enter a valid phone number."))
          }
+
+
          if (phone) {
             const isExistPhone = await User.findOne({ phone, accountVerified: true })
             if (isExistPhone) return next(new ErrorHandler(400, "Phone number is already registered."))
@@ -36,8 +39,8 @@ export const register = catchAsyncError(
          if (email) {
             const isExistEmail = await User.findOne({ email, accountVerified: true })
             if (isExistEmail) return next(new ErrorHandler(400, "Email Address is already registered."))
-
          }
+
          if (await registrationAttempt(phone, email) > 3) {
             return next(new ErrorHandler(400, "You have exceeded the maximum number of attempts.Please try again after an hour."))
          }
@@ -49,8 +52,6 @@ export const register = catchAsyncError(
       } catch (error) { next(error) }
    }
 )
-
-
 
 export const verifyOTP = catchAsyncError(async (req, res, next) => {
    const { email, phone, otp } = req.body
@@ -101,8 +102,8 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
       return next(new ErrorHandler(400, 'OTP Expired !'))
    }
    user.accountVerified = true;
-   user.verificationCode = null;
-   user.verificationCodeExpire = null;
+   user.verificationCode = undefined;
+   user.verificationCodeExpire = undefined;
 
    user.save({ validateModifiedOnly: true })
 
@@ -161,28 +162,70 @@ export const getUser = catchAsyncError(async (req, res, next) => {
 export const forgetPassword = catchAsyncError(async (req, res, next) => {
    const { email, phone } = req.body
    if (!phone && !email) {
-      return next(new ErrorHandler(400, "Either provide registered email or phone number"))
+      return next(new ErrorHandler(400, "Either provide registered email or phone number"));
    }
-   let user;
-   if (phone) {
-      user = await User.findOne({ phone, accountVerified: true })
+   if (phone && !validatePhoneNo(phone)) {
+      return next(new ErrorHandler(400, "Please enter a valid phone number."))
    }
-   if (email) {
-      user = await User.findOne({ email, accountVerified: true })
-   }
-   if (!user) return next(new ErrorHandler(404, 'User not found'))
 
-   const resetToken = await user.generateResetPasswordToken()
-   await user.save({ validateBeforeSave: false })
-   const reserPasswordUrl = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`
-   const message = generateResetEmailTemplate(reserPasswordUrl)
-   try {
-      sendEmail({ email, subject: 'Your Reset Password Link', message })
-      handleSuccessResponse(res, 200, `Reset password link is sent to ${email}`)
-   } catch (error) {
-      User.resetPasswordToken = undefined
-      User.resetPasswordTokenExpire = undefined
+   if (email) {
+      const user = await User.findOne({ email, accountVerified: true })
+      if (!user) return next(new ErrorHandler(404, 'No user is registered with this email address'))
+
+      const resetToken = await user.generateResetPasswordToken()
       await user.save({ validateBeforeSave: false })
-      return next(new ErrorHandler(400, error.message || "Failed to sent password reset link"))
+      const reserPasswordUrl = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`
+      const message = generateResetEmailTemplate(reserPasswordUrl)
+      try {
+         sendEmail({ email, subject: 'Your Reset Password Link', message })
+         handleSuccessResponse(res, 200, `Reset password link is sent to ${email}`)
+      } catch (error) {
+         User.resetPasswordToken = undefined
+         User.resetPasswordTokenExpire = undefined
+         await user.save({ validateBeforeSave: false })
+         return next(new ErrorHandler(400, error.message || "Failed to sent password reset link"))
+      }
+   }
+   else if (phone) {
+
+      const user = await User.findOne({ phone, accountVerified: true })
+      if (!user) return next(new ErrorHandler(404, 'No user is registered with this phone number'))
+
+      const resetPasswordOTP = await user.generateResetPasswordOTP()
+      await user.save({ validateBeforeSave: false })
+
+      try {
+         await makePhoneCall('', phone, resetPasswordOTP, 'for reseting the password')
+         handleSuccessResponse(res, 200, `Verification code for password reseting has been sent`)
+
+      } catch (error) {
+
+         user.resetPasswordOTP = undefined
+         user, resetPasswordOTPExpire = undefined
+         await user.save({ validateBeforeSave: false })
+
+         return next(new ErrorHandler(500, error.message || 'Failder to make call for verification Code | Phone Nu,ber invalid'))
+      }
    }
 })
+export const verifyResetPasswordOTP = catchAsyncError(async (req, res, next) => {
+   const { phone, otp } = req.body
+   if (!otp || !phone) return next(new ErrorHandler(400, "phone number and OTP are required for verification"))
+
+   const user = await User.findOne({ phone, resetPasswordOTP: otp, resetPasswordOTPExpire: { $gt: Date.now() } })
+   if (!user) return next(new ErrorHandler(400, "Invalid OTP"))
+
+   user.resetPasswordOTP = undefined
+   user.resetPasswordOTPExpire = undefined
+   await user.save({ validateBeforeSave: false })
+
+   handleSuccessResponse(res, 200, 'OTP Verified.')
+})
+
+
+export const resetPassword = catchAsyncError(async (req, res, next) => {
+
+
+})
+
+

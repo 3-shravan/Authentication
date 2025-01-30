@@ -1,5 +1,5 @@
 import { createTwilioClient } from '../utils/twilioClient.js'
-export const makePhoneCall = async (name, phone, verificationCode) => {
+export const makePhoneCall = async (name, phone, verificationCode ,specialMessage) => {
    const client = createTwilioClient()
    const verificationCodeWithSpace = verificationCode.toString().split("").join(" ");
    const phoneNumber = `+91${phone.trim().slice(-10)}`;
@@ -8,7 +8,7 @@ export const makePhoneCall = async (name, phone, verificationCode) => {
       twiml:
          `  <Response>
             <Say>
-            Hello  ${name} .Your Verification Code is ${verificationCodeWithSpace}.
+            Hello  ${name} .Your Verification Code ${specialMessage} is ${verificationCodeWithSpace}.
             </Say>
             </Response>
                `,

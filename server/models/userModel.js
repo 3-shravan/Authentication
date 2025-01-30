@@ -38,6 +38,12 @@ const userSchema = new mongoose.Schema({
    resetPasswordTokenExpire: {
       type: Date
    },
+   resetPasswordOTP: {
+      type: Number
+   },
+   resetPasswordOTPExpire: {
+      type: Date
+   },
    createdAt: {
       type: Date,
       default: Date.now
@@ -57,7 +63,7 @@ userSchema.methods.comparePassword = async function (password) {
 userSchema.methods.generateVerificationCode = async function () {
    const verificationCode = await generateFiveDigitRandomNumber()
    this.verificationCode = verificationCode
-   this.verificationCodeExpire = Date.now() + 30 * 60 * 1000
+   this.verificationCodeExpire = Date.now() + 10 * 60 * 1000
    return verificationCode
 }
 
@@ -72,6 +78,13 @@ userSchema.methods.generateResetPasswordToken = async function () {
    this.resetPasswordTokenExpire = Date.now() + 15 * 60 * 1000;
    return resetToken;
 }
+userSchema.methods.generateResetPasswordOTP = async function () {
+   const resetPasswordOTP = await generateFiveDigitRandomNumber()
+   this.resetPasswordOTP = resetPasswordOTP
+   this.resetPasswordOTPExpire = Date.now() + 10 * 60 * 1000
+   return resetPasswordOTP
+}
+
 
 
 export const User = mongoose.model('user', userSchema)

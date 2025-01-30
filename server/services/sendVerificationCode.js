@@ -19,7 +19,7 @@ export const sendVerificationCode = async (verificationMethod, verificationCode,
 
       if (verificationMethod === 'phone') {
          try {
-            makePhoneCall(name, phone, verificationCode)
+            makePhoneCall(name, phone, verificationCode ,'')
             handleSuccessResponse(res, 200, `Verification code sent to ${name}'s phone (${phone})`)
          } catch (error) {
             throw new ErrorHandler(400, 'Invalid phone number or service unavailable for non-Indian numbers');
