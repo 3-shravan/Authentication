@@ -1,5 +1,5 @@
-export const sendToken = async(user, statusCode, message, res) => {
-   const token =await user.generateAuthToken()
+export const sendToken = async (user, statusCode, message, res) => {
+   const token = await user.generateAuthToken()
    res.status(statusCode)
       .cookie("token", token, {
          expires: new Date(

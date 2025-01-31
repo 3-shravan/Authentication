@@ -5,6 +5,8 @@ import { handleSuccessResponse } from '../utils/responseHandler.js'
 import { makePhoneCall } from './phoneCall.js';
 
 
+/* Send verification code or link via a email or phone number based on user preference */
+
 export const sendVerificationCode = async (verificationMethod, verificationCode, name, email, phone, res) => {
    try {
       if (verificationMethod === 'email') {
@@ -19,7 +21,7 @@ export const sendVerificationCode = async (verificationMethod, verificationCode,
 
       if (verificationMethod === 'phone') {
          try {
-            makePhoneCall(name, phone, verificationCode ,'')
+            makePhoneCall(name, phone, verificationCode, '')
             handleSuccessResponse(res, 200, `Verification code sent to ${name}'s phone (${phone})`)
          } catch (error) {
             throw new ErrorHandler(400, 'Invalid phone number or service unavailable for non-Indian numbers');

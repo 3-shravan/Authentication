@@ -1,6 +1,8 @@
 import ErrorHandler from "../middlewares/errorHandler.js";
 import { User } from "../models/userModel.js"
 
+/* Create a actual user in database */
+
 export const createUser = ({ name, phone, email, password }) => {
    try {
       const user = User.create({

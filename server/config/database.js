@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-export const connectToDatabase = () => {
+ const connectToDatabase = () => {
    mongoose.connect(process.env.MONGO_URI, {
       dbName: 'Authentication'
    }).then(() => {
@@ -9,3 +9,4 @@ export const connectToDatabase = () => {
       console.log(`Error connecting to databse : ${err}`)
    })
 }
+export default connectToDatabase

@@ -1,4 +1,6 @@
 import nodeMailer from 'nodemailer'
+
+/* Function to send Email */
 export const sendEmail = async ({ email, subject, message }) => {
    const transporter = nodeMailer.createTransport({
       service: process.env.SMTP_SERVICE,

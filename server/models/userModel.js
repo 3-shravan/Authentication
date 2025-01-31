@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
    resetPasswordTokenExpire: {
       type: Date
    },
+   resetPassword: {
+      type: Boolean,
+      default: false
+   },
    resetPasswordOTP: {
       type: Number
    },
@@ -56,10 +60,12 @@ userSchema.pre('save', async function (next) {
    }
    this.password = await bcrypt.hash(this.password, 10)
 })
+
 userSchema.methods.comparePassword = async function (password) {
    return await bcrypt.compare(password, this.password)
 }
 
+//generate verification code to validate the user during registration
 userSchema.methods.generateVerificationCode = async function () {
    const verificationCode = await generateFiveDigitRandomNumber()
    this.verificationCode = verificationCode
@@ -72,19 +78,21 @@ userSchema.methods.generateAuthToken = async function () {
    return token
 }
 
+//generate token to verify the user for reseting the password
 userSchema.methods.generateResetPasswordToken = async function () {
    const resetToken = crypto.randomBytes(20).toString("hex")
    this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex")
-   this.resetPasswordTokenExpire = Date.now() + 15 * 60 * 1000;
+   this.resetPasswordTokenExpire = Date.now() + 10 * 60 * 1000;
    return resetToken;
 }
+
+// //generate verification code to validate the user for reseting the password by phone OTP
 userSchema.methods.generateResetPasswordOTP = async function () {
    const resetPasswordOTP = await generateFiveDigitRandomNumber()
    this.resetPasswordOTP = resetPasswordOTP
    this.resetPasswordOTPExpire = Date.now() + 10 * 60 * 1000
    return resetPasswordOTP
 }
-
 
 
 export const User = mongoose.model('user', userSchema)
