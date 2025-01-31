@@ -1,8 +1,9 @@
 import catchAsyncError from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/errorHandler.js";
+import crypto from 'crypto'
 import { User } from "../models/userModel.js";
 import { createUser } from "../services/userServices.js";
-import { validatePhoneNo, registrationAttempt } from '../utils/utilities.js'
+import { validatePhoneNo, registrationAttempt, crpytPassword } from '../utils/utilities.js'
 import { sendVerificationCode } from "../services/sendVerificationCode.js";
 import { sendToken } from "../services/sendToken.js";
 import { ExpiredToken } from "../models/blackListedTokenModel.js";
@@ -174,16 +175,16 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
       const resetToken = await user.generateResetPasswordToken()
       await user.save({ validateBeforeSave: false })
-      const reserPasswordUrl = `${process.env.CLIENT_URL}/resetPassword/${resetToken}`
-      const message = generateResetEmailTemplate(reserPasswordUrl)
+      const resetPasswordUrl = `${process.env.CLIENT_URL}/forgetPassword/${resetToken}`
+      const message = generateResetEmailTemplate(resetPasswordUrl)
       try {
          sendEmail({ email, subject: 'Your Reset Password Link', message })
          handleSuccessResponse(res, 200, `Reset password link is sent to ${email}`)
       } catch (error) {
-         User.resetPasswordToken = undefined
-         User.resetPasswordTokenExpire = undefined
+         user.resetPasswordToken = undefined
+         user.resetPasswordTokenExpire = undefined
          await user.save({ validateBeforeSave: false })
-         return next(new ErrorHandler(400, error.message || "Failed to sent password reset link"))
+         return next(new ErrorHandler(400, error.message || "Failed to send password reset link"))
       }
    }
    else if (phone) {
@@ -196,15 +197,15 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
       try {
          await makePhoneCall('', phone, resetPasswordOTP, 'for reseting the password')
-         handleSuccessResponse(res, 200, `Verification code for password reseting has been sent`)
+         handleSuccessResponse(res, 200, `Verification code to reset your password has been sent`)
 
       } catch (error) {
 
          user.resetPasswordOTP = undefined
-         user, resetPasswordOTPExpire = undefined
+         user.resetPasswordOTPExpire = undefined
          await user.save({ validateBeforeSave: false })
 
-         return next(new ErrorHandler(500, error.message || 'Failder to make call for verification Code | Phone Nu,ber invalid'))
+         return next(new ErrorHandler(400, error.message || 'Failed to make call for verification Code | Phone Nu,ber invalid'))
       }
    }
 })
@@ -223,9 +224,42 @@ export const verifyResetPasswordOTP = catchAsyncError(async (req, res, next) => 
 })
 
 
-export const resetPassword = catchAsyncError(async (req, res, next) => {
+export const resetPasswordViaEmail = catchAsyncError(async (req, res, next) => {
+   const { token } = req.params
+   const { phone, newPassword, confirmPassword } = req.body
 
+   if (!newPassword || !confirmPassword) return next(new ErrorHandler(400, "Plaese provide your new password as well as confirm password"))
+
+   if (newPassword !== confirmPassword) return next(new ErrorHandler(400, 'New password and confirm Password do not match'))
+
+   let user;
+   if (token) {
+
+      const resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex");
+      const user = await User.findOne({ resetPasswordToken, accountVerified: true, resetPasswordTokenExpire: { $gt: Date.now() } }).select('+password')
+      if (!user) return next(new ErrorHandler(400, "Invalid token or Expired"))
+
+      user.resetPasswordToken = undefined
+      user.resetPasswordTokenExpire = undefined
+
+   }
+   if (phone) {
+      user = await User.findOne({ phone, accountVerified: true }).select('+password')
+      if (!user) return next(new ErrorHandler(400, 'Invalid phone'))
+
+      user.resetPasswordOTP = undefined
+      user.resetPasswordOTPExpire = undefined
+   }
+
+   const isMatch = await user.comparePassword(newPassword)
+   if (isMatch) return next(new ErrorHandler(400, 'Previouly used password. Please enter new password.'))
+
+   user.password = newPassword
+   await user.save()
+
+   handleSuccessResponse(res, 200, "Password Reset Successfully")
 
 })
+
 
 
