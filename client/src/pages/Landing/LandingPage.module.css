@@ -1,0 +1,204 @@
+.header {
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  padding: 0 1rem;
+  font-size: 2.5rem;
+  width: 40%;
+  cursor: default;
+}
+.name {
+  padding: 0 1rem;
+  width: 10%;
+  font-size: 2rem;
+  height: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+.name span {
+  font-size: 2rem;
+  padding: 0 -10px;
+  display: flex;
+  font-family: "Gilroy Bold";
+  align-items: center;
+  justify-content: center;
+}
+.buttons {
+  width: 40%;
+  display: flex;
+  padding-right: 5rem;
+  justify-content: end;
+}
+.buttons button {
+  padding: 0.8rem 0.8rem;
+  width: 5.2rem;
+  font-size: 0.8rem;
+  font-family: "Gilroy Bold";
+  color: #fff;
+  background: rgba(19, 19, 19, 0.564);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 50px rgba(216, 9, 9, 0.87);
+  transition: all 0.2s;
+
+  &:hover {
+    scale: 1.05;
+    border: none;
+    background: rgba(10, 10, 10, 0.2);
+    box-shadow: 0 0 60px rgba(0, 203, 132, 0.87);
+  }
+}
+
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2.5rem;
+  height: 60vh;
+  cursor: default;
+}
+.line1 {
+  font-size: 6rem;
+  margin: 0 1rem;
+  font-family: "Gilroy Bold";
+  line-height: 4.7rem;
+  max-width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+}
+.and {
+  font-size: 5.5rem;
+  margin: 0 1rem;
+  line-height: 3.2rem;
+  font-family: "Gilroy Bold";
+  color: crimson;
+}
+.line2 {
+  font-size: 5rem;
+  margin: 0 1rem;
+  text-shadow: 0 0 10px rgba(184, 254, 222, 0.8);
+  font-family: "Gilroy Bold";
+  text-transform: uppercase;
+  line-height: 3.8rem;
+  letter-spacing: 0.5rem;
+  color: rgb(237, 228, 230);
+}
+.bg {
+  position: relative;
+  background-color: crimson;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 40%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, black, transparent);
+  }
+}
+
+.loading {
+  width: 100px;
+  height: 4px;
+  margin-top: 2.5rem;
+  background-color: #7affc1;
+  position: absolute;
+  border-radius: 2px;
+  box-shadow: -10px 0 20px rgba(0, 255, 136, 0.8),
+    0 0 20px rgba(0, 255, 136, 0.9);
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+.authButton {
+  margin: 2.5rem 0 0 1rem;
+  padding: 1rem 0.8rem;
+  width: 8rem;
+  font-size: 0.8rem;
+  font-family: "Gilroy Bold";
+  color: white;
+  background: linear-gradient(
+    135deg,
+    rgba(19, 19, 19, 0.7),
+    rgba(20, 20, 20, 0.9)
+  );
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 45px rgba(216, 9, 9, 0.7);
+  transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  &:hover {
+    border: none;
+    box-shadow: 0 0 60px rgba(0, 203, 132, 0.87);
+  }
+}
+
+.marqueeContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: black;
+  padding: 10px 0;
+  display: flex;
+
+  /* Fade effect on edges */
+  &::before,
+  &::after {
+    content: "";
+    opacity: 2;
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, black, transparent);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, black, transparent);
+  }
+}
+
+.marqueeContent {
+  display: flex;
+  min-width: 100%;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.marqueeItem {
+  font-size: 0.8rem;
+  padding: 0 25px;
+  color: white;
+}

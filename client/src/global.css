@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Gilroy Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./assets/fonts/Gilroy-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Gilroy Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/fonts/Gilroy-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Gilroy Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/Gilroy-Regular.woff") format("woff");
+}
+
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Gilroy Regular";
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+::selection {
+  background-color: #2e2e2e;
+  color: #fbfbfb;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+
+}
+::-webkit-scrollbar-track {
+  background: #131313;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555555;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7a7a7a;
+}
+
+
+
+
+body {
+  background: radial-gradient(circle, rgb(15, 15, 15) 20%, rgb(0, 0, 0) 80%);
+  color: #fff;
+  height: 100vh;
+  font-family: "Gilroy Regular";
+  overflow-x: hidden;
+}
