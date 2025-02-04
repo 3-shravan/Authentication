@@ -42,16 +42,16 @@ export const register = catchAsyncError(
          //check if user already exists 
          if (phone) {
             const isExistPhone = await User.findOne({ phone, accountVerified: true })
-            if (isExistPhone) return next(new ErrorHandler(400, "Phone number is already registered."))
+            if (isExistPhone) return next(new ErrorHandler(409, 'This phone number is already registered. Please use a different phone number.'))
          }
          if (email) {
             const isExistEmail = await User.findOne({ email, accountVerified: true })
-            if (isExistEmail) return next(new ErrorHandler(400, "Email Address is already registered."))
+            if (isExistEmail) return next(new ErrorHandler(409, 'This email address is already registered. Please use a different email.'))
          }
 
          //limit the user for making repeated request
          if (await registrationAttempt(phone, email) > 3) {
-            return next(new ErrorHandler(400, "You have exceeded the maximum number of attempts.Please try again after an hour."))
+            return next(new ErrorHandler(429, "You have exceeded the maximum number of attempts.Please try again after an hour."))
          }
 
          const user = await createUser({ name, phone, email, password })
@@ -79,11 +79,11 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
 
    //if missing fields
    if (!otp) return next(new ErrorHandler(400, 'OTP is required.'))
-   if (!phone && !email) return next(new ErrorHandler(400, 'Either phone number or email is required.'))
+   if (!phone && !email) return next(new ErrorHandler(400, 'Either phone number or email is required for verification'))
 
    //check if phone number is i valid format 
    if (phone && !validatePhoneNo(phone)) {
-      return next(new ErrorHandler(400, 'Invalid Phone no.'))
+      return next(new ErrorHandler(400, 'Invalid phone number'))
    }
 
    //query to find the user
@@ -106,7 +106,7 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
 
    //if no user exists
    if (users.length === 0) {
-      return next(new ErrorHandler(400, 'User not found'))
+      return next(new ErrorHandler(404, 'User not found. Please check the provided phone number or email.'))
    }
 
    //when there are multiple user req ...delete them after fetching the latest
@@ -132,7 +132,7 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
    const currentTime = Date.now()
    const expireTime = new Date(user.verificationCodeExpire).getTime();
    if (expireTime < currentTime) {
-      return next(new ErrorHandler(400, 'OTP Expired !'))
+      return next(new ErrorHandler(400, 'OTP Expired. Please request a new one.'))
    }
 
    //set user as verified  and set undefine for verification fields as they are no longer required
@@ -142,7 +142,7 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
 
    user.save({ validateModifiedOnly: true })
 
-   sendToken(user, 200, "Account Verified", res)
+   sendToken(user, 200, "Account Successfully Verified", res)
 })
 
 
@@ -168,17 +168,17 @@ export const login = catchAsyncError(async (req, res, next) => {
    //find user using phone or email ...as user must exist to login 
    if (phone) {
       user = await User.findOne({ phone, accountVerified: true }).select("+password")
-      if (!user) return next(new ErrorHandler(400, "Invalid phone number|User Not Found."))
+      if (!user) return next(new ErrorHandler(404, "No user found with this phone number or account is not verified."))
    }
    if (email) {
       user = await User.findOne({ email, accountVerified: true }).select("+password")
-      if (!user) return next(new ErrorHandler(400, "Invalid email address|User Not Found"))
+      if (!user) return next(new ErrorHandler(404, "No user found with this email address or account is not verified."))
    }
 
 
    //Validate the password 
    const isMatch = await user.comparePassword(password);
-   if (!isMatch) return next(new ErrorHandler(400, "Invalid password"))
+   if (!isMatch) return next(new ErrorHandler(400, 'Incorrect password. Please try again.'))
 
 
    //send null value as password to client 
@@ -201,7 +201,7 @@ export const logout = catchAsyncError(async (req, res, next) => {
    try {
       await ExpiredToken.create({ token })
    } catch (error) {
-      throw new ErrorHandler(`Error black listing token: ${error.message}`);
+      throw new ErrorHandler(500, `Error black listing token: ${error.message}`);
    }
 
    //expire and clear the cookies

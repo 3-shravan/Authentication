@@ -12,17 +12,23 @@ export const authUser = catchAsyncError(async (req, res, next) => {
    const token = req.headers.authorization?.split(" ")[1]
 
    if (!token) {
-      return next(new ErrorHandler(400, "Authenticaton token is missing "))
+      return next(new ErrorHandler(401, "Authenticaton token is missing "))
    }
    //check whether user trying to acces data with expire or unauthorize token 
    const isBlackListed = await ExpiredToken.findOne({ token })
-   if (isBlackListed) return next(new ErrorHandler(400, "Token has been revoked.Please log in again "))
+   if (isBlackListed) return next(new ErrorHandler(401, "Token has been revoked.Please log in again "))
 
    //decode the token to find the user
-   const decoded = await jwt.verify(token, process.env.JWT_SECRET)
+   let decoded;
+   try {
+      decoded = await jwt.verify(token, process.env.JWT_SECRET);
+   } catch (error) {
+      // Token verification failed (e.g., invalid token)
+      return next(new ErrorHandler(401, "Invalid or expired token. Please log in again"));
+   }
 
    const user = await User.findById(decoded.id)
-   if (!user) return next(new ErrorHandler(400, "User not found."))
+   if (!user) return next(new ErrorHandler(404, "User not found."))
 
    req.user = user
 

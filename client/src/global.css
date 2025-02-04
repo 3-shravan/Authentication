@@ -27,10 +27,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Gilroy Regular";
-
+  /* font-family: "Gilroy Regular"; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -68,6 +65,18 @@ body {
   background: radial-gradient(circle, rgb(15, 15, 15) 20%, rgb(0, 0, 0) 80%);
   color: #fff;
   height: 100vh;
-  font-family: "Gilroy Regular";
+    margin: 0;
+  padding: 0;
+  /* font-family: "Gilroy Regular";  */
   overflow-x: hidden;
+}
+
+.myfontR{
+    font-family: "Gilroy Regular"; 
+}
+.myfontM{
+    font-family: "Gilroy Medium"; 
+}
+.myfontB{
+    font-family: "Gilroy Bold"; 
 }

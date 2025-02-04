@@ -149,6 +149,9 @@ const LandingPage = () => {
 
         <motion.button
           className={styles.authButton}
+          onClick={() => {
+            navigate("/signup");
+          }}
           initial={{ x: -200 }}
           animate={{ x: 0 }}
           transition={{ delay: 1.8, duration: 1.5, ease: "anticipate" }}
