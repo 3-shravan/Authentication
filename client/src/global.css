@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
 @font-face {
+  font-family: "Futura-Bold";
+  font-style: normal;
+  src: url("./assets/fonts/Futura-Bold.woff2") format("woff2");
+}
+
+@font-face {
   font-family: "Gilroy Bold";
   font-style: normal;
   font-weight: 700;
@@ -21,19 +27,15 @@
   src: url("./assets/fonts/Gilroy-Regular.woff") format("woff");
 }
 
-
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  /* font-family: "Gilroy Regular"; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 ::selection {
   background-color: #2e2e2e;
@@ -43,7 +45,6 @@
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-
 }
 ::-webkit-scrollbar-track {
   background: #131313;
@@ -58,25 +59,19 @@
   background-color: #7a7a7a;
 }
 
-
-
-
 body {
   background: radial-gradient(circle, rgb(15, 15, 15) 20%, rgb(0, 0, 0) 80%);
   color: #fff;
   height: 100vh;
-    margin: 0;
-  padding: 0;
-  /* font-family: "Gilroy Regular";  */
   overflow-x: hidden;
 }
 
-.myfontR{
-    font-family: "Gilroy Regular"; 
+.myfontR {
+  font-family: "Gilroy Regular";
 }
-.myfontM{
-    font-family: "Gilroy Medium"; 
+.myfontM {
+  font-family: "Gilroy Medium";
 }
-.myfontB{
-    font-family: "Gilroy Bold"; 
+.myfontB {
+  font-family: "Gilroy Bold";
 }

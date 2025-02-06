@@ -176,7 +176,7 @@ const LandingPage = () => {
             animate={{ x: ["0%", "-100%"] }}
             transition={{
               repeat: Infinity,
-              duration: 40,
+              duration: 60,
               delay: 5.2,
               ease: "linear",
             }}
