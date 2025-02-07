@@ -2,8 +2,21 @@ import { motion } from "framer-motion";
 import { CgProfile } from "react-icons/cg";
 import styles from "./AuthComponent.module.css";
 import Button from "./Button";
+import { useEffect, useRef } from "react";
 
 const Fullname = ({ handleNext, formData, handleChange }) => {
+  const inputRef = useRef(null);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleNext();
+    }
+  };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   return (
     <>
       <motion.div
@@ -17,17 +30,18 @@ const Fullname = ({ handleNext, formData, handleChange }) => {
         <div className={styles.inputWrapper}>
           <CgProfile className={styles.icon} />
           <input
-            required
+            ref={inputRef}
             type="text"
             placeholder=" Fullname"
             name="name"
             value={formData.name}
             onChange={(e) => handleChange(e)}
+            onKeyDown={handleKeyDown}
             className={styles.inputField}
           />
         </div>
       </motion.div>
-      <Button handleNext={handleNext} text="Next" />
+      <Button handleNext={handleNext} text="Next" type="button" />
     </>
   );
 };

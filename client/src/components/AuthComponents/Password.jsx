@@ -3,8 +3,19 @@ import { FaLock } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import styles from "./AuthComponent.module.css";
 import Button from "./Button";
+import { useEffect, useRef } from "react";
 
 const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
+  const inputRef = useRef(null);
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleNext();
+    }
+  };
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   return (
     <>
       <motion.div
@@ -26,13 +37,14 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
           <FaLock className={styles.lockIcon} />
 
           <input
+            ref={inputRef}
             type="password"
             placeholder=" Password"
             name="password"
             value={formData.password}
             onChange={(e) => handleChange(e)}
+            onKeyDown={handleKeyDown}
             className={styles.inputField}
-            required
           />
         </div>
       </motion.div>

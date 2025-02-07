@@ -5,8 +5,29 @@ import { MdMarkEmailUnread } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 
 import styles from "./AuthComponent.module.css";
+import { useEffect, useRef } from "react";
 
 const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
+  const inputRef = useRef(null);
+
+  const handleEmail = () => {
+    formData.phone = "";
+    handleChange({
+      target: { name: "verificationMethod", value: "email" },
+    });
+  };
+
+  const handlePhone = () => {
+    formData.email = "";
+    handleChange({
+      target: { name: "verificationMethod", value: "phone" },
+    });
+  };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [formData.verificationMethod]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -24,11 +45,9 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
           className={`${styles.selectionButton} ${
             formData.verificationMethod === "email" ? styles.active : ""
           }`}
-          onClick={() =>
-            handleChange({
-              target: { name: "verificationMethod", value: "email" },
-            })
-          }
+          onClick={() => {
+            handleEmail();
+          }}
         >
           Email
         </span>
@@ -37,11 +56,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
           className={`${styles.selectionButton} ${
             formData.verificationMethod === "phone" ? styles.active : ""
           }`}
-          onClick={() =>
-            handleChange({
-              target: { name: "verificationMethod", value: "phone" },
-            })
-          }
+          onClick={() => handlePhone()}
         >
           Phone
         </span>
@@ -58,6 +73,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
             <MdMarkEmailUnread className={styles.emailIcon} />
 
             <input
+              ref={inputRef}
               type="email"
               placeholder="Email"
               name="email"
@@ -81,6 +97,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
             <TbNumber91Small className={styles.phoneIcon} />
 
             <input
+              ref={inputRef}
               type="number"
               placeholder="Phone Number"
               name="phone"

@@ -1,8 +1,21 @@
 import { motion } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
 import styles from "./AuthComponent.module.css";
+import { useState } from "react";
 
 const VerifyOTP = ({ handleChange, handlePrevious }) => {
+  const [otp, setOtp] = useState(new Array(5).fill(""));
+
+  const handleOtpChange = (element, index) => {
+    if (isNaN(element.value)) return;
+    const newOtp = [...otp];
+    newOtp[index] = element.value;
+    setOtp(newOtp);
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -18,11 +31,18 @@ const VerifyOTP = ({ handleChange, handlePrevious }) => {
       <h2 className={styles.inputName}>Verification Code</h2>
       <div className={styles.inputWrapper}>
         <div className={styles.boxesContainer}>
-          <div className={styles.boxes}></div>
-          <div className={styles.boxes}></div>
-          <div className={styles.boxes}></div>
-          <div className={styles.boxes}></div>
-          <div className={styles.boxes}></div>
+          {otp.map((data, index) => (
+            <input
+              className={styles.boxes}
+              type="text"
+              name="otp"
+              maxLength="1"
+              key={index}
+              value={data}
+              onChange={(e) => handleOtpChange(e.target, index)}
+              onFocus={(e) => e.target.select()}
+            />
+          ))}
         </div>
       </div>
     </motion.div>

@@ -9,12 +9,18 @@ export const validatePhoneNo = (phoneNumber) => {
 
 //count number of attemps made by an user to register 
 export const registrationAttempt = async (phone, email) => {
-   const attempts = await User.countDocuments({
-      $or: [
-         { phone, accountVerified: false },
-         { email, accountVerified: false },
-      ]
-   })
+   const query = { accountVerified: false };
+   if (phone && email) {
+      query.$or = [
+         { phone },
+         { email }
+      ];
+   } else if (phone) {
+      query.phone = phone;
+   } else if (email) {
+      query.email = email;
+   }
+   const attempts = await User.countDocuments(query)
    return attempts
 }
 

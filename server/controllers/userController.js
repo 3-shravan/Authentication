@@ -42,11 +42,11 @@ export const register = catchAsyncError(
          //check if user already exists 
          if (phone) {
             const isExistPhone = await User.findOne({ phone, accountVerified: true })
-            if (isExistPhone) return next(new ErrorHandler(409, 'This phone number is already registered. Please use a different phone number.'))
+            if (isExistPhone) return next(new ErrorHandler(409, 'Phone number is already registered.'))
          }
          if (email) {
             const isExistEmail = await User.findOne({ email, accountVerified: true })
-            if (isExistEmail) return next(new ErrorHandler(409, 'This email address is already registered. Please use a different email.'))
+            if (isExistEmail) return next(new ErrorHandler(409, 'Email address is already registered.'))
          }
 
          //limit the user for making repeated request

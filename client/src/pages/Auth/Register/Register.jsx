@@ -8,28 +8,34 @@ import Password from "../../../components/AuthComponents/Password";
 import VerifyPhoneEmail from "../../../components/AuthComponents/VerifyPhoneEmail";
 import VerifyOTP from "../../../components/AuthComponents/VerifyOTP";
 import Button from "../../../components/AuthComponents/Button";
+import { errorToast, successToast } from "../../../utils/ToastNotifications";
+
+const initialFormData = {
+  name: "",
+  email: "",
+  phone: "",
+  password: "",
+  verificationMethod: "email",
+};
 
 const Register = () => {
   const navigate = useNavigate();
 
   const [stage, setStage] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    verificationMethod: "email",
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleNext = (e) => {
+  const handleNext = () => {
+    if (stage === 1 && !formData.name.trim())
+      return errorToast("Please provide your name.");
+
+    if (stage === 2 && formData.password.length < 6)
+      return errorToast("Password must be 6 characters long.");
+
     setStage(stage + 1);
   };
 
@@ -37,21 +43,43 @@ const Register = () => {
     setStage(stage - 1);
   };
 
+  const isValidEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email));
+  const isValidPhone = (phone) => /^[6-9]\d{9}$/.test(String(phone));
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (stage === 3) {
+      if (
+        formData.verificationMethod === "email" &&
+        !isValidEmail(formData.email)
+      ) {
+        return errorToast("Please provide a valid email address.");
+      }
+      if (
+        formData.verificationMethod === "phone" &&
+        !isValidPhone(formData.phone)
+      ) {
+        return errorToast("Please provide a valid phone number.");
+      }
+      if (!formData.email.trim() && !formData.phone.trim()) {
+        return errorToast("Please provide phone or email for verification.");
+      }
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:8000/api/v1/user/register",
         formData
       );
       if (response.status === 200) {
-        navigate("/verifyotp");
+        successToast("verification code sent.");
+        handleNext();
       }
     } catch (error) {
-      console.log(error.response);
+      errorToast(error.response?.data?.message || "Registration failed.");
     }
-    handleNext();
   };
 
   return (

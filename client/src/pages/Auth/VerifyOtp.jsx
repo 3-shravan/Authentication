@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 const VerifyOtp = () => {
   const [formData, setFormData] = useState({
-    email: "sirfupendra@gmail.com",
+    email: "iamanonymousperson1111@gmail.com",
     phone: "",
     otp: "",
   });
