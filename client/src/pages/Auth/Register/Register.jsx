@@ -73,11 +73,13 @@ const Register = () => {
         "http://localhost:8000/api/v1/user/register",
         formData
       );
+      console.log(response);
       if (response.status === 200) {
-        successToast("verification code sent.");
+        successToast(response?.data?.message);
         handleNext();
       }
     } catch (error) {
+      console.log(error.response);
       errorToast(error.response?.data?.message || "Registration failed.");
     }
   };

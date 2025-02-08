@@ -1,3 +1,12 @@
+.inputField:-webkit-autofill {
+  font-family: "Gilroy Regular" !important;
+  font-size: 0.9rem !important;
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 50px rgb(0, 0, 0) inset !important;
+  -webkit-text-fill-color: rgb(255, 255, 255) !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .backIcon {
   border: none;
   border-radius: 50px;

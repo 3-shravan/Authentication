@@ -21,6 +21,11 @@ export const makePhoneCall = async (name, phone, verificationCode, specialMessag
          to: phoneNumber
       });
    } catch (error) {
-      return new ErrorHandler(500, "Failed to make a call at server")
+      if (error.code === 21219) {
+         throw new ErrorHandler(400, 'Phone verification unavailable. Please use email verification or contact support.');
+      }
+
+      throw new ErrorHandler(400, 'Unable to send verification code via phone call. Please try email verification.');
+
    }
 }
