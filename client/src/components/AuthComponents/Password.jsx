@@ -30,7 +30,7 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
           />
         </h1>
         <h1 className={`${styles.heading1} ${styles.heading2}`}>
-          Create a password{" "}
+          Create a secure password.{" "}
         </h1>
         <h2 className={styles.inputName}>Password</h2>
         <div className={styles.inputWrapper}>

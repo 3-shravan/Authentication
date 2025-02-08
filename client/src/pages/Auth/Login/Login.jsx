@@ -1,12 +1,19 @@
 import react from "react";
 import { useState } from "react";
 import axios from "axios";
+import { errorToast, successToast } from "../../../utils/ToastNotifications";
+import { useNavigate } from "react-router-dom";
+
+const initialFormData = {
+  email: "",
+  phone: "",
+  password: "",
+};
+
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    phone: "",
-    password: "",
-  });
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState(initialFormData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -17,18 +24,21 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(formData);
-   try {
-    const response = await axios.post(
-      "http://localhost:8000/api/v1/user/login",
-      formData
-    );
-    console.log(response);
-   } catch (error) {
-    console.log(error.response)
-    
-   }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/user/login",
+        formData
+      );
+      if (response.status === 200) {
+        successToast(response.data.message);
+        navigate("/feeds");
+      }
+    } catch (error) {
+      errorToast(error.response?.data?.message || "Failed to Login");
+    }
   };
+
   return (
     <>
       <div className=" w-full h-screen flex justify-center items-center ">

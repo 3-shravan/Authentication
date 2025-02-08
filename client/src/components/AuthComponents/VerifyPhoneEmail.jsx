@@ -38,7 +38,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
         <IoIosArrowBack className={styles.backIcon} onClick={handlePrevious} />
       </h1>
       <h1 className={`${styles.heading1} ${styles.heading2}`}>
-        Verify yourself.
+        Let us verify you !
       </h1>
       <div className={styles.selectionContainer}>
         <span
@@ -68,7 +68,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1, ease: "linear" }}
         >
-          <h2 className={styles.inputName}>Enter your Email</h2>
+          <h2 className={styles.inputName}>By Email</h2>
           <div className={styles.inputWrapper}>
             <MdMarkEmailUnread className={styles.emailIcon} />
 
@@ -90,7 +90,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1, ease: "linear" }}
         >
-          <h2 className={styles.inputName}>Enter your Phone Number</h2>
+          <h2 className={styles.inputName}>By Phone Number</h2>
           <div className={styles.inputWrapper}>
             <FaPlus className={styles.plusIcon} />
 
