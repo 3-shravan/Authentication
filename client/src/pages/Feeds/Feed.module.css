@@ -1,8 +1,11 @@
 .home {
   background-color: black;
-  color: wheat;
-  font-size: 5rem;
+  height: 100vh;
+  color: crimson;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  vertical-align: middle;
-  font-family: "Futura-Bold";
+  font-family: "Gilroy Regular";
 }

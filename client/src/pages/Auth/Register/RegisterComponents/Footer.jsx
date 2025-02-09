@@ -1,4 +1,4 @@
-import styles from "../../pages/Auth/Register/Register.module.css";
+import styles from "../Register.module.css";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {

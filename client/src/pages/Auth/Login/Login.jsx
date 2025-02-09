@@ -1,18 +1,15 @@
-import react from "react";
-import { useState } from "react";
-import axios from "axios";
-import { errorToast, successToast } from "../../../utils/ToastNotifications";
-import { useNavigate } from "react-router-dom";
-
-const initialFormData = {
-  email: "",
-  phone: "",
-  password: "",
-};
+import React from "react";
+import { useApi } from "../../../hooks/useApi";
+import { LoginInitialFormData } from "../../../utils/Constants";
+import styles from "./Login.module.css";
+import Button from "./LoginComponents/Button";
+import LoginByEmail from "./LoginComponents/LoginByEmail";
+import LoginByPhone from "./LoginComponents/LoginByPhone";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = React.useState(LoginInitialFormData);
+  const [loginByEmail, setLoginByEmail] = React.useState(true);
+  const { execute, data, loading, error } = useApi("/login", "POST", "/feeds");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,80 +18,41 @@ const Login = () => {
       [name]: value,
     }));
   };
+  const handleMethod = () => {
+    setLoginByEmail(!loginByEmail);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
-        formData
-      );
-      if (response.status === 200) {
-        successToast(response.data.message);
-        navigate("/feeds");
-      }
-    } catch (error) {
-      errorToast(error.response?.data?.message || "Failed to Login");
-    }
+    await execute(formData);
   };
 
+  React.useEffect(() => {
+    console.log("data:", data);
+    console.log("error:", error);
+    console.log("loading:", loading);
+  }, [data]);
+
   return (
-    <>
-      <div className=" w-full h-screen flex justify-center items-center ">
-        <div className=" w-3/4 h-3/4 flex border-2 border-gray-500 rounded items-center flex-col">
-          <h1 className="text-5xl text-red-600 w-full  text-center ">Login</h1>
+    <div className={styles.container}>
+      <form action="" className={styles.formContainer}>
+        <h1 className={` ${styles.heading2}`}>Login to your Account!</h1>
 
-          <form
-            action=""
-            className=" flex-col  m-2 p-8 flex "
-            onSubmit={(e) => {
-              submitHandler(e);
-            }}
-          >
-            <h2 className="font-semibold text-xl  ">Email</h2>
-            <input
-              type="text"
-              placeholder="Enter Your Email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              className="border rounded p-2 bg-zinc-800 border-zinc-500  "
-            />
+        {loginByEmail ? (
+          <LoginByEmail handleChange={handleChange} formData={formData} />
+        ) : (
+          <LoginByPhone handleChange={handleChange} formData={formData} />
+        )}
 
-            <h2 className="font-semibold text-xl">Phone</h2>
-            <input
-              type="number"
-              placeholder="Enter Your Phone Number"
-              name="phone"
-              value={formData.phone}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              className="border rounded p-2 bg-zinc-800 border-zinc-500  "
-            />
+        <span className={styles.spanLine}>Forget Password ? </span>
+        <Button text="Next" handleNext={submitHandler} />
 
-            <h2 className="font-semibold text-xl">Password</h2>
-            <input
-              type="password"
-              placeholder="Enter Your Phone password"
-              name="password"
-              value={formData.password}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              className="border rounded p-2 bg-zinc-800 border-zinc-500  "
-            />
-
-            <button className="rounded mt-3 border bg-emerald-800 h-10 border-zinc-500 ">
-              Login
-            </button>
-          </form>
-        </div>
-      </div>
-    </>
+        <span className={styles.spanLine} onClick={() => handleMethod()}>
+          Login by {loginByEmail ? "Phone" : "Email"}
+        </span>
+      </form>
+    </div>
   );
 };
 

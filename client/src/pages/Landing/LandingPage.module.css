@@ -15,16 +15,15 @@
 .name {
   padding: 0 1rem;
   width: 10%;
-  font-size: 2rem;
+  font-size: 1rem;
   height: 100%;
   display: flex;
   gap: 0.5rem;
 }
 .name span {
-  font-size: 2rem;
-  padding: 0 -10px;
+  font-size: 1.3rem;
   display: flex;
-  font-family: "Gilroy Bold";
+  font-family: "Gilroy Regular";
   align-items: center;
   justify-content: center;
 }
@@ -68,7 +67,7 @@
   margin: 0 1rem;
   font-family: "Futura-Bold";
   line-height: 4.7rem;
-  max-width: 100%;
+  max-width: 80%;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
@@ -169,7 +168,6 @@
   padding: 10px 0;
   display: flex;
 
-  /* Fade effect on edges */
   &::before,
   &::after {
     content: "";

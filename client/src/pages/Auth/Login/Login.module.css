@@ -23,7 +23,7 @@
 }
 
 .container::before {
-  content: "SIGN UP";
+  content: "Login";
   position: absolute;
   top: 18%;
   left: 50%;
@@ -44,73 +44,42 @@
   flex-direction: column;
   justify-content: center;
   top: 35%;
-  width: 40%;
+  width: 30%;
   max-width: 450px;
   font-size: 1rem;
   padding: 20px 20px 0 20px;
   color: white;
+  background-color: #0e0e0e;
+  border-radius: 10px;
 }
 
-.footer {
-  cursor: default;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  bottom: 1%;
-  color: #777;
+.heading1 {
+  font-size: 1.8rem;
+  text-align: start;
+  height: 7vh;
+  font-family: "Futura-Bold";
+  color: rgb(171, 177, 133);
+}
+.heading2 {
+  padding-left: 0.5rem;
+  text-align: start;
+  height: 7vh;
+  font-size: 1.5rem;
+  font-family: "Gilroy Bold";
+  color: rgb(84, 84, 84);
+  margin-bottom: 3vh;
+}
+
+.spanLine {
   font-size: 0.7rem;
-}
-.login {
-  margin-bottom: 1vh;
-}
-.policy {
-  width: 66%;
-  font-size: 0.6rem;
-}
-.textLinks {
-  color: rgb(23, 159, 116);
-  cursor: pointer;
+  text-align: start;
+  cursor: default;
+  padding: 0 0 1rem 1rem;
+
+  color: #777;
   &:hover {
     text-decoration: underline;
-    color: rgb(1, 202, 148);
-    transition: 0.2s all ease-in-out;
-  }
-}
-
-@media (max-width: 1024px) {
-  .container::before {
-    font-size: 10rem;
-    top: 15%;
-  }
-
-  .formContainer {
-    width: 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  .container::before {
-    font-size: 7.5rem;
-    top: 12%;
-    letter-spacing: -0.5rem;
-  }
-
-  .formContainer {
-    width: 60%;
-    top: 35%;
-  }
-}
-
-@media (max-width: 480px) {
-  .container::before {
-    font-size: 5rem;
-    top: 10%;
-    letter-spacing: -0.3rem;
-  }
-
-  .formContainer {
-    width: 80%;
-    top: 40%;
+    color: rgb(51, 139, 120);
+    cursor: pointer;
   }
 }

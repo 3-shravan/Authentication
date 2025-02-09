@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 
-import styles from "./AuthComponent.module.css";
+import styles from "./RegisterComponents.module.css";
 import { useEffect, useRef } from "react";
 
 const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {

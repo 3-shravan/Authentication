@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { CgProfile } from "react-icons/cg";
-import styles from "./AuthComponent.module.css";
-import Button from "./Button";
 import { useEffect, useRef } from "react";
+import { CgProfile } from "react-icons/cg";
+
+import styles from "./RegisterComponents.module.css";
+import Button from "./Button";
 
 const Fullname = ({ handleNext, formData, handleChange }) => {
   const inputRef = useRef(null);

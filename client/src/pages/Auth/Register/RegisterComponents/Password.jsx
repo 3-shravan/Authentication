@@ -1,9 +1,10 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
-import styles from "./AuthComponent.module.css";
+
+import styles from "./RegisterComponents.module.css";
 import Button from "./Button";
-import { useEffect, useRef } from "react";
 
 const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
   const inputRef = useRef(null);

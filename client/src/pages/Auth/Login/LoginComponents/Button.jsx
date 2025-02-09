@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "./AuthComponent.module.css";
+import styles from "./LoginComponents.module.css";
 
 const Button = ({ handleNext, text, type, loading }) => {
   return (

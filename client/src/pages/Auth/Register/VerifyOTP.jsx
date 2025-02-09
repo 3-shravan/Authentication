@@ -1,16 +1,20 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
-import styles from "./AuthComponent.module.css";
-import InputOtp from "./InputOtp";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
-import { errorToast, successToast } from "../../utils/ToastNotifications";
+
+import styles from "./RegisterComponents/RegisterComponents.module.css";
+import InputOtp from "../../../components/InputOtp/InputOtp";
+import { useApi } from "../../../hooks/useApi";
 
 const VerifyOTP = ({ formData, handlePrevious }) => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const phone = formData.phone ? `+91${formData.phone}` : "";
+
+  const { data, error, execute, loading } = useApi(
+    "/verifyotp",
+    "POST",
+    "/feeds"
+  );
 
   const handleOtpSubmit = async (otp) => {
     const requestData = {
@@ -18,21 +22,8 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
       phone: formData.phone,
       otp,
     };
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/user/verifyotp",
-        requestData
-      );
-      if (response.status === 200) {
-        successToast(response.data.message);
-        navigate("/feeds");
-      }
-    } catch (error) {
-      errorToast(error.response?.data?.message || "Failed to verify");
-    } finally {
-      setLoading(false);
-    }
+    const response = await execute(requestData);
+    console.log(data, error, loading);
   };
 
   return (

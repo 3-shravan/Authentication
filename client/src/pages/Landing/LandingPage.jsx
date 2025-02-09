@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { MarqueeItems } from "../../utils/MarqueeArray";
 import styles from "./LandingPage.module.css";
 
@@ -88,7 +88,9 @@ const LandingPage = () => {
           </motion.span>
         </motion.div>
         <div className={styles.buttons}>
-          <button onClick={() => navigate("/login")}>Login</button>
+          <button onClick={() => navigate("/login", { replace: true })}>
+            Login
+          </button>
         </div>
       </div>
       <div className={styles.authContainer}>

@@ -1,30 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import axios from "axios";
-import styles from "./Register.module.css";
-import Fullname from "../../../components/AuthComponents/Fullname";
-import Password from "../../../components/AuthComponents/Password";
-import VerifyPhoneEmail from "../../../components/AuthComponents/VerifyPhoneEmail";
-import VerifyOTP from "../../../components/AuthComponents/VerifyOTP";
-import Button from "../../../components/AuthComponents/Button";
-import { errorToast, successToast } from "../../../utils/ToastNotifications";
-import Footer from "../../../components/AuthComponents/Footer";
+import React from "react";
+import { motion } from "framer-motion";
 
-const initialFormData = {
-  name: "",
-  email: "",
-  phone: "",
-  password: "",
-  verificationMethod: "email",
-};
+import { errorToast, successToast } from "../../../utils/ToastNotifications";
+import { useApi } from "../../../hooks/useApi";
+import { RegisterInitialFormData } from "../../../utils/Constants";
+import { validateForm } from "../../../utils/Validation";
+
+import styles from "./Register.module.css";
+import Fullname from "./RegisterComponents/Fullname";
+import Password from "./RegisterComponents/Password";
+import VerifyPhoneEmail from "./RegisterComponents/VerifyPhoneEmail";
+import VerifyOTP from "./VerifyOTP";
+import Button from "./RegisterComponents/Button";
+import Footer from "./RegisterComponents/Footer";
 
 const Register = () => {
-  const navigate = useNavigate();
-
-  const [stage, setStage] = useState(1);
-  const [formData, setFormData] = useState(initialFormData);
-  const [loading, setLoading] = useState(false);
+  const [stage, setStage] = React.useState(1);
+  const [formData, setFormData] = React.useState(RegisterInitialFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,56 +34,26 @@ const Register = () => {
     setStage((prev) => prev + 1);
   };
 
-  const handlePrevious = () => setStage((prev) => prev - 1);
-
-  const isValidEmail = (email) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email));
-  const isValidPhone = (phone) => /^[6-9]\d{9}$/.test(String(phone));
-
-  const validateForm = () => {
-    if (stage === 3) {
-      if (
-        formData.verificationMethod === "email" &&
-        !isValidEmail(formData.email)
-      )
-        return "Please provide a valid email address.";
-      if (
-        formData.verificationMethod === "phone" &&
-        !isValidPhone(formData.phone)
-      )
-        return "Please provide a valid phone number.";
-
-      if (!formData.email.trim() && !formData.phone.trim())
-        return "Please provide either phone or email for verification.";
-
-      return null;
-    }
+  const handlePrevious = () => {
+    setStage((prev) => prev - 1);
   };
+
+  const { execute, loading, data, error } = useApi("/register", "POST");
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const validationError = validateForm();
+    const validationError = validateForm(formData, stage);
     if (validationError) {
       return errorToast(validationError);
     }
-    setLoading(true);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
-        formData
-      );
-      if (response.status === 200) {
-        successToast(response?.data?.message);
-        handleNext();
-      }
-    } catch (error) {
-      errorToast(error.response?.data?.message || "Registration failed.");
-    } finally {
-      setLoading(false);
-    }
+    const response = await execute(formData);
+    if (response.status === 200) handleNext();
   };
+
+  React.useEffect(() => {
+    console.log(data, error, loading);
+  }, [data, error, loading]);
 
   return (
     <>

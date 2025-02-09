@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./AuthComponent.module.css";
+import styles from "./InputOtp.module.css";
 
 const length = 5;
 const InputOtp = ({ handleOtpSubmit, loading }) => {
