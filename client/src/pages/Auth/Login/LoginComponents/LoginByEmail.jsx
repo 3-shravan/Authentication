@@ -23,7 +23,7 @@ const LoginByEmail = ({ handleChange, formData }) => {
         />
       </div>
 
-      <h2 className={styles.inputName}>Phone</h2>
+      <h2 className={styles.inputName}>Password</h2>
       <div className={styles.inputWrapper}>
         <CgProfile className={styles.icon} />
         <input

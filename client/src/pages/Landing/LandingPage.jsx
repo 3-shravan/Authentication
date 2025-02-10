@@ -88,7 +88,7 @@ const LandingPage = () => {
           </motion.span>
         </motion.div>
         <div className={styles.buttons}>
-          <button onClick={() => navigate("/login", { replace: true })}>
+          <button onClick={() => navigate("/login")}>
             Login
           </button>
         </div>

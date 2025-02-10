@@ -28,12 +28,6 @@ const Login = () => {
     await execute(formData);
   };
 
-  React.useEffect(() => {
-    console.log("data:", data);
-    console.log("error:", error);
-    console.log("loading:", loading);
-  }, [data]);
-
   return (
     <div className={styles.container}>
       <form action="" className={styles.formContainer}>

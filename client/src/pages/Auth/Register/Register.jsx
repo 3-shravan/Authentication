@@ -51,10 +51,6 @@ const Register = () => {
     if (response.status === 200) handleNext();
   };
 
-  React.useEffect(() => {
-    console.log(data, error, loading);
-  }, [data, error, loading]);
-
   return (
     <>
       <motion.div

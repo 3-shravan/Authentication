@@ -2,11 +2,26 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "../utils/ToastNotifications";
+import { useAuth } from '../context/AuthContext';
+import { setIsAuthenticated, setToken } from '../utils/LocalStorage';
 
 const BASE_URL = "http://localhost:8000/api/v1/user";
 
 export const useApi = (endpoint, method = "GET", redirectUrl = null) => {
    const navigate = useNavigate();
+   const { setAuth } = useAuth()
+   const handleSetAuth = (data) => {
+
+      setAuth((prev) => ({
+         ...prev,
+         token: data.token,
+         isAuthenticated: true,
+         profile: data.user,
+      }))
+      setToken(data.token)
+      setIsAuthenticated(true)
+   }
+
 
    const [data, setData] = React.useState(null);
    const [loading, setLoading] = React.useState(false);
@@ -22,6 +37,7 @@ export const useApi = (endpoint, method = "GET", redirectUrl = null) => {
             data: body,
          });
          if (response.status === 200) {
+            handleSetAuth(response.data)
             setData(response.data);
             if (response.data?.message) successToast(response.data.message);
             if (redirectUrl) navigate(redirectUrl, { replace: true });
