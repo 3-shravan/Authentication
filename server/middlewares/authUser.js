@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 /* Validation MiiddleWare */
 
 export const authUser = catchAsyncError(async (req, res, next) => {
-   const token = req.headers.authorization?.split(" ")[1]
+   const token = req.headers.authorization?.split(" ")[1] || req.cookies.token
 
    if (!token) {
       return next(new ErrorHandler(401, "Authenticaton token is missing "))

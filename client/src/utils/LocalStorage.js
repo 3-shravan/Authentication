@@ -14,6 +14,11 @@ export const getIsAuthenticated = () => {
    return JSON.parse(localStorage.getItem("isAuthenticated"));
 };
 
+export const setTokenAndAuthenticated = (token, isAuthenticated) => {
+   localStorage.setItem("token", token)
+   localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated))
+}
+
 
 
 

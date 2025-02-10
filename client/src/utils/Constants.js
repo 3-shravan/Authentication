@@ -1,9 +1,3 @@
-import { getIsAuthenticated, getToken } from './LocalStorage'
-export const userData = {
-   isAuthenticated: getIsAuthenticated(),
-   token: getToken(),
-   profile: null,
-}
 
 export const RegisterInitialFormData = {
    name: "",

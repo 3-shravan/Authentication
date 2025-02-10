@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
-import { userData } from "../utils/Constants";
+import { getIsAuthenticated, getToken } from "../utils/LocalStorage";
 
 const AuthContext = React.createContext();
 
 export const ContextProvider = ({ children }) => {
-  const [auth, setAuth] = React.useState(userData);
+  const [auth, setAuth] = React.useState({
+    isAuthenticated: getIsAuthenticated(),
+    token: getToken(),
+    profile: null,
+  });
 
-  
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
