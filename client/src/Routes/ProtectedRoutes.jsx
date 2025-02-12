@@ -9,10 +9,11 @@ const ProtectedRoutes = () => {
   const { execute, loading } = useApi("/profile", "GET", "/feeds");
 
   React.useEffect(() => {
-    if (!auth.token || !auth.isAuthenticated) {
+    if (auth.token === "undefined" || !auth.isAuthenticated) {
       navigate("/login", { replace: true });
       return;
     }
+
     const fetchProfile = async () => {
       const response = await execute();
       if (response.status === 200) {

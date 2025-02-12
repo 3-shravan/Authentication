@@ -5,8 +5,8 @@ const AuthContext = React.createContext();
 
 export const ContextProvider = ({ children }) => {
   const [auth, setAuth] = React.useState({
-    isAuthenticated: getIsAuthenticated(),
-    token: getToken(),
+    isAuthenticated: getIsAuthenticated() ||false,
+    token: getToken() || null,
     profile: null,
   });
 

@@ -1,11 +1,10 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 
 import { useApi } from "../../../hooks/useApi";
 import { LoginInitialFormData } from "../../../utils/Constants";
 import { useAuth } from "../../../context/AuthContext";
 import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
-
 
 import styles from "./Login.module.css";
 import Button from "./LoginComponents/Button";
@@ -27,7 +26,6 @@ const Login = () => {
     }));
   };
 
-  
   const handleMethod = () => {
     setLoginByEmail(!loginByEmail);
   };
@@ -57,8 +55,9 @@ const Login = () => {
           <LoginByPhone handleChange={handleChange} formData={formData} />
         )}
 
-        <span className={styles.spanLine}>Forget Password ? </span>
-        <Button text="Next" handleNext={submitHandler} />
+        {/* <span className={styles.spanLine}>Forget Password ? </span> */}
+        <Link to={"/forgetPassword"} className={styles.spanLine}>Forget Password</Link>
+        <Button text="Login" handleNext={submitHandler} loading={loading} />
 
         <span className={styles.spanLine} onClick={() => handleMethod()}>
           Login by {loginByEmail ? "Phone" : "Email"}

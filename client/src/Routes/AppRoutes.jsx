@@ -6,6 +6,7 @@ import Feed from "../pages/Feeds/Feed";
 import PublicRoutes from "./PublicRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PageNotFound from "../pages/PageNotFound";
+import ForgetPassword from "../pages/Auth/ForgetPassword/ForgetPassword";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
       </Route>
 
       <Route element={<ProtectedRoutes />}>

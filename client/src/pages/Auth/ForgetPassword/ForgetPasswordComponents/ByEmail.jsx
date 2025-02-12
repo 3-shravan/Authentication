@@ -1,9 +1,9 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { motion } from "framer-motion";
-import styles from "./LoginComponents.module.css";
+import styles from "./ForgetPasswordComponents.module.css";
 
-const LoginByEmail = ({ handleChange, formData }) => {
+const ByEmail = ({ handleChange, formData }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,21 +22,8 @@ const LoginByEmail = ({ handleChange, formData }) => {
           className={styles.inputField}
         />
       </div>
-
-      {/* <h2 className={styles.inputName}>Password</h2> */}
-      <div className={styles.inputWrapper}>
-        <CgProfile className={styles.icon} />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={formData.password}
-          onChange={(e) => handleChange(e)}
-          className={styles.inputField}
-        />
-      </div>
     </motion.div>
   );
 };
 
-export default LoginByEmail;
+export default ByEmail;

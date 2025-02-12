@@ -7,7 +7,7 @@ const PublicRoutes = () => {
   const { auth } = useAuth();
 
   React.useEffect(() => {
-    if (auth.token && auth.isAuthenticated) {
+    if (!auth.token === "undefined" && auth.isAuthenticated) {
       navigate("/feeds", { replace: true });
       return;
     }

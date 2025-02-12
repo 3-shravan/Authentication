@@ -10,7 +10,7 @@ const LoginByPhone = ({ handleChange, formData }) => {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.1, ease: "linear" }}
     >
-      <h2 className={styles.inputName}>Phone Number</h2>
+      {/* <h2 className={styles.inputName}>Phone Number</h2> */}
       <div className={styles.inputWrapper}>
         <CgProfile className={styles.icon} />
         <input
@@ -23,7 +23,7 @@ const LoginByPhone = ({ handleChange, formData }) => {
         />
       </div>
 
-      <h2 className={styles.inputName}>Password</h2>
+      {/* <h2 className={styles.inputName}>Password</h2> */}
       <div className={styles.inputWrapper}>
         <CgProfile className={styles.icon} />
         <input

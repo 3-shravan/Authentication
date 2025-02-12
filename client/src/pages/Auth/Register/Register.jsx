@@ -6,7 +6,6 @@ import { errorToast, successToast } from "../../../utils/ToastNotifications";
 import { useApi } from "../../../hooks/useApi";
 import { RegisterInitialFormData } from "../../../utils/Constants";
 import { validateForm } from "../../../utils/Validation";
-import { useAuth } from "../../../context/AuthContext";
 
 import styles from "./Register.module.css";
 import Fullname from "./RegisterComponents/Fullname";
@@ -15,11 +14,8 @@ import VerifyPhoneEmail from "./RegisterComponents/VerifyPhoneEmail";
 import VerifyOTP from "./VerifyOTP";
 import Button from "./RegisterComponents/Button";
 import Footer from "./RegisterComponents/Footer";
-import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
-
 
 const Register = () => {
-  const { setAuth } = useAuth();
   const [stage, setStage] = React.useState(1);
   const [formData, setFormData] = React.useState(RegisterInitialFormData);
 
@@ -27,6 +23,8 @@ const Register = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  
 
   const handleNext = () => {
     if (stage === 1 && !formData.name.trim())
@@ -56,12 +54,6 @@ const Register = () => {
 
     if (response.status === 200) {
       handleNext();
-      setAuth({
-        token: response.data.token,
-        isAuthenticated: true,
-        profile: response.data.user,
-      });
-      setTokenAndAuthenticated(response.data.token, true);
     }
   };
 

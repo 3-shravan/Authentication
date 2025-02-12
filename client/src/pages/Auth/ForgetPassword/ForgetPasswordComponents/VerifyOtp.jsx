@@ -1,35 +1,29 @@
+import React from "react";
+
+import { useApi } from "../../../../hooks/useApi";
 import { motion } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
 
-import styles from "./RegisterComponents/RegisterComponents.module.css";
-import InputOtp from "../../../components/InputOtp/InputOtp";
-import { useApi } from "../../../hooks/useApi";
-import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
-import { useAuth } from "../../../context/AuthContext";
+import InputOtp from "../../../../components/InputOtp/InputOtp";
+import styles from "../../AuthComponents.module.css";
 
-const VerifyOTP = ({ formData, handlePrevious }) => {
-  const phone = formData.phone ? `+91${formData.phone}` : "";
-  const { setAuth } = useAuth();
-
-  const { execute, loading } = useApi("/verifyotp", "POST", "/feeds");
+const VerifyOtp = ({ formData, setStage }) => {
+  const phone = `+91${" "}${formData.phone}`;
+  const { execute, loading } = useApi(
+    "/forgetPassword/verifyOTP",
+    "POST",
+    "/login"
+  );
 
   const handleOtpSubmit = async (otp) => {
     const requestData = {
-      email: formData.email,
       phone: formData.phone,
       otp,
     };
-
+    console.log(requestData);
     const response = await execute(requestData);
-    console.log(response);
-
     if (response.status === 200) {
-      setAuth({
-        token: response.data.token,
-        isAuthenticated: true,
-        profile: response.data.user,
-      });
-      setTokenAndAuthenticated(response.data.token, true);
+      console.log("now comapare Password");
     }
   };
 
@@ -48,7 +42,7 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
       >
         <h1 className={styles.heading1}>
           <IoIosArrowBack
-            onClick={handlePrevious}
+            onClick={() => setStage(0)}
             className={styles.backIcon}
           />
         </h1>
@@ -56,10 +50,8 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
           Verification Code
         </h1>
         <h2 className={styles.inputName}>
-          We sent you a Verification Code on{" "}
-          <span className={styles.email}>
-            {phone} {formData.email}.
-          </span>
+          We sent you a Verification Code on
+          {phone}
         </h2>
 
         <InputOtp handleOtpSubmit={handleOtpSubmit} loading={loading} />
@@ -68,4 +60,4 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
   );
 };
 
-export default VerifyOTP;
+export default VerifyOtp;
