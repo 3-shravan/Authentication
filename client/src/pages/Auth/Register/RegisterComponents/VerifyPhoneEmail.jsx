@@ -3,9 +3,9 @@ import { TbNumber91Small } from "react-icons/tb";
 import { FaPlus } from "react-icons/fa6";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
-
-import styles from "./RegisterComponents.module.css";
 import { useEffect, useRef } from "react";
+
+import styles from "../../AuthComponents.module.css";
 
 const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
   const inputRef = useRef(null);

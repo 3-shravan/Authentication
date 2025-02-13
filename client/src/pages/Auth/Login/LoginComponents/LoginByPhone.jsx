@@ -1,7 +1,7 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { motion } from "framer-motion";
-import styles from "./LoginComponents.module.css";
+import styles from "../../AuthComponents.module.css";
 
 const LoginByPhone = ({ handleChange, formData }) => {
   return (

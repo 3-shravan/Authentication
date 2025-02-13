@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { FaLock } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 
-import styles from "./RegisterComponents.module.css";
-import Button from "./Button";
+import styles from "../../AuthComponents.module.css";
+import AuthButton from "../../../../components/UI/AuthButton";
+import { Link } from "react-router-dom";
+import GoToLogin from "./GoToLogin";
 
 const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
   const inputRef = useRef(null);
@@ -49,7 +51,9 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
           />
         </div>
       </motion.div>
-      <Button handleNext={handleNext} text="Next" />
+      <AuthButton handleNext={handleNext} text="Next" register={true} />
+      <GoToLogin />
+
     </>
   );
 };

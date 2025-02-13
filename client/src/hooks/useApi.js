@@ -19,7 +19,6 @@ export const useApi = (endpoint, method = "GET", redirectUrl = null) => {
    const execute = React.useCallback(async (body = null) => {
       setLoading(true);
       setError(null);
-      console.log(body)
       try {
          const response = await axios({
             url: `${BASE_URL}${endpoint}`,

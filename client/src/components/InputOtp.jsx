@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./InputOtp.module.css";
+import "../assets/styles/inputOtp.css";
 
 const length = 5;
 const InputOtp = ({ handleOtpSubmit, loading }) => {
@@ -57,14 +57,14 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
 
   return loading ? (
     <span>Verifying otp...</span>
-  ) : (
-    <div className={styles.otpContainer}>
+  ) : (<>
+    <div className="otpContainer">
       {otp.map((value, index) => {
         return (
           <input
             key={index}
             type="text"
-            className={styles.inputOtp}
+            className="inputOtp"
             value={value}
             ref={(val) => (inputRefs.current[index] = val)}
             onChange={(e) => handleChange(e, index)}
@@ -74,6 +74,8 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
         );
       })}
     </div>
+    <button className="resendOtp">Resend OTP</button>
+    </>
   );
 };
 

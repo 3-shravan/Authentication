@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
 
-import styles from "./RegisterComponents/RegisterComponents.module.css";
-import InputOtp from "../../../components/InputOtp/InputOtp";
+import styles from "../AuthComponents.module.css";
+import InputOtp from "../../../components/InputOtp";
+
 import { useApi } from "../../../hooks/useApi";
 import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
+import GoToLogin from "./RegisterComponents/GoToLogin";
 
 const VerifyOTP = ({ formData, handlePrevious }) => {
   const phone = formData.phone ? `+91${formData.phone}` : "";
@@ -52,18 +54,16 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
             className={styles.backIcon}
           />
         </h1>
-        <h1 className={`${styles.heading1} ${styles.heading2}`}>
-          Verification Code
-        </h1>
         <h2 className={styles.inputName}>
           We sent you a Verification Code on{" "}
           <span className={styles.email}>
-            {phone} {formData.email}.
+            {phone} {formData.email}
           </span>
         </h2>
 
         <InputOtp handleOtpSubmit={handleOtpSubmit} loading={loading} />
       </form>
+      <GoToLogin />
     </motion.div>
   );
 };

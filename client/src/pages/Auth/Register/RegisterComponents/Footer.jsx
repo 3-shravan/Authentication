@@ -1,26 +1,21 @@
 import styles from "../Register.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const navigate = useNavigate();
   return (
     <div className={styles.footer}>
-      <div className={styles.login}>
-        <span>
-          {" "}
-          Already have a account ?{" "}
-          <span className={styles.textLinks} onClick={() => navigate("/login")}>
-            Login
-          </span>{" "}
-          here.
-        </span>
-      </div>
       <div className={styles.policy}>
         <span>
           By continuing to use this website, you acknowledge that you have read,
           understood, and agreed to our{" "}
-          <span className={styles.textLinks}>Privacy Policy</span> and{" "}
-          <span className={styles.textLinks}>Terms & Conditions.</span>
+          <Link to="/privacy-policy" className={styles.textLinks}>
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link to="/terms-conditions" className={styles.textLinks}>
+            Terms & Conditions
+          </Link>
+          .
         </span>
       </div>
     </div>

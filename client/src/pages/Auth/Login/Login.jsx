@@ -1,18 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useApi } from "../../../hooks/useApi";
 import { LoginInitialFormData } from "../../../utils/Constants";
 import { useAuth } from "../../../context/AuthContext";
 import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
 
-import styles from "./Login.module.css";
-import Button from "./LoginComponents/Button";
+import loginstyles from "./Login.module.css";
+import styles from "../AuthComponents.module.css";
+import AuthButton from "../../../components/UI/AuthButton";
 import LoginByEmail from "./LoginComponents/LoginByEmail";
 import LoginByPhone from "./LoginComponents/LoginByPhone";
 
 const Login = () => {
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = React.useState(LoginInitialFormData);
   const [loginByEmail, setLoginByEmail] = React.useState(true);
@@ -27,6 +29,7 @@ const Login = () => {
   };
 
   const handleMethod = () => {
+    setFormData(LoginInitialFormData);
     setLoginByEmail(!loginByEmail);
   };
 
@@ -45,9 +48,14 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <form action="" className={styles.formContainer}>
-        <h1 className={` ${styles.heading2}`}>Login to your Account!</h1>
+    <div className={loginstyles.container}>
+      <form action="" className={loginstyles.formContainer}>
+        {/* <h1 className={styles.heading1}>Welcome Back</h1> */}
+
+        <h1 className={styles.heading2}>Login to your Account.</h1>
+        <span className={styles.spanLine} onClick={() => handleMethod()}>
+          Login using {loginByEmail ? "Phone Number" : "Email"}
+        </span>
 
         {loginByEmail ? (
           <LoginByEmail handleChange={handleChange} formData={formData} />
@@ -55,13 +63,14 @@ const Login = () => {
           <LoginByPhone handleChange={handleChange} formData={formData} />
         )}
 
-        {/* <span className={styles.spanLine}>Forget Password ? </span> */}
-        <Link to={"/forgetPassword"} className={styles.spanLine}>Forget Password</Link>
-        <Button text="Login" handleNext={submitHandler} loading={loading} />
+        <AuthButton text="Login" handleNext={submitHandler} loading={loading} />
 
-        <span className={styles.spanLine} onClick={() => handleMethod()}>
-          Login by {loginByEmail ? "Phone" : "Email"}
-        </span>
+        <button
+          className={loginstyles.forgetPassword}
+          onClick={() => navigate("/forgetPassword")}
+        >
+          Forget Password ?
+        </button>
       </form>
     </div>
   );

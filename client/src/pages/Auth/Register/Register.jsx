@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 
 import { motion } from "framer-motion";
@@ -12,8 +11,9 @@ import Fullname from "./RegisterComponents/Fullname";
 import Password from "./RegisterComponents/Password";
 import VerifyPhoneEmail from "./RegisterComponents/VerifyPhoneEmail";
 import VerifyOTP from "./VerifyOTP";
-import Button from "./RegisterComponents/Button";
+import AuthButton from "../../../components/UI/AuthButton";
 import Footer from "./RegisterComponents/Footer";
+import GoToLogin from './RegisterComponents/GoToLogin'
 
 const Register = () => {
   const [stage, setStage] = React.useState(1);
@@ -23,8 +23,6 @@ const Register = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  
 
   const handleNext = () => {
     if (stage === 1 && !formData.name.trim())
@@ -96,11 +94,13 @@ const Register = () => {
                 handlePrevious={handlePrevious}
                 submitHandler={submitHandler}
               />
-              <Button
+              <AuthButton
                 handleNext={submitHandler}
                 text="Send OTP"
                 loading={loading}
+                register={true}
               />
+              <GoToLogin />
             </>
           )}
         </form>

@@ -1,0 +1,92 @@
+.container {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   height: 100vh;
+   width: 100vw;
+   background: linear-gradient(to top, black 35%, rgba(0, 0, 0, 0) 125%),
+     linear-gradient(
+       to bottom,
+       rgba(28, 103, 84, 0.75) 25%,
+       rgba(0, 0, 0, 0) 85%
+     ),
+     linear-gradient(to right, black 15%, rgba(0, 0, 0, 0) 60%),
+     linear-gradient(to left, black 15%, rgba(0, 0, 0, 0) 60%);
+   transform: translate(-50%, -50%);
+   font-size: 2rem;
+   font-weight: bold;
+   color: rgba(255, 255, 255, 0.1);
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ 
+ .container::before {
+   content: "SIGN UP";
+   position: absolute;
+   top: 18%;
+   left: 50%;
+   width: 100%;
+   transform: translate(-50%, -50%);
+   font-size: 15rem;
+   font-weight: bold;
+   text-transform: uppercase;
+   letter-spacing: -0.7rem;
+   font-family: "Futura-Bold";
+   color: rgba(7, 22, 16, 0.299);
+   z-index: -1;
+ }
+ 
+ .formContainer {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   top: 35%;
+   width: 40%;
+   max-width: 450px;
+   font-size: 1rem;
+   padding: 20px 20px 0 20px;
+   color: white;
+   background-color: #131313;
+ }
+ 
+ 
+ @media (max-width: 1024px) {
+   .container::before {
+     font-size: 10rem;
+     top: 15%;
+   }
+ 
+   .formContainer {
+     width: 50%;
+   }
+ }
+ 
+ @media (max-width: 768px) {
+   .container::before {
+     font-size: 7.5rem;
+     top: 12%;
+     letter-spacing: -0.5rem;
+   }
+ 
+   .formContainer {
+     width: 60%;
+     top: 35%;
+   }
+ }
+ 
+ @media (max-width: 480px) {
+   .container::before {
+     font-size: 5rem;
+     top: 10%;
+     letter-spacing: -0.3rem;
+   }
+ 
+   .formContainer {
+     width: 80%;
+     top: 40%;
+   }
+ }
+ 

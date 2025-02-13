@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { CgProfile } from "react-icons/cg";
 
-import styles from "./RegisterComponents.module.css";
-import Button from "./Button";
+import styles from "../../AuthComponents.module.css";
+import AuthButton from "../../../../components/UI/AuthButton";
+import { Link } from "react-router-dom";
+import GoToLogin from "./GoToLogin";
 
 const Fullname = ({ handleNext, formData, handleChange }) => {
   const inputRef = useRef(null);
@@ -42,7 +44,13 @@ const Fullname = ({ handleNext, formData, handleChange }) => {
           />
         </div>
       </motion.div>
-      <Button handleNext={handleNext} text="Next" type="button" />
+      <AuthButton
+        handleNext={handleNext}
+        text="Next"
+        type="button"
+        register={true}
+      />
+      <GoToLogin />
     </>
   );
 };

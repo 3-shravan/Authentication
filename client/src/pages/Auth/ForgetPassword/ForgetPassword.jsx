@@ -4,7 +4,7 @@ import { useApi } from "../../../hooks/useApi";
 import ByEmail from "./ForgetPasswordComponents/ByEmail";
 import ByPhone from "./ForgetPasswordComponents/ByPhone";
 import styles from "./ForgetPassword.module.css";
-import Button from "../../../components/UI/Button";
+import AuthButton from "../../../components/UI/AuthButton";
 import VerifyOtp from "./ForgetPasswordComponents/VerifyOtp";
 import { errorToast } from "../../../utils/ToastNotifications";
 import { isValidEmail, isValidPhone } from "../../../utils/Validation";
@@ -50,13 +50,11 @@ const ForgetPassword = () => {
     console.log(formData);
 
     const response = await execute(formData);
-    console.log(response);
-
-    !byEmail && setStage(1);
+    if (response.status === 200) !byEmail && setStage(1);
   };
 
   return (
-    <div>
+    
       <div className={styles.container}>
         <form
           action=""
@@ -72,7 +70,7 @@ const ForgetPassword = () => {
               {byEmail ? (
                 <>
                   <ByEmail handleChange={handleChange} formData={formData} />
-                  <Button
+                  <AuthButton
                     text="Send"
                     type="button"
                     handleNext={submitHandler}
@@ -82,7 +80,7 @@ const ForgetPassword = () => {
               ) : (
                 <>
                   <ByPhone handleChange={handleChange} formData={formData} />
-                  <Button
+                  <AuthButton
                     text="Send OTP"
                     type="button"
                     handleNext={submitHandler}
@@ -101,7 +99,7 @@ const ForgetPassword = () => {
           {stage === 1 && <VerifyOtp formData={formData} setStage={setStage} />}
         </motion.div>
       </div>
-    </div>
+    
   );
 };
 

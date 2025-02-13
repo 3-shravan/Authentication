@@ -4,7 +4,7 @@ import { useApi } from "../../../../hooks/useApi";
 import { motion } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
 
-import InputOtp from "../../../../components/InputOtp/InputOtp";
+import InputOtp from "../../../../components/InputOtp";
 import styles from "../../AuthComponents.module.css";
 
 const VerifyOtp = ({ formData, setStage }) => {
@@ -12,7 +12,7 @@ const VerifyOtp = ({ formData, setStage }) => {
   const { execute, loading } = useApi(
     "/forgetPassword/verifyOTP",
     "POST",
-    "/login"
+    `/resetPassword/phone/${formData.phone}`
   );
 
   const handleOtpSubmit = async (otp) => {

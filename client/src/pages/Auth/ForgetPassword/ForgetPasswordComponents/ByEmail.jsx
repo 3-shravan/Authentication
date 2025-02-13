@@ -1,7 +1,7 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { motion } from "framer-motion";
-import styles from "./ForgetPasswordComponents.module.css";
+import styles from "../../AuthComponents.module.css";
 
 const ByEmail = ({ handleChange, formData }) => {
   return (
