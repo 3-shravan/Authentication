@@ -45,36 +45,11 @@
   justify-content: center;
   top: 35%;
   width: 40%;
-  max-width: 450px;
+  max-width: 550px;
   font-size: 1rem;
-  padding: 20px 20px 0 20px;
+  padding: 1rem 1.8rem;
   color: white;
-}
-
-.footer {
-  cursor: default;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  bottom: 1%;
-  color: #4e4e4e;
-  font-size: 0.7rem;
-}
-
-.policy {
-  font-family: "Gilroy Medium";
-  width: 66%;
-  font-size: 0.6rem;
-}
-.textLinks {
-  color: rgb(23, 159, 116);
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-    color: rgb(1, 202, 148);
-    transition: 0.2s all ease-in-out;
-  }
+  border-radius: 10px;
 }
 
 @media (max-width: 1024px) {

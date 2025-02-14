@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { useApi } from "../../../hooks/useApi";
 import { LoginInitialFormData } from "../../../utils/Constants";
@@ -11,6 +12,8 @@ import styles from "../AuthComponents.module.css";
 import AuthButton from "../../../components/UI/AuthButton";
 import LoginByEmail from "./LoginComponents/LoginByEmail";
 import LoginByPhone from "./LoginComponents/LoginByPhone";
+import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
+import GoToSignUp from "./LoginComponents/GoToSignUp";
 
 const Login = () => {
   const { setAuth } = useAuth();
@@ -48,13 +51,25 @@ const Login = () => {
   };
 
   return (
-    <div className={loginstyles.container}>
+    <motion.div
+      className={loginstyles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.1, ease: "linear" }}
+    >
       <form action="" className={loginstyles.formContainer}>
-        {/* <h1 className={styles.heading1}>Welcome Back</h1> */}
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.25, ease: "linear" }}
+          className={styles.heading1}
+        >
+          Good To See You Back !{" "}
+        </motion.h1>
 
-        <h1 className={styles.heading2}>Login to your Account.</h1>
         <span className={styles.spanLine} onClick={() => handleMethod()}>
-          Login using {loginByEmail ? "Phone Number" : "Email"}
+          Login via
+          <h2>{loginByEmail ? "Phone Number" : "Email"}</h2>
         </span>
 
         {loginByEmail ? (
@@ -63,16 +78,29 @@ const Login = () => {
           <LoginByPhone handleChange={handleChange} formData={formData} />
         )}
 
-        <AuthButton text="Login" handleNext={submitHandler} loading={loading} />
-
-        <button
-          className={loginstyles.forgetPassword}
-          onClick={() => navigate("/forgetPassword")}
+        <motion.div
+          initial={{ opacity: 0.5 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, ease: "linear" }}
         >
-          Forget Password ?
-        </button>
+          {" "}
+          <AuthButton
+            text="Login"
+            handleNext={submitHandler}
+            loading={loading}
+          />
+          <button
+            className={loginstyles.forgetPassword}
+            onClick={() => navigate("/forgetPassword")}
+            type="button"
+          >
+            Forget Password ?
+          </button>
+          <GoToSignUp />
+        </motion.div>
       </form>
-    </div>
+      <PrivacyTermsAndConditions />
+    </motion.div>
   );
 };
 

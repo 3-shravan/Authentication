@@ -56,7 +56,7 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
   };
 
   return loading ? (
-    <span>Verifying otp...</span>
+    <span className="loader">Verifying otp...</span>
   ) : (<>
     <div className="otpContainer">
       {otp.map((value, index) => {
@@ -74,7 +74,7 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
         );
       })}
     </div>
-    <button className="resendOtp">Resend OTP</button>
+    <button type="button" className="resendOtp">Resend OTP</button>
     </>
   );
 };

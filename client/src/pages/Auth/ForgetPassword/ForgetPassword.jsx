@@ -1,13 +1,18 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useApi } from "../../../hooks/useApi";
 import ByEmail from "./ForgetPasswordComponents/ByEmail";
 import ByPhone from "./ForgetPasswordComponents/ByPhone";
 import styles from "./ForgetPassword.module.css";
+import authStyles from "../AuthComponents.module.css";
 import AuthButton from "../../../components/UI/AuthButton";
 import VerifyOtp from "./ForgetPasswordComponents/VerifyOtp";
+import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
+
+import { motion } from "framer-motion";
+import { useApi } from "../../../hooks/useApi";
 import { errorToast } from "../../../utils/ToastNotifications";
-import { isValidEmail, isValidPhone } from "../../../utils/Validation";
+import { validForgetEmail, validForgetPhone } from "../../../utils/Validation";
+import { IoIosArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const initialData = {
   email: "",
@@ -15,8 +20,8 @@ const initialData = {
 };
 
 const ForgetPassword = () => {
-  const [byEmail, setByEmail] = React.useState(true);
   const [formData, setFormData] = React.useState(initialData);
+  const [byEmail, setByEmail] = React.useState(true);
   const [stage, setStage] = React.useState(0);
 
   const { execute, loading } = useApi("/forgetPassword", "POST");
@@ -39,67 +44,78 @@ const ForgetPassword = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (byEmail && (!formData.email.trim() || !isValidEmail(formData.email))) {
-      errorToast("Provide a valid Email address");
-      return;
+
+    if (validForgetEmail(formData, byEmail)) {
+      return errorToast("Provide a valid Email address");
     }
-    if (!byEmail && (!formData.phone.trim() || !isValidPhone(formData.phone))) {
-      errorToast("Provide a valid Phone number");
-      return;
+
+    if (validForgetPhone(formData, byEmail)) {
+      return errorToast("Provide a valid Phone number");
     }
-    console.log(formData);
 
     const response = await execute(formData);
     if (response.status === 200) !byEmail && setStage(1);
   };
 
   return (
-    
-      <div className={styles.container}>
-        <form
-          action=""
+    <div className={styles.container}>
+      <form
+        action=""
+        className={styles.formContainer}
+        onSubmit={(e) => submitHandler(e)}
+      >
+        <h1 className={authStyles.heading1}>
+          <Link to={"/login"}>
+            <IoIosArrowBack className={authStyles.backIcon} />
+          </Link>
+        </h1>
+        {stage === 0 && (
+          <>
+            <h1 className={authStyles.heading1}>Forget Your Password ? </h1>
+            <span
+              className={authStyles.spanLine}
+              onClick={() => handleMethod()}
+            >
+              Verify via
+              <h2>{byEmail ? "Email" : "Phone Number"}</h2>
+            </span>
+
+            {byEmail ? (
+              <>
+                <ByEmail handleChange={handleChange} formData={formData} />
+                <AuthButton
+                  text="Verify"
+                  type="button"
+                  handleNext={submitHandler}
+                  loading={loading}
+                />
+              </>
+            ) : (
+              <>
+                <ByPhone handleChange={handleChange} formData={formData} />
+                <AuthButton
+                  text="Verify"
+                  type="button"
+                  handleNext={submitHandler}
+                  loading={loading}
+                />
+              </>
+            )}
+          </>
+        )}
+      </form>
+      {stage === 1 && (
+        <motion.div
+          initial={{ opacity: 5 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, ease: "linear" }}
           className={styles.formContainer}
-          onSubmit={(e) => submitHandler(e)}
         >
-          {stage === 0 && (
-            <>
-              <h1 className={` ${styles.heading2}`}>
-                Reset your password by verifying yourself.
-              </h1>
-
-              {byEmail ? (
-                <>
-                  <ByEmail handleChange={handleChange} formData={formData} />
-                  <AuthButton
-                    text="Send"
-                    type="button"
-                    handleNext={submitHandler}
-                    loading={loading}
-                  />
-                </>
-              ) : (
-                <>
-                  <ByPhone handleChange={handleChange} formData={formData} />
-                  <AuthButton
-                    text="Send OTP"
-                    type="button"
-                    handleNext={submitHandler}
-                    loading={loading}
-                  />
-                </>
-              )}
-
-              <span className={styles.spanLine} onClick={() => handleMethod()}>
-                Try another way
-              </span>
-            </>
-          )}
-        </form>
-        <motion.div className={styles.formContainer}>
-          {stage === 1 && <VerifyOtp formData={formData} setStage={setStage} />}
+          <VerifyOtp formData={formData} setStage={setStage} />
         </motion.div>
-      </div>
-    
+      )}
+      <PrivacyTermsAndConditions />
+    </div>
   );
 };
 

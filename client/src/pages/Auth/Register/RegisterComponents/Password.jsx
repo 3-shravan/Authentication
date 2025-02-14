@@ -5,7 +5,6 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import styles from "../../AuthComponents.module.css";
 import AuthButton from "../../../../components/UI/AuthButton";
-import { Link } from "react-router-dom";
 import GoToLogin from "./GoToLogin";
 
 const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {

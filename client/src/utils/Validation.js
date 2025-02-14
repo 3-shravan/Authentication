@@ -25,3 +25,12 @@ export const validateForm = (formData, stage) => {
       return null;
    }
 };
+
+export const validForgetEmail = (formData, byEmail) => {
+   return byEmail && (!formData.email.trim() || !isValidEmail(formData.email))
+}
+export const validForgetPhone = (formData, byEmail) => {
+   return !byEmail && (!formData.phone.trim() || !isValidPhone(formData.phone))
+}
+
+

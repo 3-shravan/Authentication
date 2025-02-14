@@ -8,7 +8,7 @@ import InputOtp from "../../../../components/InputOtp";
 import styles from "../../AuthComponents.module.css";
 
 const VerifyOtp = ({ formData, setStage }) => {
-  const phone = `+91${" "}${formData.phone}`;
+  const phone = `${formData.phone}`;
   const { execute, loading } = useApi(
     "/forgetPassword/verifyOTP",
     "POST",
@@ -32,6 +32,7 @@ const VerifyOtp = ({ formData, setStage }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.1, ease: "linear" }}
+      className={styles.verifyOtp}
     >
       <form
         action=""
@@ -46,12 +47,10 @@ const VerifyOtp = ({ formData, setStage }) => {
             className={styles.backIcon}
           />
         </h1>
-        <h1 className={`${styles.heading1} ${styles.heading2}`}>
-          Verification Code
-        </h1>
+       
         <h2 className={styles.inputName}>
-          We sent you a Verification Code on
-          {phone}
+          We sent you a Verification Code on +91
+          <h2>{phone}</h2>
         </h2>
 
         <InputOtp handleOtpSubmit={handleOtpSubmit} loading={loading} />

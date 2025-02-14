@@ -12,8 +12,8 @@ import Password from "./RegisterComponents/Password";
 import VerifyPhoneEmail from "./RegisterComponents/VerifyPhoneEmail";
 import VerifyOTP from "./VerifyOTP";
 import AuthButton from "../../../components/UI/AuthButton";
-import Footer from "./RegisterComponents/Footer";
-import GoToLogin from './RegisterComponents/GoToLogin'
+import GoToLogin from "./RegisterComponents/GoToLogin";
+import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
 
 const Register = () => {
   const [stage, setStage] = React.useState(1);
@@ -115,7 +115,7 @@ const Register = () => {
           </div>
         )}
 
-        <Footer />
+        <PrivacyTermsAndConditions />
       </motion.div>
     </>
   );

@@ -1,33 +1,39 @@
 .otpContainer {
-   display: flex;
-   width: 100%;
-   gap: 0.5rem;
-   padding: 1.5rem 0.2rem;
-   margin-bottom: 1rem;
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.5rem 0 0.5rem;
+  margin-bottom: 1rem;
+}
 
- }
- 
- .inputOtp {
-   width: 3rem;
-   height: 3rem;
-   text-align: center;
-   color: crimson;
-   border: 0.1px solid rgb(39, 71, 60);
-   border-radius: 8px;
-   cursor: default;
- }
- .resendOtp{
-  margin-bottom: 0.8vh;
-  border:0.1px solid rgb(65, 65, 65);
-  border-radius: 5px;
-  padding: 0.6rem 1rem;
-  width: 100%;
-  font-size: 0.8rem;
+.inputOtp {
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  color: crimson;
   font-family: "Futura-Bold";
+  border: 0.1px solid rgb(39, 61, 50);
+  border-radius: 8px;
+  cursor: default;
+  &:focus {
+    outline: none;
+  }
+}
+.resendOtp {
+  border: 0.1px solid rgb(65, 65, 65);
+  display: flex;
+  color: #6c6c6c;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  width: 100%;
+  margin: 0.8vh 0 1.5vh 0;
+  font-size: 0.8rem;
+  font-family: "Gilroy Bold";
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  &:hover{
-    background-color: #121212;
+  &:hover {
+    background-color: #000000;
+    color: #3e3e3e;
   }
- }
+}

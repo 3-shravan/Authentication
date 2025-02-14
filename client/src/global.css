@@ -26,6 +26,12 @@
   font-weight: 400;
   src: url("./assets/fonts/Gilroy-Regular.woff") format("woff");
 }
+@font-face {
+  font-family: "Gilroy-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/fonts/Gilroy-Medium.woff") format("woff");
+}
 
 *,
 *::before,
@@ -60,7 +66,8 @@
 }
 
 body {
-  background: radial-gradient(circle, rgb(15, 15, 15) 20%, rgb(0, 0, 0) 80%);
+  /* background: radial-gradient(circle, rgb(15, 15, 15) 20%, rgb(0, 0, 0) 80%); */
+  background-color: #000000;
   color: #fff;
   height: 100vh;
   overflow-x: hidden;
