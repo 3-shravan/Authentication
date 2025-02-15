@@ -1,70 +1,13 @@
-.header {
-  height: 12vh;
-  display: flex;
-  align-items: center;
-  font-family: "Futura-Bold";
-
-  justify-content: space-between;
-}
-.logo {
-  padding: 0 1rem;
-  font-size: 2.5rem;
-  width: 40%;
-  cursor: default;
-}
-.name {
-  padding: 0 1rem;
-  width: 10%;
-  font-size: 1rem;
-  height: 100%;
-  display: flex;
-  gap: 0.5rem;
-}
-.name span {
-  font-size: 1.3rem;
-  display: flex;
-  font-family: "Gilroy Regular";
-  align-items: center;
-  justify-content: center;
-}
-.buttons {
-  width: 40%;
-  display: flex;
-  padding-right: 5rem;
-  justify-content: end;
-}
-.buttons button {
-  padding: 0.8rem 0.8rem;
-  width: 5.2rem;
-  font-size: 0.8rem;
-  font-family: "Gilroy Bold";
-  color: #fff;
-  background: rgba(19, 19, 19, 0.564);
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 0 50px rgba(216, 9, 9, 0.87);
-  transition: all 0.2s;
-
-  &:hover {
-    scale: 1.05;
-    border: none;
-    background: rgba(10, 10, 10, 0.2);
-    box-shadow: 0 0 60px rgba(0, 203, 132, 0.87);
-  }
-}
-
 .authContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 2.5rem;
-  height: 60vh;
+  margin-top: 3.5rem;
   cursor: default;
 }
 .line1 {
   font-size: 6rem;
-  margin: 0 1rem;
+  margin: 0 2rem;
   font-family: "Futura-Bold";
   line-height: 4.7rem;
   max-width: 80%;
@@ -74,14 +17,14 @@
 }
 .and {
   font-size: 5.5rem;
-  margin: 0 1rem;
+  margin: 0 2rem;
   line-height: 3.2rem;
   font-family: "Futura-Bold";
   color: crimson;
 }
 .line2 {
   font-size: 5rem;
-  margin: 0 1rem;
+  margin: 0 2rem;
   text-shadow: 0 0 10px rgba(184, 254, 222, 0.8);
   font-family: "Futura-Bold";
   text-transform: uppercase;
@@ -91,7 +34,7 @@
 }
 .bg {
   position: relative;
-  background-color: crimson;
+  background-color: rgb(18, 18, 18);
   width: 100%;
 
   &::before,
@@ -134,27 +77,30 @@
     transparent
   );
 }
-.authButton {
-  margin: 2.5rem 0 0 1rem;
-  padding: 1rem 0.8rem;
-  width: 8rem;
-  font-size: 0.8rem;
+.getStartedButton {
+  margin: 2.5rem 0 0 1.6rem;
+  padding: 0.8rem 0.8rem;
+  width: 8.2rem;
+  display: flex;
+  justify-content: center;
+  font-size: 0.85rem;
   font-family: "Gilroy Bold";
-  color: white;
-  background: linear-gradient(
-    135deg,
-    rgba(19, 19, 19, 0.7),
-    rgba(20, 20, 20, 0.9)
-  );
+  color: crimson;
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 0 45px rgba(216, 9, 9, 0.7);
+  /* box-shadow: 0 0 45px rgba(216, 9, 9, 0.7); */
   transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   &:hover {
     border: none;
-    box-shadow: 0 0 60px rgba(0, 203, 132, 0.87);
+    /* box-shadow: 0 0 60px rgba(205, 238, 226, 0.87); */
+    box-shadow: 0 0 60px rgba(71, 194, 130, 0.943);
   }
+}
+.icon {
+  padding-left: 6px;
+  color: wheat;
+  font-size: 0.9rem;
 }
 
 .marqueeContainer {
@@ -201,4 +147,182 @@
   font-size: 0.8rem;
   padding: 0 25px;
   color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .buttons {
+    width: 50%;
+    padding-right: 3rem;
+  }
+  .line1 {
+    font-size: 5rem;
+    line-height: 4.5rem;
+  }
+  .line2 {
+    font-size: 4.5rem;
+    line-height: 3.8rem;
+  }
+  .and {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    height: 12vh;
+    justify-content: space-between;
+    padding: 0 1rem;
+  }
+  .name {
+    margin: 0.8rem 1.5rem;
+  }
+  .buttons {
+    width: 60%;
+    padding-right: 2rem;
+  }
+  .buttons button {
+    padding: 0.6rem 0.6rem;
+    width: 4.5rem;
+    font-size: 0.7rem;
+  }
+  .authContainer {
+    height: 55vh;
+    margin-top: 2rem;
+  }
+  .line1 {
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+  .and {
+    font-size: 4rem;
+  }
+  .line2 {
+    font-size: 3.5rem;
+    line-height: 3.2rem;
+  }
+  .authButton {
+    width: 7rem;
+    padding: 0.8rem 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 10vh;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .name {
+    margin: 0.5rem 1rem;
+  }
+  .buttons {
+    width: 80%;
+    padding-right: 0;
+    justify-content: center;
+  }
+  .buttons button {
+    width: 4rem;
+    font-size: 0.6rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .authContainer {
+    height: auto;
+    margin-top: 1.5rem;
+  }
+  .line1 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    max-width: 90%;
+  }
+  .and {
+    font-size: 3rem;
+  }
+  .line2 {
+    font-size: 2.8rem;
+    line-height: 3rem;
+  }
+  .authButton {
+    width: 6.5rem;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+  .buttons {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+  }
+  .buttons button {
+    width: 3.5rem;
+    font-size: 0.6rem;
+    padding: 0.4rem 0.4rem;
+  }
+  .authContainer {
+    margin-top: 1rem;
+    height: auto;
+  }
+  .line1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    max-width: 100%;
+    text-align: center;
+  }
+  .and {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .line2 {
+    font-size: 2.2rem;
+    line-height: 2.8rem;
+    text-align: center;
+  }
+  .authButton {
+    width: 6rem;
+    padding: 0.6rem 0.4rem;
+    font-size: 0.6rem;
+  }
+  .marqueeContainer {
+    padding: 5px 0;
+  }
+  .marqueeItem {
+    font-size: 0.7rem;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .line1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  .and {
+    font-size: 2rem;
+  }
+  .line2 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+  .authButton {
+    width: 5.5rem;
+    padding: 0.5rem 0.3rem;
+  }
+  .buttons button {
+    width: 3rem;
+    font-size: 0.5rem;
+    padding: 0.3rem 0.3rem;
+  }
+  .marqueeItem {
+    font-size: 0.6rem;
+  }
 }

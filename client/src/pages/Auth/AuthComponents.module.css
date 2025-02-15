@@ -6,11 +6,11 @@
   -webkit-text-fill-color: rgb(255, 255, 255) !important;
   transition: background-color 9999s ease-in-out 0s;
 }
-.space4vh{
+.space4vh {
   background-color: #000000;
   height: 5vh;
 }
-.space1vh{
+.space1vh {
   background-color: #000000;
   height: 1vh;
 }
@@ -60,19 +60,19 @@
 
 .icon {
   position: absolute;
-  left: 3%;
+  left: 2%;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #9e9e9e;
 }
 
 .lockIcon {
   position: absolute;
-  left: 4%;
+  left: 3%;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #9e9e9e;
 }
 .plusIcon {
@@ -93,10 +93,10 @@
 }
 .emailIcon {
   position: absolute;
-  left: 4%;
+  left: 3%;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #9e9e9e;
 }
 
@@ -147,7 +147,6 @@
   font-size: 0.9rem;
 }
 
-
 .spanLine {
   font-size: 0.7rem;
   font-family: "Gilroy Medium";
@@ -170,7 +169,7 @@
 ---------------------
 */
 
-.secondaryButton{
+.secondaryButton {
   border: 0.1px solid rgb(65, 65, 65);
   display: flex;
   color: #6c6c6c;
@@ -191,7 +190,6 @@
     text-decoration: underline;
   }
 }
-
 
 .redirectLine {
   font-family: "Gilroy Regular";

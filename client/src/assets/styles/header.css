@@ -1,0 +1,82 @@
+.header {
+  position: relative;
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-family: "Futura-Bold";
+  justify-content: flex-end;
+}
+
+.sphere {
+  position: absolute;
+  left: 0%;
+  top: 20%;
+  height: 15vh;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10;
+}
+.letters {
+  color: crimson;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin-bottom: -1rem;
+  display: flex;
+  font-family: "Futura-Bold";
+  align-items: center;
+}
+.dot {
+  color: wheat;
+  font-size: 3.5rem;
+  margin-top: -3.5vh;
+}
+
+.nav {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 10;
+  padding: 0 3rem;
+ 
+}
+.loginButton {
+  padding: 0.5rem 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Gilroy Bold";
+  color: #f8f8f8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: rgb(40, 130, 104);
+  }
+}
+
+.loginIcon {
+  padding: 1px;
+  font-size: 0.9rem;
+  color: rgb(136, 229, 186);
+  text-decoration: underline;
+}
+.menu {
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 2rem;
+  color: crimson;
+
+  &:hover {
+    color: crimson;
+  }
+}

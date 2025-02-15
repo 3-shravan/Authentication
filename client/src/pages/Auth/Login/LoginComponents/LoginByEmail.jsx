@@ -1,7 +1,8 @@
 import React from "react";
-import { CgProfile } from "react-icons/cg";
-import { motion } from "framer-motion";
 import styles from "../../AuthComponents.module.css";
+
+import { MdLock, MdMarkEmailUnread } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const LoginByEmail = ({ handleChange, formData }) => {
   return (
@@ -11,10 +12,10 @@ const LoginByEmail = ({ handleChange, formData }) => {
       transition={{ delay: 0.2, ease: "circIn" }}
     >
       <div className={styles.inputWrapper}>
-        <CgProfile className={styles.icon} />
+        <MdMarkEmailUnread className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />{" "}
         <input
           type="email"
-          placeholder="Email"
+          placeholder="  Email"
           name="email"
           value={formData.email}
           onChange={(e) => handleChange(e)}
@@ -23,10 +24,11 @@ const LoginByEmail = ({ handleChange, formData }) => {
       </div>
 
       <div className={styles.inputWrapper}>
-        <CgProfile className={styles.icon} />
+        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+
         <input
           type="password"
-          placeholder="Password"
+          placeholder="  Password"
           name="password"
           value={formData.password}
           onChange={(e) => handleChange(e)}

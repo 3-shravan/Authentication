@@ -14,6 +14,8 @@ import VerifyOTP from "./VerifyOTP";
 import AuthButton from "../../../components/UI/AuthButton";
 import GoToLogin from "./RegisterComponents/GoToLogin";
 import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
+import { PiArrowSquareInDuotone } from "react-icons/pi";
+import Header from "../../../components/UI/Header";
 
 const Register = () => {
   const [stage, setStage] = React.useState(1);
@@ -57,6 +59,7 @@ const Register = () => {
 
   return (
     <>
+      <Header />
       <motion.div
         className={styles.container}
         initial={{ opacity: 0 }}
@@ -96,9 +99,10 @@ const Register = () => {
               />
               <AuthButton
                 handleNext={submitHandler}
-                text="Send OTP"
+                text="Send Otp"
                 loading={loading}
                 register={true}
+                icon={<PiArrowSquareInDuotone className="text-xl pl-1" />}
               />
               <GoToLogin />
             </>

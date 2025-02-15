@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaLock } from "react-icons/fa";
+import { MdLock, MdNavigateNext } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 
 import styles from "../../AuthComponents.module.css";
@@ -31,17 +31,17 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
             className={styles.backIcon}
           />
         </h1>
-        <h1 className={`${styles.heading1} ${styles.heading2}`}>
+        <h1 className={styles.heading2}>
           Create a secure password.{" "}
         </h1>
         <h2 className={styles.inputName}>Password</h2>
         <div className={styles.inputWrapper}>
-          <FaLock className={styles.lockIcon} />
+        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-6 " />
 
           <input
             ref={inputRef}
             type="password"
-            placeholder=" Password"
+            placeholder="  Password"
             name="password"
             value={formData.password}
             onChange={(e) => handleChange(e)}
@@ -50,7 +50,8 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
           />
         </div>
       </motion.div>
-      <AuthButton handleNext={handleNext} text="Next" register={true} />
+      <AuthButton handleNext={handleNext} text="Next" register={true}
+      icon={<MdNavigateNext />} />
       <GoToLogin />
 
     </>

@@ -3,10 +3,13 @@ import authStyles from "../authcomponents.module.css";
 import styles from "./Reset.module.css";
 import FormContainer from "./FormContainer";
 import AuthButton from "../../../components/UI/AuthButton";
+import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
+import Header from "../../../components/UI/Header";
+
 import { Link, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import { motion } from "framer-motion";
-import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
+import { RiRestartFill } from "react-icons/ri";
 
 const initialFormData = {
   newPassword: "",
@@ -25,39 +28,46 @@ const ResetPasswordViaPhone = () => {
 
     await execute(reqData);
   };
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.1, ease: "linear" }}
-      className={styles.container}
-    >
-      <form
-        action=""
-        className={styles.formContainer}
-        onSubmit={(e) => submitHandler(e)}
+    <>
+      <Header />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1, ease: "linear" }}
+        className={styles.container}
       >
-        <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.25, ease: "linear" }}
-          className={authStyles.heading1}
+        <form
+          action=""
+          className={styles.formContainer}
+          onSubmit={(e) => submitHandler(e)}
         >
-          Create new password.
-        </motion.h1>
-        <div className={authStyles.space4vh}></div>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25, ease: "linear" }}
+            className={authStyles.heading1}
+          >
+            Create new password.
+          </motion.h1>
+          <div className={authStyles.space4vh}></div>
 
-        <FormContainer formData={formData} setFormData={setFormData} />
-        <div className={authStyles.space1vh}></div>
+          <FormContainer formData={formData} setFormData={setFormData} />
+          <div className={authStyles.space1vh}></div>
 
-        <AuthButton text="Reset" type="submit" loading={loading} />
-        <Link to="/login" className={authStyles.secondaryButton}>
-          Want to login ?
-        </Link>
-      </form>
-      <PrivacyTermsAndConditions />
-    </motion.div>
+          <AuthButton
+            text="Reset"
+            type="submit"
+            loading={loading}
+            icon={<RiRestartFill className="text-md pl-1 text-black" />}
+          />
+          <Link to="/login" className={authStyles.secondaryButton}>
+            Want to login ?
+          </Link>
+        </form>
+        <PrivacyTermsAndConditions />
+      </motion.div>
+    </>
   );
 };
 

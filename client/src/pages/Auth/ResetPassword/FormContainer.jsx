@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../AuthComponents.module.css";
-import { CgProfile } from "react-icons/cg";
+import { MdLock, MdLockOutline } from "react-icons/md";
 
 const FormContainer = ({ formData, setFormData }) => {
   const handleChange = (e) => {
@@ -14,10 +14,11 @@ const FormContainer = ({ formData, setFormData }) => {
   return (
     <div>
       <div className={styles.inputWrapper}>
-        <CgProfile className={styles.icon} />
+      <MdLockOutline className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+
         <input
           type="password"
-          placeholder=" New Password"
+          placeholder="  New Password"
           name="newPassword"
           value={formData.newPassword}
           onChange={(e) => handleChange(e)}
@@ -26,10 +27,10 @@ const FormContainer = ({ formData, setFormData }) => {
       </div>
 
       <div className={styles.inputWrapper}>
-        <CgProfile className={styles.icon} />
-        <input
+      <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+      <input
           type="password"
-          placeholder="Confirm Password"
+          placeholder="  Confirm Password"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={(e) => handleChange(e)}

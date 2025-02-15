@@ -4,8 +4,8 @@ import { CgProfile } from "react-icons/cg";
 
 import styles from "../../AuthComponents.module.css";
 import AuthButton from "../../../../components/UI/AuthButton";
-import { Link } from "react-router-dom";
 import GoToLogin from "./GoToLogin";
+import { MdNavigateNext } from "react-icons/md";
 
 const Fullname = ({ handleNext, formData, handleChange }) => {
   const inputRef = useRef(null);
@@ -31,11 +31,11 @@ const Fullname = ({ handleNext, formData, handleChange }) => {
         <h1 className={` ${styles.heading2}`}>Join today!</h1>
         <h2 className={styles.inputName}>What's your name</h2>
         <div className={styles.inputWrapper}>
-          <CgProfile className={styles.icon} />
+          <CgProfile className="text-3xl absolute left-2.5 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
           <input
             ref={inputRef}
             type="text"
-            placeholder=" Fullname"
+            placeholder="  Fullname"
             name="name"
             value={formData.name}
             onChange={(e) => handleChange(e)}
@@ -49,6 +49,7 @@ const Fullname = ({ handleNext, formData, handleChange }) => {
         text="Next"
         type="button"
         register={true}
+        icon={<MdNavigateNext />}
       />
       <GoToLogin />
     </>

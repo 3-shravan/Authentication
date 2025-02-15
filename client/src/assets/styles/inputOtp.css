@@ -37,3 +37,15 @@
     color: #3e3e3e;
   }
 }
+
+.verifyLoader {
+  border: 7px solid #ffffff;
+  border-top: 5px solid #024b41;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2rem;
+}

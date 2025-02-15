@@ -19,7 +19,6 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .container::before {
@@ -29,7 +28,7 @@
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  font-size: 15rem;
+  font-size: 14rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: -0.7rem;

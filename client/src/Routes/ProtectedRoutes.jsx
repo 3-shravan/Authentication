@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 const ProtectedRoutes = () => {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
-  const { execute, loading } = useApi("/profile", "GET", "/feeds");
+  const { execute, loading ,error } = useApi("/profile", "GET", "/feeds");
 
   React.useEffect(() => {
     if (auth.token === "undefined" || !auth.isAuthenticated) {
@@ -21,7 +21,11 @@ const ProtectedRoutes = () => {
           ...prev,
           profile: response.data.user,
         }));
+      }else{
+        localStorage.removeItem('token')
+        localStorage.removeItem('isAuthenticated')
       }
+
     };
 
     fetchProfile();

@@ -6,6 +6,7 @@ import authStyles from "../AuthComponents.module.css";
 import AuthButton from "../../../components/UI/AuthButton";
 import VerifyOtp from "./ForgetPasswordComponents/VerifyOtp";
 import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
+import Header from "../../../components/UI/Header"
 
 import { motion } from "framer-motion";
 import { useApi } from "../../../hooks/useApi";
@@ -13,6 +14,7 @@ import { errorToast } from "../../../utils/ToastNotifications";
 import { validForgetEmail, validForgetPhone } from "../../../utils/Validation";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { MdMotionPhotosOn } from "react-icons/md";
 
 const initialData = {
   email: "",
@@ -58,64 +60,85 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <form
-        action=""
-        className={styles.formContainer}
-        onSubmit={(e) => submitHandler(e)}
+    <>
+      <Header />
+      <motion.div
+        className={styles.container}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1, ease: "linear" }}
       >
-        <h1 className={authStyles.heading1}>
-          <Link to={"/login"}>
-            <IoIosArrowBack className={authStyles.backIcon} />
-          </Link>
-        </h1>
-        {stage === 0 && (
-          <>
-            <h1 className={authStyles.heading1}>Forget Your Password ? </h1>
-            <span
-              className={authStyles.spanLine}
-              onClick={() => handleMethod()}
-            >
-              Verify via
-              <h2>{byEmail ? "Email" : "Phone Number"}</h2>
-            </span>
-
-            {byEmail ? (
-              <>
-                <ByEmail handleChange={handleChange} formData={formData} />
-                <AuthButton
-                  text="Verify"
-                  type="button"
-                  handleNext={submitHandler}
-                  loading={loading}
-                />
-              </>
-            ) : (
-              <>
-                <ByPhone handleChange={handleChange} formData={formData} />
-                <AuthButton
-                  text="Verify"
-                  type="button"
-                  handleNext={submitHandler}
-                  loading={loading}
-                />
-              </>
-            )}
-          </>
-        )}
-      </form>
-      {stage === 1 && (
-        <motion.div
-          initial={{ opacity: 5 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1, ease: "linear" }}
+        <form
+          action=""
           className={styles.formContainer}
+          onSubmit={(e) => submitHandler(e)}
         >
-          <VerifyOtp formData={formData} setStage={setStage} />
-        </motion.div>
-      )}
-      <PrivacyTermsAndConditions />
-    </div>
+          <h1 className={authStyles.heading1}>
+            <Link to={"/login"}>
+              <IoIosArrowBack className={authStyles.backIcon} />
+            </Link>
+          </h1>
+          {stage === 0 && (
+            <>
+              <motion.h1
+                className={authStyles.heading1}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.25, ease: "linear" }}
+              >
+                Forget Your Password ?{" "}
+              </motion.h1>
+              <span
+                className={authStyles.spanLine}
+                onClick={() => handleMethod()}
+              >
+                Verify via
+                <h2>{byEmail ? "Phone Number" : "Email"}</h2>
+              </span>
+
+              {byEmail ? (
+                <>
+                  <ByEmail handleChange={handleChange} formData={formData} />
+                  <AuthButton
+                    text="Verify"
+                    type="button"
+                    handleNext={submitHandler}
+                    loading={loading}
+                    icon={
+                      <MdMotionPhotosOn className="text-m pl-1 text-black" />
+                    }
+                  />
+                </>
+              ) : (
+                <>
+                  <ByPhone handleChange={handleChange} formData={formData} />
+                  <AuthButton
+                    text="Verify"
+                    type="button"
+                    handleNext={submitHandler}
+                    loading={loading}
+                    icon={
+                      <MdMotionPhotosOn className="text-m pl-1 text-black" />
+                    }
+                  />
+                </>
+              )}
+            </>
+          )}
+        </form>
+        {stage === 1 && (
+          <motion.div
+            initial={{ opacity: 5 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1, ease: "linear" }}
+            className={styles.formContainer}
+          >
+            <VerifyOtp formData={formData} setStage={setStage} />
+          </motion.div>
+        )}
+        <PrivacyTermsAndConditions />
+      </motion.div>
+    </>
   );
 };
 

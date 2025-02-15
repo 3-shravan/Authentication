@@ -3,96 +3,16 @@ import { useState } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import { MarqueeItems } from "../../utils/MarqueeArray";
 import styles from "./LandingPage.module.css";
+import { BsChatLeftHeartFill } from "react-icons/bs";
+import Header from "../../components/UI/Header";
 
 const LandingPage = () => {
   const [hideLine, setHideLine] = useState(false);
   const navigate = useNavigate();
   return (
     <>
-      <div className={styles.header}>
-        <motion.div
-          className={styles.name}
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 3 }}
-        >
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4 }}
-          >
-            C
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.1 }}
-          >
-            O
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.2 }}
-          >
-            N
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.3 }}
-          >
-            N
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.4 }}
-          >
-            E
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.5 }}
-          >
-            C
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.6 }}
-          >
-            T
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.7 }}
-          >
-            I
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.8 }}
-          >
-            F
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 4.9 }}
-          >
-            Y
-          </motion.span>
-        </motion.div>
-        <div className={styles.buttons}>
-          <button onClick={() => navigate("/login")}>
-            Login
-          </button>
-        </div>
-      </div>
+      <Header />
+
       <div className={styles.authContainer}>
         <motion.h1
           className={styles.line1}
@@ -108,14 +28,14 @@ const LandingPage = () => {
             className={styles.loading}
             initial={{ x: -100 }}
             animate={{ x: 1100 }}
-            transition={{ delay: 1, duration: 2, ease: "circIn" }}
+            transition={{ delay: 1.4, duration: 2, ease: "circIn" }}
             onAnimationComplete={() => setHideLine(true)}
           ></motion.div>
         )}
 
         <motion.div
           className={styles.and}
-          initial={{ x: -100 }}
+          initial={{ x: -110 }}
           animate={{ x: 0 }}
           transition={{
             delay: 2,
@@ -127,11 +47,12 @@ const LandingPage = () => {
         </motion.div>
         <motion.div
           className={styles.bg}
-          initial={{ y: -259 }}
-          animate={{ y: 0 }}
+          initial={{ y: -254, backgroundColor: "#DC143C" }}
+          animate={{ y: 0, backgroundColor: "#131313" }}
           transition={{
             delay: 1,
             duration: 0.8,
+
             ease: "easeOut",
           }}
         >
@@ -140,8 +61,8 @@ const LandingPage = () => {
             initial={{ x: -1200 }}
             animate={{ x: 0 }}
             transition={{
-              delay: 2.5,
-              duration: 0.8,
+              delay: 3,
+              duration: 0.7,
               ease: "easeOut",
             }}
           >
@@ -150,24 +71,28 @@ const LandingPage = () => {
         </motion.div>
 
         <motion.button
-          className={styles.authButton}
+          className={styles.getStartedButton}
           onClick={() => {
             navigate("/signup");
           }}
           initial={{ x: -200 }}
           animate={{ x: 0 }}
-          transition={{ delay: 1.8, duration: 1.5, ease: "anticipate" }}
+          transition={{ delay: 2.3, duration: 1.5, ease: "anticipate" }}
         >
-          Get Started
+          Get Started{" "}
+          <span className={styles.icon}>
+            {" "}
+            <BsChatLeftHeartFill />
+          </span>
         </motion.button>
       </div>
       <motion.div
         className={styles.marqueeContainer}
-        initial={{ y: -490 }}
+        initial={{ y: -452 }}
         animate={{ y: 0 }}
         transition={{
-          delay: 5,
-          duration: 3,
+          delay: 6.7,
+          duration: 3.9,
           ease: "anticipate",
         }}
       >
@@ -179,7 +104,7 @@ const LandingPage = () => {
             transition={{
               repeat: Infinity,
               duration: 60,
-              delay: 5.2,
+              delay: 7,
               ease: "linear",
             }}
           >

@@ -55,8 +55,8 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
     }
   };
 
-  return loading ? (
-    <span className="loader">Verifying otp...</span>
+  return true ? (
+    <span className="verifyLoader"></span>
   ) : (<>
     <div className="otpContainer">
       {otp.map((value, index) => {
