@@ -31,7 +31,7 @@ const Fullname = ({ handleNext, formData, handleChange }) => {
         <h1 className={` ${styles.heading2}`}>Join today!</h1>
         <h2 className={styles.inputName}>What's your name</h2>
         <div className={styles.inputWrapper}>
-          <CgProfile className="text-3xl absolute left-2.5 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+          <CgProfile className="text-3xl absolute left-2.5 text-zinc-300 pr-2  border-zinc-700 h-7 mx-auto" />
           <input
             ref={inputRef}
             type="text"

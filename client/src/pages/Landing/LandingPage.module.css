@@ -2,32 +2,32 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
   cursor: default;
+}
+
+.line1,
+.line2,
+.and {
+  margin: 0 2rem;
+  font-family: "Futura-Bold";
+  text-transform: uppercase;
 }
 .line1 {
   font-size: 6rem;
-  margin: 0 2rem;
-  font-family: "Futura-Bold";
   line-height: 4.7rem;
-  max-width: 80%;
-  text-transform: uppercase;
+  max-width: 82%;
   letter-spacing: 0.2rem;
   text-shadow: 0 0 8px rgba(0, 255, 136, 0.7);
 }
 .and {
   font-size: 5.5rem;
-  margin: 0 2rem;
   line-height: 3.2rem;
-  font-family: "Futura-Bold";
   color: crimson;
 }
 .line2 {
   font-size: 5rem;
-  margin: 0 2rem;
   text-shadow: 0 0 10px rgba(184, 254, 222, 0.8);
-  font-family: "Futura-Bold";
-  text-transform: uppercase;
   line-height: 4.1rem;
   letter-spacing: 0.5rem;
   color: rgb(237, 228, 230);
@@ -56,12 +56,12 @@
 .loading {
   width: 100px;
   height: 4px;
-  margin-top: 2.5rem;
-  background-color: #7affc1;
+  margin-top: -2.1rem;
+  background-color: #3af79f;
   position: absolute;
   border-radius: 2px;
   box-shadow: -10px 0 20px rgba(0, 255, 136, 0.8),
-    0 0 20px rgba(0, 255, 136, 0.9);
+    0 0 20px rgba(131, 246, 192, 0.9);
 }
 
 .glow {
@@ -78,7 +78,7 @@
   );
 }
 .getStartedButton {
-  margin: 2.5rem 0 0 1.6rem;
+  margin: 2.5rem 0 5rem 1.6rem;
   padding: 0.8rem 0.8rem;
   width: 8.2rem;
   display: flex;
@@ -89,11 +89,9 @@
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  /* box-shadow: 0 0 45px rgba(216, 9, 9, 0.7); */
   transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   &:hover {
     border: none;
-    /* box-shadow: 0 0 60px rgba(205, 238, 226, 0.87); */
     box-shadow: 0 0 60px rgba(71, 194, 130, 0.943);
   }
 }
@@ -104,7 +102,7 @@
 }
 
 .marqueeContainer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -149,12 +147,7 @@
   color: white;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
-  .buttons {
-    width: 50%;
-    padding-right: 3rem;
-  }
   .line1 {
     font-size: 5rem;
     line-height: 4.5rem;
@@ -168,129 +161,100 @@
   }
 }
 
-@media (max-width: 992px) {
-  .header {
-    height: 12vh;
-    justify-content: space-between;
-    padding: 0 1rem;
-  }
-  .name {
-    margin: 0.8rem 1.5rem;
-  }
-  .buttons {
-    width: 60%;
-    padding-right: 2rem;
-  }
-  .buttons button {
-    padding: 0.6rem 0.6rem;
-    width: 4.5rem;
-    font-size: 0.7rem;
-  }
+@media (max-width: 1016px) {
   .authContainer {
-    height: 55vh;
-    margin-top: 2rem;
+    margin-top: 2.2rem;
+    width: 100%;
   }
   .line1 {
-    font-size: 4rem;
-    line-height: 4rem;
+    font-size: 4.5rem;
+    line-height: 3.9rem;
   }
   .and {
     font-size: 4rem;
   }
   .line2 {
-    font-size: 3.5rem;
-    line-height: 3.2rem;
+    font-size: 4.5rem;
+    line-height: 3.8rem;
   }
-  .authButton {
-    width: 7rem;
+  .getStartedButton {
+    width: 8rem;
+    margin-top: 1rem;
     padding: 0.8rem 0.6rem;
   }
 }
 
 @media (max-width: 768px) {
-  .header {
-    height: 10vh;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .name {
-    margin: 0.5rem 1rem;
-  }
-  .buttons {
-    width: 80%;
-    padding-right: 0;
-    justify-content: center;
-  }
-  .buttons button {
-    width: 4rem;
-    font-size: 0.6rem;
-    padding: 0.5rem 0.5rem;
-  }
   .authContainer {
     height: auto;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
   }
   .line1 {
-    font-size: 3rem;
+    font-size: 4.2rem;
     line-height: 3.5rem;
-    max-width: 90%;
+    max-width: 85%;
   }
   .and {
-    font-size: 3rem;
+    font-size: 4.2rem;
   }
   .line2 {
-    font-size: 2.8rem;
-    line-height: 3rem;
+    font-size: 4.2rem;
+    line-height: 3.5rem;
   }
-  .authButton {
-    width: 6.5rem;
-    padding: 0.7rem 0.5rem;
-    font-size: 0.7rem;
+  .getStartedButton {
+    width: 8rem;
+    margin-top: 3rem;
+    padding: 0.8rem 0.7rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 618px) {
+  .line1 {
+    font-size: 4.1rem;
+    line-height: 3.5rem;
+    width: 80%;
+  }
+  .and {
+    font-size: 4.2rem;
+  }
+  .bg::after {
+    display: none;
+  }
+  .line2 {
+    font-size: 4rem;
+    line-height: 3.2rem;
+  }
+  .getStartedButton {
+    margin-top: 2rem;
   }
 }
 
 @media (max-width: 576px) {
-  .header {
-    height: auto;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0.5rem 0;
-  }
-  .buttons {
-    width: 100%;
-    padding: 0;
-    justify-content: center;
-  }
-  .buttons button {
-    width: 3.5rem;
-    font-size: 0.6rem;
-    padding: 0.4rem 0.4rem;
-  }
   .authContainer {
-    margin-top: 1rem;
+    margin-top: 4rem;
     height: auto;
   }
   .line1 {
-    font-size: 2.5rem;
-    line-height: 3rem;
-    max-width: 100%;
-    text-align: center;
+    font-size: 3.8rem;
+    line-height: 3.2rem;
   }
   .and {
-    font-size: 2.5rem;
-    text-align: center;
+    font-size: 3.8rem;
   }
   .line2 {
-    font-size: 2.2rem;
-    line-height: 2.8rem;
-    text-align: center;
+    font-size: 3.5rem;
+    line-height: 2.9rem;
   }
-  .authButton {
-    width: 6rem;
-    padding: 0.6rem 0.4rem;
-    font-size: 0.6rem;
+  .bg::after {
+    display: none;
+  }
+
+  .getStartedButton {
+    margin-top: 2.2rem;
+    width: 7.5rem;
+    padding: 0.9rem 0.7rem;
+    font-size: 0.8rem;
   }
   .marqueeContainer {
     padding: 5px 0;
@@ -301,28 +265,90 @@
   }
 }
 
-@media (max-width: 400px) {
-  .line1 {
-    font-size: 2rem;
-    line-height: 2.5rem;
+@media (max-width: 500px) {
+  .authContainer {
+    margin-top: 5rem;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
   }
+
+  .line2 {
+    font-size: 3.6rem;
+    letter-spacing: -1px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .line1 {
+    padding-top: 1rem;
+    font-size: 4.2rem;
+    line-height: 4rem;
+  }
+
+  .line2 {
+    line-height: 3rem;
+    padding-top: 0.3rem;
+  }
+
   .and {
-    font-size: 2rem;
+    font-size: 4rem;
+  }
+
+  .bg::after {
+    display: none;
+  }
+
+  .getStartedButton {
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    width: 100%;
+    margin: 0;
+    margin-top: 13.7rem;
+    padding: 0.9rem 0.7rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .authContainer {
+    margin-top: 9rem;
+    height: auto;
+  }
+  .line1 {
+    width: 80%;
+    font-size: 4rem;
+    line-height: 3.5rem;
+  }
+
+  .line2 {
+    font-size: 3.2rem;
+    line-height: 2rem;
+  }
+
+  .and {
+    font-size: 4rem;
+    text-align: start;
+  }
+
+  .getStartedButton {
+    font-size: 1.3rem;
+    margin-top: 10rem;
+  }
+
+  .marqueeItem {
+    font-size: 0.7rem;
+  }
+}
+@media (max-width: 335px) {
+  .line1 {
+    font-size: 3.4rem;
+    line-height: 3.4rem;
   }
   .line2 {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-  }
-  .authButton {
-    width: 5.5rem;
-    padding: 0.5rem 0.3rem;
-  }
-  .buttons button {
-    width: 3rem;
-    font-size: 0.5rem;
-    padding: 0.3rem 0.3rem;
-  }
-  .marqueeItem {
-    font-size: 0.6rem;
+    font-size: 3.2rem;
+    letter-spacing: 1-rem;
+    line-height: 3.4rem;
   }
 }

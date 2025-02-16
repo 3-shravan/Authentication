@@ -1,51 +1,42 @@
 .header {
-  position: relative;
-  height: 15vh;
+  height: 12vh;
   width: 100%;
-  display: flex;
-  align-items: center;
-  font-family: "Futura-Bold";
-  justify-content: flex-end;
 }
 
 .sphere {
-  position: absolute;
-  left: 0%;
-  top: 20%;
-  height: 15vh;
-  padding: 1rem 2rem;
+  position: fixed;
+  top: 2.7%;
+  left: 2.7%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  z-index: 10;
+  z-index: 2;
 }
+
 .letters {
   color: crimson;
   font-size: 1.8rem;
   text-transform: uppercase;
-  margin-bottom: -1rem;
+  margin-bottom: -1.2rem;
   display: flex;
   font-family: "Futura-Bold";
   align-items: center;
 }
+
 .dot {
   color: wheat;
   font-size: 3.5rem;
-  margin-top: -3.5vh;
+  margin-top: -4vh;
 }
 
-.nav {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  z-index: 10;
-  padding: 0 3rem;
- 
-}
+
+
 .loginButton {
   padding: 0.5rem 0.5rem;
   font-size: 0.9rem;
+  position: fixed;
+  right: 7%;
+  top: 2.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,10 +49,10 @@
   text-decoration: underline;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
 
-  &:hover {
-    color: rgb(40, 130, 104);
-  }
+.loginButton:hover {
+  color: rgb(40, 130, 104);
 }
 
 .loginIcon {
@@ -70,13 +61,142 @@
   color: rgb(136, 229, 186);
   text-decoration: underline;
 }
-.menu {
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0 2rem;
-  color: crimson;
 
-  &:hover {
-    color: crimson;
+.menu {
+  position: fixed;
+  right: 2%;
+  top: 3.5%;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: crimson;
+  z-index: 2;
+}
+
+.menu:hover {
+  color: rgb(45, 45, 45);
+}
+
+@media screen and (max-width: 1200px) {
+  .sphere {
+    left: 2.8%;
+  }
+  .nav {
+    width: 20%;
+    padding: 0 2rem;
+  }
+
+  .letters {
+    margin-bottom: -1.2rem;
+  }
+  .dot {
+    margin-top: -1.4rem;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .header {
+    height: 17vh;
+  }
+  .sphere {
+    top: 2.8%;
+    left: 2.8%;
+  }
+  .nav {
+    width: 20%;
+    padding: 0 2rem;
+  }
+
+  .letters {
+    margin-bottom: -1.2rem;
+  }
+  .dot {
+    margin-top: -1.4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 16vh;
+  }
+  .sphere {
+    top: 3.5%;
+    left: 4%;
+  }
+
+  .letters {
+    font-size: 1.8rem;
+    margin-bottom: -1.2rem;
+  }
+  .dot {
+    font-size: 3rem;
+    margin-top: -0.9rem;
+  }
+
+  .loginButton {
+    font-size: 0.7rem;
+    right: 3%;
+    top: 8%;
+  }
+  .loginIcon {
+    font-size: 0.7rem;
+  }
+  .menu {
+    font-size: 1.8rem;
+    right: 4%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    height: 10vh;
+  }
+  .sphere {
+    top: 3.5%;
+    left: 5%;
+  }
+  .letters {
+    font-size: 1.7rem;
+    margin-bottom: -1.1rem;
+  }
+
+  .dot {
+    font-size: 2.9rem;
+    margin-top: -14px;
+  }
+  .loginButton {
+    font-size: 1rem;
+    right: 2%;
+  }
+  .loginIcon {
+    padding: 2px;
+    font-size: 0.9rem;
+  }
+  .menu {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header {
+    height: 5vh;
+  }
+  .letters {
+    font-size: 1.6rem;
+    margin-bottom: -1rem;
+  }
+  .dot {
+    font-size: 3rem;
+    margin-top: -1.2rem;
+  }
+ 
+  .loginButton {
+    right: 2%;
+  }
+  .loginIcon {
+    padding: 2px;
+    font-size: 0.9rem;
+  }
+  .menu {
+    font-size: 1.8rem;
   }
 }

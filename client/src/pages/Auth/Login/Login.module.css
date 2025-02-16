@@ -44,7 +44,7 @@
   flex-direction: column;
   justify-content: center;
   top: 35%;
-  width: 40%;
+  width: 42%;
   max-width: 550px;
   font-size: 1rem;
   padding: 1rem 1.8rem;
@@ -84,30 +84,99 @@
   .formContainer {
     width: 50%;
   }
+  .forgetPassword {
+    font-size: 1rem;
+    padding: 0.7rem 2.9rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .container::before {
+    font-size: 10rem;
+    top: 15%;
+  }
+
+  .formContainer {
+    width: 70%;
+  }
+  .forgetPassword {
+    font-size: 1rem;
+    padding: 0.6rem 2.9rem;
+  }
 }
 
 @media (max-width: 768px) {
   .container::before {
     font-size: 7.5rem;
-    top: 12%;
-    letter-spacing: -0.5rem;
+    width: 100%;
+    top: 15%;
+    line-height: 6rem;
+  }
+  .formContainer {
+    width: 100%;
+    top: 35%;
+  }
+  .forgetPassword {
+    font-size: 0.8rem;
+    padding: 0.8rem 2.6rem;
+  }
+}
+@media (max-width: 630px) {
+  .container::before {
+    width: 100%;
+    font-size: 8rem;
+    line-height: 7rem;
   }
 
   .formContainer {
-    width: 60%;
+    width: 100%;
     top: 35%;
+  }
+  .forgetPassword {
+    font-size: 0.8rem;
+    padding: 0.8rem 2.6rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   .container::before {
-    font-size: 5rem;
-    top: 10%;
+    font-size: 8rem;
+    top: 25%;
     letter-spacing: -0.3rem;
   }
 
   .formContainer {
-    width: 80%;
+    width: 100%;
+    top: 40%;
+  }
+  .forgetPassword {
+    font-size: 1rem;
+    padding: 0.8rem 2.7rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .container::before {
+    font-size: 7rem;
+    width: 100%;
+    top: 22%;
+  }
+
+  .formContainer {
+    width: 100%;
     top: 40%;
   }
 }
+@media (max-width: 350px) {
+  .container::before {
+    font-size: 6rem;
+    width: 100%;
+    top: 30%;
+  }
+
+  .formContainer {
+    width: 100%;
+    top: 30%;
+  }
+}
+

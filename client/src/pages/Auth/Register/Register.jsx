@@ -102,7 +102,7 @@ const Register = () => {
                 text="Send Otp"
                 loading={loading}
                 register={true}
-                icon={<PiArrowSquareInDuotone className="text-xl pl-1" />}
+                icon={<PiArrowSquareInDuotone className="text-2xl pl-1" />}
               />
               <GoToLogin />
             </>

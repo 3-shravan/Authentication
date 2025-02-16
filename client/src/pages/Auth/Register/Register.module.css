@@ -1,3 +1,4 @@
+/* Default styles (for larger screens) */
 .container {
   position: absolute;
   top: 50%;
@@ -54,7 +55,6 @@
 @media (max-width: 1024px) {
   .container::before {
     font-size: 10rem;
-    top: 15%;
   }
 
   .formContainer {
@@ -62,28 +62,63 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   .container::before {
-    font-size: 7.5rem;
-    top: 12%;
-    letter-spacing: -0.5rem;
-  }
-
-  .formContainer {
-    width: 60%;
-    top: 35%;
+    font-size: 10rem;
+    top: 15%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .container::before {
-    font-size: 5rem;
-    top: 10%;
-    letter-spacing: -0.3rem;
+    font-size: 7.5rem;
+    width: 90%;
+    top: 15%;
+    line-height: 6rem;
+  }
+
+  .formContainer {
+    width: 70%;
+    top: 35%;
+  }
+}
+@media (max-width: 630px) {
+  .container::before {
+    width: 70%;
+    font-size: 8rem;
+    line-height: 7rem;
+    top: 25%;
   }
 
   .formContainer {
     width: 80%;
-    top: 40%;
+    top: 35%;
+  }
+}
+
+@media (max-width: 550px) {
+  .container::before {
+    font-size: 8rem;
+    top: 25%;
+    letter-spacing: -0.3rem;
+    line-height: 6.5rem;
+  }
+
+  .formContainer {
+    width: 100%;
+    top: 48%;
+  }
+}
+
+@media (max-width: 420px) {
+  .container::before {
+    font-size: 7rem;
+    width: 80%;
+    top: 27%;
+  }
+
+  .formContainer {
+    width: 100%;
+    top: 42%;
   }
 }

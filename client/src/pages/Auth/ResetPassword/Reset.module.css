@@ -53,40 +53,73 @@
   border-radius: 10px;
   background-color: #000000;
 }
-
 @media (max-width: 1024px) {
   .container::before {
-    font-size: 10rem;
-    top: 15%;
-  }
-
-  .formContainer {
-    width: 50%;
+    font-size: 7rem;
+    top: 20%;
   }
 }
 
 @media (max-width: 768px) {
+
+
   .container::before {
     font-size: 7.5rem;
-    top: 12%;
+    top: 24%;
     letter-spacing: -0.5rem;
+    line-height: 6.1rem;
   }
 
   .formContainer {
-    width: 60%;
+    width: 70%;
     top: 35%;
+    padding: 1.2rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    font-size: 1.6rem;
+  }
+
+  .container::before {
+    font-size: 6rem;
+    line-height: 5.5rem;
+    letter-spacing: -0.4rem;
+  }
+
+  .formContainer {
+    width: 70%;
+    padding: 1.2rem 1.4rem;
   }
 }
 
 @media (max-width: 480px) {
   .container::before {
-    font-size: 5rem;
-    top: 10%;
+    font-size: 4.7rem;
+    top: 25%;
     letter-spacing: -0.3rem;
+    line-height: 4.5rem;
   }
 
   .formContainer {
-    width: 80%;
+    width: 100%;
     top: 40%;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    font-size: 1.2rem;
+  }
+
+  .container::before {
+    font-size: 4.5rem;
+    line-height: 4rem;
+    letter-spacing: -0.2rem;
+  }
+
+  .formContainer {
+    width: 100%;
   }
 }

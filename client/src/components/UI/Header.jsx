@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { BsChatLeftHeartFill } from "react-icons/bs";
 import { FaIdBadge } from "react-icons/fa";
 import { TbMenu } from "react-icons/tb";
 import "../../assets/styles/header.css";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div className="header">
       <motion.div
@@ -78,7 +79,7 @@ const Header = () => {
           </motion.span>
         </motion.span>
         <motion.span
-          initial={{ y: -100 }}
+          initial={{ y: -180 }}
           animate={{ y: 0 }}
           transition={{ delay: 5.5 }}
           className="dot letters"

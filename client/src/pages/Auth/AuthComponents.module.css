@@ -58,48 +58,6 @@
   position: relative;
 }
 
-.icon {
-  position: absolute;
-  left: 2%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.5rem;
-  color: #9e9e9e;
-}
-
-.lockIcon {
-  position: absolute;
-  left: 3%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  color: #9e9e9e;
-}
-.plusIcon {
-  position: absolute;
-  left: 3%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.5rem;
-  color: #9e9e9e;
-}
-.phoneIcon {
-  position: absolute;
-  left: 4%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.6rem;
-  color: #9e9e9e;
-}
-.emailIcon {
-  position: absolute;
-  left: 3%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.2rem;
-  color: #9e9e9e;
-}
-
 .inputField {
   font-size: 0.9rem;
   display: flex;
@@ -215,48 +173,117 @@
 @******************  
 --------------------
 */
-
+/* MEDIA QUERIES  
+@******************
+@******************
+@******************  
+-------------------- */
 @media (max-width: 1024px) {
-  .inputField {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 768px) {
   .heading1 {
-    font-size: 1.6rem;
-    text-align: center;
+    font-size: 1.9rem;
   }
 
   .heading2 {
-    font-size: 1.2rem;
-  }
-
-  .inputName {
-    font-size: 1.1rem;
-  }
-
-  .inputField {
-    font-size: 0.8rem;
-    padding: 0.6rem 2.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .heading1 {
     font-size: 1.5rem;
-  }
-
-  .heading2 {
-    font-size: 1.3rem;
   }
 
   .inputName {
     font-size: 1rem;
   }
 
+  .redirectLine {
+    font-size: 0.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .secondaryButton,
   .inputField {
+    font-size: 1rem;
+    padding: 0.6rem 2.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heading1 {
+    font-size: 1.8rem;
+  }
+
+  .heading2 {
+    font-size: 1.4rem;
+  }
+
+  .inputName {
+    font-size: 0.9rem;
+  }
+
+  .redirectLine {
+    font-size: 0.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .spanLine {
+    margin: 0.3rem 0;
+  }
+
+  .selectionContainer {
+    width: 50%;
+    gap: 1rem;
+  }
+
+  .secondaryButton,
+  .inputField {
+    font-size: 0.8rem;
+    padding: 0.8rem 2.6rem;
+  }
+
+  .selectionButton {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading1 {
+    font-size: 2.5rem;
+    line-height: 2.3rem;
+  }
+
+  .heading2 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .inputName {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+
+  .redirectLine {
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .spanLine {
+    margin: 0.7rem 0;
+  }
+
+  .selectionContainer {
+    width: 80%;
+    gap: 0.8rem;
+  }
+
+  .secondaryButton,
+  .inputField {
+    font-size: 1rem;
+    padding: 0.8rem 2.7rem;
+  }
+
+  .selectionButton {
+    font-size: 0.8rem;
+  }
+
+  .secondaryButton {
+    padding: 0.5rem 0.8rem;
     font-size: 0.75rem;
-    padding: 0.5rem 2rem;
   }
 }

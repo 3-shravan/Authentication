@@ -70,7 +70,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
         >
           <h2 className={styles.inputName}>By Email</h2>
           <div className={styles.inputWrapper}>
-            <MdMarkEmailUnread className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+            <MdMarkEmailUnread className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2  border-zinc-700 h-7 mx-auto" />
 
             <input
               ref={inputRef}
@@ -94,7 +94,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
           <div className={styles.inputWrapper}>
             <FaPlus className="text-sm absolute left-2 text-zinc-300 pr-2  border-zinc-700 h-7 mx-auto" />
 
-            <TbNumber91Small className="text-3xl absolute left-2.5 text-zinc-300 pr-1 border-r-1 border-zinc-700 h-7 mx-auto" />
+            <TbNumber91Small className="text-3xl absolute left-2.5 text-zinc-300 pr-1  border-zinc-700 h-7 mx-auto" />
 
             <input
               ref={inputRef}

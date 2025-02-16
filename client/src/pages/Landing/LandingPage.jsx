@@ -35,7 +35,7 @@ const LandingPage = () => {
 
         <motion.div
           className={styles.and}
-          initial={{ x: -110 }}
+          initial={{ x: -210 }}
           animate={{ x: 0 }}
           transition={{
             delay: 2,
@@ -47,7 +47,7 @@ const LandingPage = () => {
         </motion.div>
         <motion.div
           className={styles.bg}
-          initial={{ y: -254, backgroundColor: "#DC143C" }}
+          initial={{ y: -245, backgroundColor: "#DC143C" }}
           animate={{ y: 0, backgroundColor: "#131313" }}
           transition={{
             delay: 1,
@@ -75,7 +75,7 @@ const LandingPage = () => {
           onClick={() => {
             navigate("/signup");
           }}
-          initial={{ x: -200 }}
+          initial={{ x: -300 }}
           animate={{ x: 0 }}
           transition={{ delay: 2.3, duration: 1.5, ease: "anticipate" }}
         >
@@ -88,7 +88,7 @@ const LandingPage = () => {
       </div>
       <motion.div
         className={styles.marqueeContainer}
-        initial={{ y: -452 }}
+        initial={{ y: -470 }}
         animate={{ y: 0 }}
         transition={{
           delay: 6.7,

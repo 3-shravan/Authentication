@@ -15,7 +15,7 @@ const LoginByPhone = ({ handleChange, formData }) => {
     >
       <div className={styles.inputWrapper}>
         <FaPlus className="text-sm absolute left-2 text-zinc-300 pr-2  border-zinc-700 h-7 mx-auto" />
-        <TbNumber91Small className="text-3xl absolute left-2.5 text-zinc-300 pr-1 border-r-1 border-zinc-700 h-7 mx-auto" />{" "}
+        <TbNumber91Small className="text-3xl absolute left-2.5 text-zinc-300 pr-1  border-zinc-700 h-7 " />{" "}
         <input
           type="number"
           placeholder="  Phone Number"
@@ -27,7 +27,7 @@ const LoginByPhone = ({ handleChange, formData }) => {
       </div>
 
       <div className={styles.inputWrapper}>
-        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2  border-zinc-700 h-7 " />
         <input
           type="password"
           placeholder="  Password"

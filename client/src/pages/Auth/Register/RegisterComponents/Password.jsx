@@ -36,7 +36,7 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
         </h1>
         <h2 className={styles.inputName}>Password</h2>
         <div className={styles.inputWrapper}>
-        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-6 " />
+        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2  border-zinc-700 h-6 " />
 
           <input
             ref={inputRef}
