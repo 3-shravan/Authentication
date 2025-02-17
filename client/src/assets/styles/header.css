@@ -14,7 +14,7 @@
 }
 
 .letters {
-  color: crimson;
+  color: var(--crimson);
   font-size: 1.8rem;
   text-transform: uppercase;
   margin-bottom: -1.2rem;
@@ -24,7 +24,7 @@
 }
 
 .dot {
-  color: wheat;
+  color: var(--wheat);
   font-size: 3.5rem;
   margin-top: -4vh;
 }
@@ -41,7 +41,7 @@
   justify-content: center;
   align-items: center;
   font-family: "Gilroy Bold";
-  color: #f8f8f8;
+  color: var(--off-white);
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 50px;
@@ -52,13 +52,13 @@
 }
 
 .loginButton:hover {
-  color: rgb(40, 130, 104);
+  color: var(--forest-green);
 }
 
 .loginIcon {
   padding: 1px;
   font-size: 0.9rem;
-  color: rgb(136, 229, 186);
+  color: #88e5ba;
   text-decoration: underline;
 }
 
@@ -68,12 +68,12 @@
   top: 3.5%;
   font-size: 1.7rem;
   cursor: pointer;
-  color: crimson;
+  color: var(--crimson);
   z-index: 2;
 }
 
 .menu:hover {
-  color: rgb(45, 45, 45);
+  color: var(--subtle-yellow);
 }
 
 @media screen and (max-width: 1200px) {

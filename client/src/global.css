@@ -1,5 +1,59 @@
 @import "tailwindcss";
 
+@theme {
+  --color-htt: #131313;
+  --color-text: #000000;
+}
+
+:root {
+  --black: black;
+  --white: white;
+  --crimson: crimson;
+  --wheat: wheat;
+  --off-white: #c7c7c7;
+
+  --dark-100: #131313;
+  --dark-300: #464646;
+
+  /**********TEXTS*******/
+  --subtle-yellow: #abb185;
+  --subtle-text: #6c6c6c;
+  --subtle-text-hover: #3e3e3e;
+
+  /**********Green Shades**********/
+  --shadow-green: #00ff88;
+  --green: #007550;
+  --forest-green: #16483b;
+  --forest-dark-green: #061f17;
+
+  /********* GRADIENT **********/
+  /* --gradient-bg-green: rgba(24, 93, 76, 0.75); */
+  --gradient-bg-green: rgba(28, 103, 84, 0.75);
+  --gradient-bg-text: rgba(7, 22, 16, 0.299);
+}
+
+/*
+********** 
+Theme Mode------
+***********
+*/
+
+.light {
+  --bg: var(--white);
+  --font: var(--black);
+}
+
+.dark {
+  --bg: var(--black);
+  --font: var(--white);
+}
+
+/*
+********** 
+Custom Font
+***********
+*/
+
 @font-face {
   font-family: "Futura-Bold";
   font-style: normal;
@@ -33,6 +87,22 @@
   src: url("./assets/fonts/Gilroy-Medium.woff") format("woff");
 }
 
+.myfontR {
+  font-family: "Gilroy Regular";
+}
+.myfontM {
+  font-family: "Gilroy Medium";
+}
+.myfontB {
+  font-family: "Gilroy Bold";
+}
+
+/*
+********** 
+Boiler Plate-----------
+***********
+*/
+
 *,
 *::before,
 *::after {
@@ -42,6 +112,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+body {
+  /* background-color: var(--bg);
+  color: var(--font); */
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/*
+************************
+WEBKITS-----------
+*************************
+**/
 
 ::selection {
   background-color: #2e2e2e;
@@ -65,26 +148,17 @@
   background-color: #7a7a7a;
 }
 
-body {
-  /* background: radial-gradient(circle, rgb(15, 15, 15) 20%, rgb(0, 0, 0) 80%); */
-  background-color: #000000;
-  color: #fff;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.myfontR {
-  font-family: "Gilroy Regular";
-}
-.myfontM {
-  font-family: "Gilroy Medium";
-}
-.myfontB {
-  font-family: "Gilroy Bold";
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.inputField:-webkit-autofill {
+  font-family: "Gilroy Regular" !important;
+  font-size: 0.9rem !important;
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 50px rgb(0, 0, 0) inset !important;
+  -webkit-text-fill-color: rgb(255, 255, 255) !important;
+  transition: background-color 9999s ease-in-out 0s;
 }

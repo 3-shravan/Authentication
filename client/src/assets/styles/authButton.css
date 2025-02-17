@@ -10,10 +10,10 @@
   transition: all 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 .authButton {
-  background-color: crimson;
-
+  background-color: var(--crimson);
   &:hover {
-    background-color: #cb0b38e3;
+    color: black;
+    background-color: var(--subtle-yellow);
     border: none;
   }
   &:disabled {
@@ -21,11 +21,14 @@
   }
 }
 .registerAuthButton {
-  background-color: #01372a;
+  background-color: var(--forest-dark-green);
+  border: 1px solid var(--forest-dark-green);
+  transition: all 0.1s ease-in-out;
+  outline: none;
 
   &:hover {
-    background-color: #01211b;
-    border: none;
+    background-color: var(--black);
+    border: 1px solid var(--dark-300);
   }
 
   &:disabled {
@@ -34,8 +37,8 @@
 }
 
 .authLoader {
-  border: 7px solid #ffffff;
-  border-top: 2px solid #007550;
+  border: 7px solid var(--white);
+  border-top: 10px solid var(--green);
   border-radius: 50%;
   width: 1rem;
   height: 1rem;
@@ -44,8 +47,8 @@
   vertical-align: middle;
 }
 .loginAuthLoader {
-  border: 7px solid #ffffff;
-  border-top: 10px solid #1f1f1f;
+  border: 7px solid var(--white);
+  border-top: 10px solid var(--crimson);
   border-radius: 50%;
   width: 1rem;
   height: 1rem;

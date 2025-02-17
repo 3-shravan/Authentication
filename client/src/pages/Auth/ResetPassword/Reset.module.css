@@ -4,18 +4,13 @@
   left: 50%;
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to top, black 10%, rgba(0, 0, 0, 0) 125%),
-    linear-gradient(
-      to bottom,
-      rgba(28, 103, 84, 0.75) 25%,
-      rgba(0, 0, 0, 0) 85%
-    ),
-    linear-gradient(to right, black 15%, rgba(0, 0, 0, 0) 60%),
-    linear-gradient(to left, black 15%, rgba(0, 0, 0, 0) 60%);
+  background: linear-gradient(to top, black 10%, transparent 125%),
+    linear-gradient(to bottom, var(--gradient-bg-green) 25%, transparent 85%),
+    linear-gradient(to right, black 15%, transparent 60%),
+    linear-gradient(to left, black 15%, transparent 60%);
   transform: translate(-50%, -50%);
   font-size: 2rem;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.1);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -35,7 +30,7 @@
   text-transform: uppercase;
   letter-spacing: -0.5rem;
   font-family: "Futura-Bold";
-  color: rgba(7, 22, 16, 0.299);
+  color: var(--gradient-bg-text);
   z-index: -1;
 }
 
@@ -49,9 +44,9 @@
   max-width: 550px;
   font-size: 1rem;
   padding: 1.5rem 1.8rem 1.5rem;
-  color: white;
+  color: var(--white);
   border-radius: 10px;
-  background-color: #000000;
+  background-color: var(--black);
 }
 @media (max-width: 1024px) {
   .container::before {
@@ -61,8 +56,6 @@
 }
 
 @media (max-width: 768px) {
-
-
   .container::before {
     font-size: 7.5rem;
     top: 24%;

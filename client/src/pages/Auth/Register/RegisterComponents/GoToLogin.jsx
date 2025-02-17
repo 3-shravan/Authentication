@@ -8,9 +8,9 @@ const GoToLogin = () => {
         {" "}
         Already have a account ?{" "}
         <Link to="/login" className={styles.redirectLink}>
-          Login
+          Login.
         </Link>{" "}
-        here.
+       
       </span>
     </div>
   );
