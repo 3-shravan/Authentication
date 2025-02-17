@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "../utils/ToastNotifications";
 import { useAuth } from '../context/AuthContext';
-import { getToken } from '../utils/LocalStorage';
 
 const BASE_URL = "http://localhost:8000/api/v1/user";
 

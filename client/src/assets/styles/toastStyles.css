@@ -1,27 +1,4 @@
-.custom-toast {
-  background-color: #0e0e0e !important;
-  color: #b9b9b9 !important;
+.sonner-container {
+  width: 26%;
   font-family: "Gilroy Bold";
-  font-size: 0.9rem;
-  border-radius: 10px;
-  width: 45vh;
-  height: 7vh;
-  border: 0.1px solid rgb(67, 67, 67);
-  box-shadow: 0px 0px 12px rgba(28, 28, 28, 0.92);
-}
-
-.Toastify__toast {
-  min-height: 40px !important;
-  padding: 8px 12px !important;
-  font-size: 14px !important;
-}
-
-.Toastify__toast-icon {
-  width: 15px;
-  opacity: 1;
-  filter: grayscale(80%);
-}
-
-.Toastify__close-button {
-  display: none;
 }

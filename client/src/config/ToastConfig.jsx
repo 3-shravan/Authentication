@@ -1,21 +1,12 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster } from "sonner";
 import "../assets/styles/toastStyles.css";
 const ToastConfig = () => {
   return (
-    <ToastContainer
-      toastClassName="custom-toast"
-      bodyClassName="custom-toast-body"
+    <Toaster
       position="bottom-right"
-      autoClose={3000}
-      hideProgressBar={true}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
+      duration={3000}
+      theme="light"
+      className="sonner-container"
     />
   );
 };

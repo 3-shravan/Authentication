@@ -20,6 +20,12 @@ export const setTokenAndAuthenticated = (token, isAuthenticated) => {
    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
 }
 
+export const removeTokenAndAuthenticated = () => {
+   localStorage.removeItem("token")
+   localStorage.removeItem("isAuthenticated")
+}
+
+
 
 
 
