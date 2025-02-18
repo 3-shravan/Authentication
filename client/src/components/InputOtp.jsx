@@ -7,7 +7,7 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
   const inputRefs = useRef([]);
 
   useEffect(() => {
-    if (inputRefs.current[0]) {
+    if (otp.every((val) => val === "") && inputRefs.current[0]) {
       inputRefs.current[0].focus();
     }
   }, [handleOtpSubmit]);
@@ -55,7 +55,7 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
     }
   };
 
-  return true ? (
+  return loading ? (
     <span className="verifyLoader"></span>
   ) : (<>
     <div className="otpContainer">
@@ -74,8 +74,8 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
         );
       })}
     </div>
-    <button type="button" className="resendOtp">Resend OTP</button>
-    </>
+    {/* <button type="button" className="resendOtp">Resend OTP</button> */}
+  </>
   );
 };
 

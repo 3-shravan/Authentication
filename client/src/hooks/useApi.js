@@ -36,7 +36,7 @@ export const useApi = (endpoint, method = "GET", redirectUrl = null) => {
             return response;
          }
       } catch (err) {
-         const errorMessage = err.response?.data?.message || "An error occurred";
+         const errorMessage = err.response?.data?.message || "Server is down right now.";
          errorToast(errorMessage);
          setError(errorMessage);
 

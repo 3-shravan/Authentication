@@ -9,11 +9,23 @@ import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
 import { useAuth } from "../../../context/AuthContext";
 import GoToLogin from "./RegisterComponents/GoToLogin";
 
-const VerifyOTP = ({ formData, handlePrevious }) => {
+const VerifyOTP = ({
+  formData,
+  handlePrevious,
+  isResend,
+  resendHandler,
+  showError,
+  resendLoading,
+  text,
+}) => {
   const phone = formData.phone ? `+91${formData.phone}` : "";
   const { setAuth } = useAuth();
 
   const { execute, loading } = useApi("/verifyotp", "POST", "/feeds");
+
+  const handleResendOtp = () => {
+    isResend ? resendHandler() : showError();
+  };
 
   const handleOtpSubmit = async (otp) => {
     const requestData = {
@@ -23,7 +35,6 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
     };
 
     const response = await execute(requestData);
-    console.log(response);
 
     if (response.status === 200) {
       setAuth({
@@ -41,13 +52,7 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.1, ease: "linear" }}
     >
-      <form
-        action=""
-        className={styles.formContainer}
-        onSubmit={(e) => {
-          handleOtpSubmit(e);
-        }}
-      >
+      <form action="" className={styles.formContainer}>
         <h1 className={styles.heading1}>
           <IoIosArrowBack
             onClick={handlePrevious}
@@ -63,6 +68,16 @@ const VerifyOTP = ({ formData, handlePrevious }) => {
 
         <InputOtp handleOtpSubmit={handleOtpSubmit} loading={loading} />
       </form>
+
+      <button
+        type="button"
+        onClick={() => handleResendOtp()}
+        className="resendOtp"
+        disabled={resendLoading}
+      >
+        {resendLoading ? "..." : text}
+      </button>
+
       <GoToLogin />
     </motion.div>
   );

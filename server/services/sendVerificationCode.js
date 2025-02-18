@@ -8,23 +8,20 @@ import { makePhoneCall } from './phoneCall.js';
 /* Send verification code or link via a email or phone number based on user preference */
 
 export const sendVerificationCode = async (verificationMethod, verificationCode, name, email, phone, res) => {
+   try {
+      if (verificationMethod === 'email') {
+         const message = generateEmailTemplate(verificationCode);
 
-   if (verificationMethod === 'email') {
-      const message = generateEmailTemplate(verificationCode);
+         await sendEmail({ email, subject: 'Your Verificaton Code', message })
+         return `Verification code successfully sent to ${email}`;
+      }
 
-      await sendEmail({ email, subject: 'Your Verificaton Code', message })
-      return handleSuccessResponse(res, 200, `Verification code sent to ${email}`)
-
+      if (verificationMethod === 'phone') {
+         await makePhoneCall(name, phone, verificationCode, '')
+         return `Verification code successfully sent to ${phone}.`
+      }
+      throw new ErrorHandler(400, 'Invalid verification method. Please use "email" or "phone".');
+   } catch (error) {
+      throw new ErrorHandler(500, 'Failed to send verification code. Please try again later.');
    }
-
-   if (verificationMethod === 'phone') {
-      await makePhoneCall(name, phone, verificationCode, '')
-      return handleSuccessResponse(
-         res,
-         200,
-         `Verification code successfully sent to ${phone}.`)
-   }
-   throw new ErrorHandler(400, 'Invalid verification method. Please use "email" or "phone".');
-
-
 }

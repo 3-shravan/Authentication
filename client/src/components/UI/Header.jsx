@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaIdBadge } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
 import { TbMenu } from "react-icons/tb";
 import "../../assets/styles/header.css";
 import { useNavigate } from "react-router-dom";
@@ -93,7 +94,7 @@ const Header = () => {
           <span onClick={() => navigate("/login")} className="loginButton">
             Login
             <span className="loginIcon">
-              <FaIdBadge />
+            <CiHeart />
             </span>
           </span>
         )}

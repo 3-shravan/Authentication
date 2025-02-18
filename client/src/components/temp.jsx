@@ -26,6 +26,7 @@ const Register = () => {
   const [resendTimer, setResendTimer] = React.useState(0);
 
 
+
   React.useEffect(() => {
     let timer;
     if (resendTimer > 0) {
@@ -69,34 +70,11 @@ const Register = () => {
     return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`)
   }
 
-  const resendHandler = async () => {
-
-    if (!isResend) {
-      return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`);
-    }
-
-    const validationError = validateForm(formData, stage);
-    if (validationError) {
-      return errorToast(validationError);
-    }
-
-    setIsResend(false)
-
-    const response = await execute(formData);
-    if (response.status === 200) {
-      handleNext();
-      setResendTimer(RESEND_TIME);
-    } else {
-      setIsResend(true)
-    }
-
-  };
-
   const submitHandler = async (e) => {
     e.preventDefault()
 
     if (!isResend) {
-      return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`);
+      return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`)
     }
 
     const validationError = validateForm(formData, stage);
@@ -109,6 +87,7 @@ const Register = () => {
     const response = await execute(formData);
     if (response.status === 200) {
       handleNext();
+      setIsResend(false);
       setResendTimer(RESEND_TIME);
     } else {
       setIsResend(true)
@@ -127,7 +106,7 @@ const Register = () => {
       >
         <form
           action=""
-          onSubmit={(e) => submitHandler(e)}
+          onScroll={(e) => submitHandler(e)}
           className={styles.formContainer}
         >
           {stage === 1 && (
@@ -158,7 +137,7 @@ const Register = () => {
               />
               <AuthButton
 
-                handleNext={submitHandler}
+                handleNext={isResend && submitHandler}
                 type="submit"
                 text={isResend ? "Send OTP" : `Resend in ${resendTimer}s`}
                 loading={!isResend && loading}
@@ -173,11 +152,11 @@ const Register = () => {
         {stage === 4 && (
           <div className={styles.formContainer}>
             <VerifyOTP
-              text={isResend ? "Resend OTP" : `Resend in ${resendTimer}s`}
-              resendLoading={loading}
-              showError={showError}
-              resendHandler={resendHandler}
-              isResend={isResend}
+              // text={isResend ? "Send OTP" : `Resend in ${resendTimer}s`}
+              // resendLoading={loading}
+              // showError={showError}
+              // submitHandler={submitHandler}
+              // isResend={isResend}
               formData={formData}
               handleChange={handleChange}
               handlePrevious={handlePrevious}
@@ -191,3 +170,99 @@ const Register = () => {
   );
 };
 export default Register;
+
+
+
+
+/*
+
+
+import { motion } from "framer-motion";
+import { IoIosArrowBack } from "react-icons/io";
+
+import styles from "../AuthComponents.module.css";
+import InputOtp from "../../../components/InputOtp";
+
+import { useApi } from "../../../hooks/useApi";
+import { setTokenAndAuthenticated } from "../../../utils/LocalStorage";
+import { useAuth } from "../../../context/AuthContext";
+import GoToLogin from "./RegisterComponents/GoToLogin";
+
+const VerifyOTP = ({
+  formData,
+  handlePrevious,
+  isResend,
+  submitHandler,
+  showError,
+  resendLoading,
+  text,
+}) => {
+  const phone = formData.phone ? `+91${formData.phone}` : "";
+  const { setAuth } = useAuth();
+
+  const { execute, loading } = useApi("/verifyotp", "POST", "/feeds");
+
+  const handleResendOtp = () => {
+    isResend ? submitHandler() : showError();
+  };
+
+  const handleOtpSubmit = async (otp) => {
+    const requestData = {
+      email: formData.email,
+      phone: formData.phone,
+      otp,
+    };
+
+    const response = await execute(requestData);
+
+    if (response.status === 200) {
+      setAuth({
+        token: response.data.token,
+        isAuthenticated: true,
+        profile: response.data.user,
+      });
+      setTokenAndAuthenticated(response.data.token, true);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.1, ease: "linear" }}
+    >
+      <form action="" className={styles.formContainer}>
+        <h1 className={styles.heading1}>
+          <IoIosArrowBack
+            onClick={handlePrevious}
+            className={styles.backIcon}
+          />
+        </h1>
+        <h2 className={styles.inputName}>
+          We sent you a Verification Code on{" "}
+          <span className={styles.email}>
+            {phone} {formData.email}
+          </span>
+        </h2>
+
+        <InputOtp handleOtpSubmit={handleOtpSubmit} loading={loading} />
+      </form>
+
+      <button
+        type="button"
+        onClick={() => handleResendOtp()}
+        className="resendOtp"
+        disabled={resendLoading}
+      >
+        {resendLoading ? "..." : text}
+      </button>
+
+      <GoToLogin />
+    </motion.div>
+  );
+};
+
+export default VerifyOTP;
+
+
+*/

@@ -50,7 +50,7 @@ const Password = ({ handleNext, formData, handleChange, handlePrevious }) => {
           />
         </div>
       </motion.div>
-      <AuthButton handleNext={handleNext} text="Next" register={true}
+      <AuthButton handleNext={handleNext} text="Next" type="button" register={true}
       icon={<MdNavigateNext />} />
       <GoToLogin />
 

@@ -114,8 +114,8 @@ Boiler Plate-----------
 }
 
 body {
-  /* background-color: var(--bg);
-  color: var(--font); */
+  background-color: var(--bg);
+  color: var(--font);
   min-height: 100vh;
   overflow-x: hidden;
 }

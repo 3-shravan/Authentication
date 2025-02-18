@@ -33,20 +33,20 @@
 
 .loginButton {
   padding: 0.5rem 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   position: fixed;
-  right: 7%;
-  top: 2.5%;
+  right: 6%;
+  top: 2.9%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Gilroy Bold";
   color: var(--off-white);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   border-radius: 50px;
   text-align: center;
-  text-decoration: underline;
+  text-decoration: wavy;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -56,8 +56,7 @@
 }
 
 .loginIcon {
-  padding: 1px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #88e5ba;
   text-decoration: underline;
 }
@@ -68,12 +67,12 @@
   top: 3.5%;
   font-size: 1.7rem;
   cursor: pointer;
-  color: var(--crimson);
+  color: var(--white);
   z-index: 2;
 }
 
 .menu:hover {
-  color: var(--subtle-yellow);
+  color: var(--crimson);
 }
 
 @media screen and (max-width: 1200px) {

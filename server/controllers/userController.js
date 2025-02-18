@@ -61,7 +61,8 @@ export const register = catchAsyncError(
          await user.save()
 
          //send code to user email or phone based on user preference
-         await sendVerificationCode(verificationMethod, verificationCode, name, email, phone, res)
+         const message = await sendVerificationCode(verificationMethod, verificationCode, name, email, phone, res)
+         handleSuccessResponse(res, 200, message)
 
       } catch (error) {
          next(error)

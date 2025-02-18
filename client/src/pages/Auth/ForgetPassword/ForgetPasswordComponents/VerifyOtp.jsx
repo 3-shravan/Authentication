@@ -7,24 +7,34 @@ import { IoIosArrowBack } from "react-icons/io";
 import InputOtp from "../../../../components/InputOtp";
 import styles from "../../AuthComponents.module.css";
 
-const VerifyOtp = ({ formData, setStage }) => {
+const VerifyOtp = ({
+  formData,
+  setStage,
+  isResend,
+  resendHandler,
+  showError,
+  resendLoading,
+  text,
+}) => {
   const phone = `${formData.phone}`;
+
   const { execute, loading } = useApi(
     "/forgetPassword/verifyOTP",
     "POST",
     `/resetPassword/phone/${formData.phone}`
   );
 
+
+  const handleResendOtp = () => {
+    isResend ? resendHandler() : showError();
+  };
+
   const handleOtpSubmit = async (otp) => {
     const requestData = {
       phone: formData.phone,
       otp,
     };
-    console.log(requestData);
-    const response = await execute(requestData);
-    if (response.status === 200) {
-      console.log("now comapare Password");
-    }
+    await execute(requestData);
   };
 
   return (
@@ -47,7 +57,7 @@ const VerifyOtp = ({ formData, setStage }) => {
             className={styles.backIcon}
           />
         </h1>
-       
+
         <h2 className={styles.inputName}>
           We sent you a Verification Code on +91
           <h2>{phone}</h2>
@@ -55,6 +65,15 @@ const VerifyOtp = ({ formData, setStage }) => {
 
         <InputOtp handleOtpSubmit={handleOtpSubmit} loading={loading} />
       </form>
+
+      <button
+        type="button"
+        onClick={() => handleResendOtp()}
+        className="resendOtp"
+        disabled={resendLoading}
+      >
+        {resendLoading ? "..." : text}
+      </button>
     </motion.div>
   );
 };

@@ -20,13 +20,32 @@ const initialData = {
   email: "",
   phone: "",
 };
-
+const RESEND_TIME = 30
 const ForgetPassword = () => {
   const [formData, setFormData] = React.useState(initialData);
   const [byEmail, setByEmail] = React.useState(true);
   const [stage, setStage] = React.useState(0);
 
+  const [isResend, setIsResend] = React.useState(true)
+  const [resendTimer, setResendTimer] = React.useState(0)
+
   const { execute, loading } = useApi("/forgetPassword", "POST");
+
+  React.useEffect(() => {
+    let timer;
+    if (resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => prev - 1)
+      }, 1000)
+      return () => clearInterval(timer)
+    } else {
+      setIsResend(true)
+    }
+  }, [resendTimer])
+
+  const showError = async () => {
+    return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`)
+  }
 
   const handleMethod = () => {
     if (byEmail) {
@@ -44,8 +63,29 @@ const ForgetPassword = () => {
     }));
   };
 
+  const resendHandler = async () => {
+    if (!isResend) return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`)
+
+    if (validForgetEmail(formData, byEmail)) {
+      return errorToast("Provide a valid Email address");
+    }
+    if (validForgetPhone(formData, byEmail)) {
+      return errorToast("Provide a valid Phone number");
+    }
+    setIsResend(false)
+
+    const response = await execute(formData);
+    if (response.status === 200) {
+      setResendTimer(RESEND_TIME)
+      !byEmail && setStage(1)
+    } else setIsResend(true)
+  };
+
   const submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    if (!isResend) return errorToast(`Please wait ${resendTimer} seconds before resending OTP.`)
+
 
     if (validForgetEmail(formData, byEmail)) {
       return errorToast("Provide a valid Email address");
@@ -54,9 +94,13 @@ const ForgetPassword = () => {
     if (validForgetPhone(formData, byEmail)) {
       return errorToast("Provide a valid Phone number");
     }
+    setIsResend(false)
 
     const response = await execute(formData);
-    if (response.status === 200) !byEmail && setStage(1);
+    if (response.status === 200) {
+      setResendTimer(RESEND_TIME)
+      !byEmail && setStage(1)
+    } else setIsResend(true)
   };
 
   return (
@@ -70,8 +114,8 @@ const ForgetPassword = () => {
       >
         <form
           action=""
-          className={styles.formContainer}
           onSubmit={(e) => submitHandler(e)}
+          className={styles.formContainer}
         >
           <h1 className={authStyles.heading1}>
             <Link to={"/login"}>
@@ -97,32 +141,20 @@ const ForgetPassword = () => {
               </span>
 
               {byEmail ? (
-                <>
-                  <ByEmail handleChange={handleChange} formData={formData} />
-                  <AuthButton
-                    text="Verify"
-                    type="button"
-                    handleNext={submitHandler}
-                    loading={loading}
-                    icon={
-                      <MdMotionPhotosOn className="text-m pl-1 text-black" />
-                    }
-                  />
-                </>
+                <ByEmail handleChange={handleChange} formData={formData} />
               ) : (
-                <>
-                  <ByPhone handleChange={handleChange} formData={formData} />
-                  <AuthButton
-                    text="Verify"
-                    type="button"
-                    handleNext={submitHandler}
-                    loading={loading}
-                    icon={
-                      <MdMotionPhotosOn className="text-m pl-1 text-black" />
-                    }
-                  />
-                </>
+                <ByPhone handleChange={handleChange} formData={formData} />
               )}
+
+              <AuthButton
+                text={isResend ? "Verify" : `Resend in ${resendTimer}s`}
+                type="submit"
+                handleNext={submitHandler}
+                loading={!isResend && loading}
+                icon={
+                  <MdMotionPhotosOn className="text-m pl-1 text-black" />
+                }
+              />
             </>
           )}
         </form>
@@ -133,7 +165,14 @@ const ForgetPassword = () => {
             transition={{ delay: 0.1, ease: "linear" }}
             className={styles.formContainer}
           >
-            <VerifyOtp formData={formData} setStage={setStage} />
+            <VerifyOtp
+              text={isResend ? "Resend OTP" : `Resend in ${resendTimer}s`}
+              resendLoading={loading}
+              showError={showError}
+              resendHandler={resendHandler}
+              isResend={isResend}
+              formData={formData}
+              setStage={setStage} />
           </motion.div>
         )}
         <PrivacyTermsAndConditions />
