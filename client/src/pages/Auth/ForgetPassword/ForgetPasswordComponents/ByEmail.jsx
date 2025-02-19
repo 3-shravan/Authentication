@@ -14,7 +14,7 @@ const ByEmail = ({ handleChange, formData }) => {
         <MdMarkEmailUnread className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />{" "}
         <input
           type="email"
-          placeholder="  Email"
+          placeholder=" Email"
           name="email"
           value={formData.email}
           onChange={(e) => handleChange(e)}

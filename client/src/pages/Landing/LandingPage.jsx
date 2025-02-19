@@ -15,6 +15,14 @@ const LandingPage = () => {
         <Header />
 
         <div className={styles.hero}>
+
+
+          {/***********  
+             * @line1
+          *  *********** / */}
+
+
+
           <motion.h1
             className={styles.line1}
             initial={{ opacity: 0, y: -500 }}
@@ -46,9 +54,16 @@ const LandingPage = () => {
           >
             &
           </motion.div>
+
+          {/***********  
+                 * @bg
+              *  *********** / */}
+
+
+
           <motion.div
             className={styles.bg}
-            initial={{ y: -245, backgroundColor: "#DC143C" }}
+            initial={{ y: -270, backgroundColor: "#DC143C" }}
             animate={{ y: 0, backgroundColor: "#131313" }}
             transition={{
               delay: 1,
@@ -57,6 +72,13 @@ const LandingPage = () => {
               ease: "easeOut",
             }}
           >
+
+            {/***********  
+             * @Discovery
+              *  *********** / */}
+
+
+
             <motion.div
               className={styles.line2}
               initial={{ x: -1200 }}
@@ -71,11 +93,17 @@ const LandingPage = () => {
             </motion.div>
           </motion.div>
 
+          {/***********  
+         * @SignUp_button
+          *  *********** / */}
+
+
+
           <motion.button
             className={styles.getStartedButton}
             onClick={() => {
 
-              navigate("/signup");
+              navigate("/signup", { replace: true });
             }}
             initial={{ x: -300 }}
             animate={{ x: 0 }}
@@ -88,6 +116,12 @@ const LandingPage = () => {
             </span>
           </motion.button>
         </div>
+
+
+        {/*********** 
+         * @MARQUEEE_EFFECT 
+         *  *********** / */}
+
         <motion.div
           className={styles.marqueeContainer}
           initial={{ y: -470 }}

@@ -18,7 +18,7 @@ const LoginByPhone = ({ handleChange, formData }) => {
         <TbNumber91Small className="text-3xl absolute left-2.5 text-zinc-300 pr-1  border-zinc-700 h-7 " />{" "}
         <input
           type="number"
-          placeholder="  Phone Number"
+          placeholder=" Phone Number"
           name="phone"
           value={formData.phone}
           onChange={(e) => handleChange(e)}
@@ -30,7 +30,7 @@ const LoginByPhone = ({ handleChange, formData }) => {
         <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2  border-zinc-700 h-7 " />
         <input
           type="password"
-          placeholder="  Password"
+          placeholder=" Password"
           name="password"
           value={formData.password}
           onChange={(e) => handleChange(e)}

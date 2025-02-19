@@ -1,16 +1,20 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../../AuthComponents.module.css";
 
 const GoToLogin = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.redirectLine}>
       <span>
         {" "}
-        Already have a account ?{" "}
-        <Link to="/login" className={styles.redirectLink}>
+        Already have an account?{" "}
+        <span
+          className={styles.redirectLink}
+          onClick={() => navigate("/login", { replace: true })}
+        >
           Login.
-        </Link>{" "}
-       
+        </span>{" "}
       </span>
     </div>
   );

@@ -18,7 +18,7 @@ const FormContainer = ({ formData, setFormData }) => {
 
         <input
           type="password"
-          placeholder="  New Password"
+          placeholder=" New Password"
           name="newPassword"
           value={formData.newPassword}
           onChange={(e) => handleChange(e)}
@@ -30,7 +30,7 @@ const FormContainer = ({ formData, setFormData }) => {
       <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
       <input
           type="password"
-          placeholder="  Confirm Password"
+          placeholder=" Confirm Password"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={(e) => handleChange(e)}

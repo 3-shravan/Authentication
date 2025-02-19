@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 4rem;
   cursor: default;
 }
 
@@ -21,7 +21,7 @@
 }
 .line1 {
   font-size: 6rem;
-  line-height: 4.7rem;
+  line-height: 5rem;
   max-width: 82%;
   letter-spacing: 0.2rem;
   text-shadow: 0 0 6px var(--shadow-green);
@@ -62,7 +62,7 @@
   width: 100px;
   height: 4px;
   margin-top: -2.1rem;
-  background-color: var(--shadow-green);
+  background-color: var(--wheat);
   position: absolute;
   border-radius: 2px;
   box-shadow: -10px 0 20px var(--shadow-green), 0 0 20px var(--shadow-green);

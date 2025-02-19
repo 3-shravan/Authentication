@@ -1,10 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaIdBadge } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { TbMenu } from "react-icons/tb";
 import "../../assets/styles/header.css";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -91,10 +90,10 @@ const Header = () => {
 
       <div className="nav">
         {window.location.pathname === "/" && (
-          <span onClick={() => navigate("/login")} className="loginButton">
+          <span onClick={() => navigate("/login", { replace: true })} className="loginButton">
             Login
             <span className="loginIcon">
-            <CiHeart />
+              <CiHeart />
             </span>
           </span>
         )}

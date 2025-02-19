@@ -75,7 +75,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
             <input
               ref={inputRef}
               type="email"
-              placeholder="  Email"
+              placeholder=" Email"
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -99,7 +99,7 @@ const VerifyPhoneEmail = ({ formData, handleChange, handlePrevious }) => {
             <input
               ref={inputRef}
               type="number"
-              placeholder="  Phone Number"
+              placeholder=" Phone Number"
               name="phone"
               value={formData.phone}
               onChange={handleChange}

@@ -14,7 +14,7 @@ import cleanupAllExpiredData from './Automation/cleanupManager.js'
 
 export const app = express()
 app.use(cors({
-   origin: true,
+   origin: process.env.CLIENT_URL,
    methods: ['GET', 'POST', 'PUT', 'DELETE'],
    allowedHeaders: ["Authorization", "Content-Type"],
    credentials: true

@@ -16,7 +16,7 @@ const ByPhone = ({ handleChange, formData }) => {
         <TbNumber91Small className="text-3xl absolute left-2.5 text-zinc-300 pr-1 border-r-1 border-zinc-700 h-7 mx-auto" />
         <input
           type="number"
-          placeholder="  Phone Number"
+          placeholder=" Phone Number"
           name="phone"
           value={formData.phone}
           onChange={(e) => handleChange(e)}

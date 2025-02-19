@@ -66,10 +66,15 @@
   justify-content: center;
   font-family: "Gilroy Regular";
   width: 100%;
+  
   border-radius: 50px;
   padding: 0.7rem 3rem;
   border: 1px solid var(--dark-300);
   transition: all 0.3s ease-in-out;
+
+  caret-color: var(--white);
+  
+
 }
 
 .inputField:focus {
