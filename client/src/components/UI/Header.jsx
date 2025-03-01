@@ -77,15 +77,23 @@ const Header = () => {
           >
             e
           </motion.span>
+          <motion.span
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ delay: 5.5 }}
+            className="dot letters"
+          >
+            .
+          </motion.span>
         </motion.span>
-        <motion.span
+        {/* <motion.span
           initial={{ y: -180 }}
           animate={{ y: 0 }}
           transition={{ delay: 5.5 }}
           className="dot letters"
         >
           .
-        </motion.span>
+        </motion.span> */}
       </motion.div>
 
       <div className="nav">

@@ -128,7 +128,7 @@ const LandingPage = () => {
           animate={{ y: 0 }}
           transition={{
             delay: 6.7,
-            duration: 3.9,
+            duration: 4.5,
             ease: "anticipate",
           }}
         >
@@ -139,7 +139,7 @@ const LandingPage = () => {
               animate={{ x: ["0%", "-100%"] }}
               transition={{
                 repeat: Infinity,
-                duration: 60,
+                duration: 80,
                 delay: 7,
                 ease: "linear",
               }}

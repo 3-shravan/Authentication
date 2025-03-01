@@ -15,21 +15,22 @@
 
 .letters {
   color: var(--crimson);
-  font-size: 1.8rem;
+  font-size: 2rem;
   text-transform: uppercase;
   margin-bottom: -1.2rem;
   display: flex;
+  letter-spacing: -1.5px;
   font-family: "Futura-Bold";
   align-items: center;
 }
 
 .dot {
   color: var(--wheat);
-  font-size: 3.5rem;
-  margin-top: -4vh;
+  font-size: 3rem;
+  margin-top: -3vh;
+  height: 10vh;
+  /* background-color: #fff; */
 }
-
-
 
 .loginButton {
   padding: 0.5rem 0.5rem;
@@ -46,17 +47,32 @@
   letter-spacing: 1px;
   border-radius: 50px;
   text-align: center;
-  text-decoration: wavy;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+.loginButton::after {
+  content: "";
+  position: absolute;
+  bottom: 1.5vh;
+  left: 0.65vw;
+  scale: 0;
+  height: 1.5px;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.5s ease-in-out;
+}
 
-.loginButton:hover {
-  color: var(--forest-green);
+.loginButton:hover::after {
+  height: 1.5px;
+  scale: 1;
+  width: 70%;
+  background-color: var(--crimson);
+  transition: all 0.35s ease-in-out;
+  /* color: var(--forest-green); */
 }
 
 .loginIcon {
-  font-size: 1.2rem;
+  font-size: 0rem;
   color: #88e5ba;
   text-decoration: underline;
 }
@@ -187,7 +203,7 @@
     font-size: 3rem;
     margin-top: -1.2rem;
   }
- 
+
   .loginButton {
     right: 2%;
   }

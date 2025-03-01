@@ -74,7 +74,7 @@
   width: 8.2rem;
   display: flex;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-family: "Gilroy Bold";
   color: var(--crimson);
   border: none;
@@ -82,7 +82,9 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   &:hover {
-    border: none;
+    transition: all 0.3s linear;
+    background-color: white;
+    color: black;
     box-shadow: 0 0 60px var(--forest-green);
   }
 }
