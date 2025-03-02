@@ -12,9 +12,10 @@ const FormContainer = ({ formData, setFormData }) => {
   };
 
   return (
-    <div>
+    <div >
+      <section className={styles.space1vh}></section>
       <div className={styles.inputWrapper}>
-      <MdLockOutline className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+        <MdLockOutline className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
 
         <input
           type="password"
@@ -27,8 +28,8 @@ const FormContainer = ({ formData, setFormData }) => {
       </div>
 
       <div className={styles.inputWrapper}>
-      <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
-      <input
+        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2 border-r-1 border-zinc-700 h-7 mx-auto" />
+        <input
           type="password"
           placeholder=" Confirm Password"
           name="confirmPassword"

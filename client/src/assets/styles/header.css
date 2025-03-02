@@ -11,25 +11,29 @@
   justify-content: center;
   flex-direction: column;
   z-index: 2;
+  font-family: "Futura-Bold";
+  text-transform: uppercase;
+  letter-spacing: -1.5px;
+  color: var(--crimson);
+  cursor: default;
 }
 
-.letters {
-  color: var(--crimson);
+.letter {
   font-size: 2rem;
-  text-transform: uppercase;
   margin-bottom: -1.2rem;
+}
+.letterDiv {
+  font-size: 2rem;
   display: flex;
-  letter-spacing: -1.5px;
-  font-family: "Futura-Bold";
-  align-items: center;
+  position: relative;
 }
 
 .dot {
   color: var(--wheat);
-  font-size: 3rem;
-  margin-top: -3vh;
-  height: 10vh;
-  /* background-color: #fff; */
+  font-size: 3.5rem;
+  position: absolute;
+  margin-top: -2vh;
+  cursor: pointer;
 }
 
 .loginButton {
@@ -68,7 +72,6 @@
   width: 70%;
   background-color: var(--crimson);
   transition: all 0.35s ease-in-out;
-  /* color: var(--forest-green); */
 }
 
 .loginIcon {
@@ -99,13 +102,6 @@
     width: 20%;
     padding: 0 2rem;
   }
-
-  .letters {
-    margin-bottom: -1.2rem;
-  }
-  .dot {
-    margin-top: -1.4rem;
-  }
 }
 
 @media screen and (max-width: 1020px) {
@@ -120,13 +116,6 @@
     width: 20%;
     padding: 0 2rem;
   }
-
-  .letters {
-    margin-bottom: -1.2rem;
-  }
-  .dot {
-    margin-top: -1.4rem;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -136,15 +125,7 @@
   .sphere {
     top: 3.5%;
     left: 4%;
-  }
-
-  .letters {
     font-size: 1.8rem;
-    margin-bottom: -1.2rem;
-  }
-  .dot {
-    font-size: 3rem;
-    margin-top: -0.9rem;
   }
 
   .loginButton {
@@ -169,15 +150,6 @@
     top: 3.5%;
     left: 5%;
   }
-  .letters {
-    font-size: 1.7rem;
-    margin-bottom: -1.1rem;
-  }
-
-  .dot {
-    font-size: 2.9rem;
-    margin-top: -14px;
-  }
   .loginButton {
     font-size: 1rem;
     right: 2%;
@@ -194,14 +166,6 @@
 @media screen and (max-width: 400px) {
   .header {
     height: 5vh;
-  }
-  .letters {
-    font-size: 1.6rem;
-    margin-bottom: -1rem;
-  }
-  .dot {
-    font-size: 3rem;
-    margin-top: -1.2rem;
   }
 
   .loginButton {

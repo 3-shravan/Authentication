@@ -95,8 +95,8 @@ const Login = () => {
               icon={<IoLogIn className="text-black/90" />}
             />
             <button
-              className={loginstyles.forgetPassword}
-              onClick={() => navigate("/forgetPassword")}
+              className={styles.secondaryButton}
+              onClick={() => navigate("/forgetPassword" ,{replace:true})}
               type="button"
             >
               Forget Password ?

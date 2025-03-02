@@ -63,7 +63,7 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
         return (
           <input
             key={index}
-            type="text"
+            type="number"
             className="inputOtp"
             value={value}
             ref={(val) => (inputRefs.current[index] = val)}
@@ -74,7 +74,6 @@ const InputOtp = ({ handleOtpSubmit, loading }) => {
         );
       })}
     </div>
-    {/* <button type="button" className="resendOtp">Resend OTP</button> */}
   </>
   );
 };

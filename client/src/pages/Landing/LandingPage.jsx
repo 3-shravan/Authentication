@@ -105,8 +105,8 @@ const LandingPage = () => {
 
               navigate("/signup", { replace: true });
             }}
-            initial={{ x: -300 }}
-            animate={{ x: 0 }}
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 2.3, duration: 1.5, ease: "anticipate" }}
           >
             Get Started{" "}

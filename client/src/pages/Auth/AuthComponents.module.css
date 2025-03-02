@@ -10,10 +10,12 @@
 .space4vh {
   background-color: var(--black);
   height: 5vh;
+  z-index: -100;
 }
 .space1vh {
   background-color: var(--black);
   height: 1vh;
+  z-index: -100;
 }
 
 .backIcon {
@@ -66,15 +68,13 @@
   justify-content: center;
   font-family: "Gilroy Regular";
   width: 100%;
-  
+
   border-radius: 50px;
   padding: 0.7rem 3rem;
   border: 1px solid var(--dark-300);
   transition: all 0.3s ease-in-out;
 
   caret-color: var(--white);
-  
-
 }
 
 .inputField:focus {
@@ -136,11 +136,11 @@
 .secondaryButton {
   border: 0.1px solid rgb(65, 65, 65);
   display: flex;
-  color: var(--subtle-text);
+  color: #6c6c6c;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  padding: 0.6rem 1rem;
+  padding: 0.7rem 1rem;
   width: 100%;
   margin: 0.8vh 0 1.5vh 0;
   font-size: 0.8rem;
@@ -149,8 +149,8 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   &:hover {
-    background-color: var(--black);
-    color: var(--subtle-text-hover);
+    background-color: #000000;
+    color: #3e3e3e;
     text-decoration: underline;
   }
 }
@@ -284,10 +284,5 @@
 
   .selectionButton {
     font-size: 0.8rem;
-  }
-
-  .secondaryButton {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.75rem;
   }
 }

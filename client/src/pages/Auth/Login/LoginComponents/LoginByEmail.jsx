@@ -12,7 +12,7 @@ const LoginByEmail = ({ handleChange, formData }) => {
       transition={{ delay: 0.2, ease: "circIn" }}
     >
       <div className={styles.inputWrapper}>
-        <MdMarkEmailUnread className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2  border-zinc-700 h-7 mx-auto" />{" "}
+        <MdMarkEmailUnread className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-6 mx-auto" />{" "}
         <input
           type="email"
           placeholder=" Email"
@@ -24,7 +24,7 @@ const LoginByEmail = ({ handleChange, formData }) => {
       </div>
 
       <div className={styles.inputWrapper}>
-        <MdLock className="text-3xl absolute left-2.5 text-zinc-100 pr-2  border-zinc-700 h-7 mx-auto" />
+        <MdLock className="text-[1.7rem] absolute left-3 text-zinc-300 pr-2 border-r-1 border-zinc-700 h-6 mx-auto" />
 
         <input
           type="password"

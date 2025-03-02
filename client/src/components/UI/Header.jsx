@@ -19,7 +19,7 @@ const Header = () => {
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ delay: 4.5 }}
-          className="letters"
+          className="letter"
         >
           The
         </motion.span>
@@ -27,7 +27,7 @@ const Header = () => {
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ delay: 4 }}
-          className="letters"
+          className="letterDiv"
         >
           <motion.span
             initial={{ y: -100 }}
@@ -81,7 +81,10 @@ const Header = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ delay: 5.5 }}
-            className="dot letters"
+            className="letters dot"
+            onClick={() => navigate('/',{replace:true})}
+
+
           >
             .
           </motion.span>
