@@ -3,7 +3,7 @@ import { useTheme } from "../../context/ThemeContext";
 import useLogout from "../../hooks/useLogout";
 
 const Feed = () => {
-  const { theme, toggleTheme } = useTheme()
+  const { toggleTheme } = useTheme()
   const { auth } = useAuth();
   const logout = useLogout()
   return (

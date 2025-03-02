@@ -9,109 +9,110 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <div className="header">
+
+      {/***********  
+           * @LOGO
+        *  *********** / */}
+
+
       <motion.div
-        className="sphere"
+        className="logo"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ delay: 5, ease: "linear" }}
+        transition={{ delay: 1, ease: "linear" }}
       >
         <motion.span
           initial={{ y: -100 }}
           animate={{ y: 0 }}
-          transition={{ delay: 4.5 }}
-          className="letter"
+          transition={{ delay: 1.5 }}
+          className="the"
         >
-          The
+          its
         </motion.span>
         <motion.span
           initial={{ y: -100 }}
           animate={{ y: 0 }}
-          transition={{ delay: 4 }}
-          className="letterDiv"
+          className="letters"
         >
           <motion.span
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ delay: 6 }}
-            className="letters"
+            transition={{ delay: 1.5 }}
+            className="letter"
           >
-            S
+            L
           </motion.span>
           <motion.span
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ delay: 6.1 }}
-            className="letters"
+            transition={{ delay: 1.6 }}
+            className="letter"
           >
-            p
+            O
           </motion.span>
           <motion.span
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ delay: 6.2 }}
-            className="letters"
+            transition={{ delay: 1.7 }}
+            className="letter"
           >
-            h
+            G
           </motion.span>
           <motion.span
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ delay: 6.3 }}
-            className="letters"
+            transition={{ delay: 1.8 }}
+            className="letter"
           >
-            e
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 6.4 }}
-            className="letters"
-          >
-            r
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 6.5 }}
-            className="letters"
-          >
-            e
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 5.5 }}
-            className="letters dot"
-            onClick={() => navigate('/',{replace:true})}
-
-
-          >
-            .
+            O
           </motion.span>
         </motion.span>
-        {/* <motion.span
-          initial={{ y: -180 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 5.5 }}
-          className="dot letters"
-        >
-          .
-        </motion.span> */}
       </motion.div>
 
-      <div className="nav">
-        {window.location.pathname === "/" && (
-          <span onClick={() => navigate("/login", { replace: true })} className="loginButton">
-            Login
-            <span className="loginIcon">
-              <CiHeart />
+
+
+
+      {/***********  
+           * @navBar
+        *  *********** / */}
+
+
+
+      <nav className="nav">
+
+        {/***********  
+           * @dropdown 
+        *  *********** / */}
+
+        <div className="dropdown">
+          {/* DropDown | DropDown */}
+        </div>
+
+
+        {/***********  
+             * @MenuBar
+          *  *********** / */}
+
+
+        <div className="menuBar">
+          {/* {window.location.pathname === "/" && ( */}
+            <span onClick={() => navigate("/login", { replace: true })} className="menuButton">
+              Login
             </span>
+          {/* )} */}
+          <span className="menuButton" >
+            Menu
           </span>
-        )}
-        <span className="menu">
-          <TbMenu />
-        </span>
-      </div>
+          <span className="menuButton selected"
+            onClick={() => {
+              navigate("/", { replace: true })
+            }
+            }>
+            Home
+          </span>
+        </div>
+
+      </nav>
     </div>
   );
 };

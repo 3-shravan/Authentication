@@ -8,87 +8,54 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 8rem;
   cursor: default;
 }
 
 .line1,
-.line2,
-.and {
+.line2 {
   margin: 0 2rem;
   font-family: "Futura-Bold";
   text-transform: uppercase;
 }
 .line1 {
-  font-size: 6.5rem;
-  line-height: 5rem;
+  color: var(--wheat);
+  font-family: "Gilroy Bold";
+  font-size: 3rem;
+  line-height: 2.6rem;
   max-width: 85%;
-  letter-spacing: 0.2rem;
-  text-shadow: 0 0 5px var(--shadow-green);
+  margin-left: 2.5rem;
 }
-.and {
-  font-size: 5.5rem;
-  line-height: 3.2rem;
-  color: var(--crimson);
-}
+
 .line2 {
-  font-size: 5.5rem;
+  font-family: "Gilroy Bold";
+  font-size: 5.7rem;
   color: rgb(48, 48, 48);
-  /* text-shadow: 0 0 3px var(--shadow-green); */
-  line-height: 4.2rem;
-  letter-spacing: 0.5rem;
-}
-.bg {
-  position: relative;
-  width: 100%;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 40%;
-    height: 100%;
-    z-index: 2;
-  }
-
-  &::after {
-    right: 0;
-    background: linear-gradient(to left, var(--black), transparent);
-  }
-}
-
-.loading {
-  width: 100px;
-  height: 4px;
-  margin-top: -2rem;
-  background-color: var(--wheat);
-  position: absolute;
-  border-radius: 2px;
-  box-shadow: -10px 0 20px var(--shadow-green), 0 0 20px var(--shadow-green);
+  line-height: 5rem;
 }
 
 .getStartedButton {
-  margin: 2.5rem 0 5rem 1.6rem;
+  margin: 2rem 0 0 2rem;
   padding: 0.8rem 0.8rem;
   width: 8.2rem;
   display: flex;
   justify-content: center;
   font-size: 0.9rem;
   font-family: "Gilroy Bold";
-  color: var(--crimson);
+  color: var(--dark-300);
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  background-color: var(--dark-100);
-  transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #131313;
+  text-decoration: underline;
+  transition: all 0.3s ease-in-out;
   &:hover {
     transition: all 0.3s linear;
     background-color: white;
     color: black;
-    box-shadow: 0 0 60px var(--forest-green);
   }
 }
+
 .icon {
   padding-left: 6px;
   color: var(--wheat);
@@ -139,6 +106,10 @@
   font-size: 0.8rem;
   padding: 0 25px;
 }
+
+/***********  
+     * @MediaQueries 
+  *  *********** / */
 
 @media (max-width: 1200px) {
   .line1 {
