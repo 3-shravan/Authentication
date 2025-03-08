@@ -101,9 +101,9 @@ const LandingPage = () => {
               animate={{ x: ["0%", "-100%"] }}
               transition={{
                 repeat: Infinity,
-                duration: 100,
-                delay: 7,
-                ease: "linear",
+                duration: 60,
+                delay: 3,
+                ease: "anticipate",
               }}
             >
               {MarqueeItems.map((text, index) => (

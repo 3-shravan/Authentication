@@ -8,46 +8,41 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 8rem;
   cursor: default;
+  padding: 15rem 40px 1rem;
 }
 
 .line1,
 .line2 {
-  margin: 0 2rem;
-  font-family: "Futura-Bold";
+  font-family: "Gilroy Bold";
   text-transform: uppercase;
 }
 .line1 {
   color: var(--wheat);
-  font-family: "Gilroy Bold";
-  font-size: 3rem;
-  line-height: 2.6rem;
-  max-width: 85%;
-  margin-left: 2.5rem;
+  font-size: clamp(20px, 5rem, 100px);
+  line-height: 4rem;
+  padding-left: 0.5rem;
 }
 
 .line2 {
-  font-family: "Gilroy Bold";
-  font-size: 5.7rem;
+  font-size: clamp(50px, 7rem, 100px);
   color: rgb(48, 48, 48);
-  line-height: 5rem;
+  line-height: 5.5rem;
 }
 
 .getStartedButton {
-  margin: 2rem 0 0 2rem;
+  margin: 1rem 0 0;
   padding: 0.8rem 0.8rem;
-  width: 8.2rem;
+  width: 8rem;
   display: flex;
   justify-content: center;
   font-size: 0.9rem;
   font-family: "Gilroy Bold";
   color: var(--dark-300);
-  border: none;
+  border: 1px solid var(--dark-300);
   border-radius: 50px;
   cursor: pointer;
   background-color: #131313;
-  text-decoration: underline;
   transition: all 0.3s ease-in-out;
   &:hover {
     transition: all 0.3s linear;
@@ -111,82 +106,64 @@
      * @MediaQueries 
   *  *********** / */
 
-@media (max-width: 1200px) {
+@media (min-width: 1440px) {
+  .hero {
+    background-color: #fff;
+    padding-top: 15rem;
+  }
   .line1 {
-    font-size: 5rem;
-    line-height: 4.5rem;
+    font-size: 7rem;
   }
   .line2 {
-    font-size: 4.5rem;
-    line-height: 3.8rem;
+    font-size: 8rem;
+    line-height: 9rem;
   }
-  .and {
-    font-size: 5rem;
+  .getStartedButton {
+    margin: 2rem 0 3rem;
+    padding: 1.2rem 0;
+    width: 9rem;
+    font-size: 1.1rem;
   }
 }
 
-@media (max-width: 1016px) {
-  .hero {
-    margin-top: 2.2rem;
-    width: 100%;
-  }
+@media (max-width: 1024px) {
   .line1 {
-    font-size: 4.5rem;
-    line-height: 3.9rem;
+    font-size: 5.5rem;
+    line-height: 5rem;
   }
-  .and {
-    font-size: 4rem;
-  }
+
   .line2 {
-    font-size: 4.5rem;
-    line-height: 3.8rem;
+    font-size: 6.5rem;
+    line-height: 5rem;
   }
   .getStartedButton {
     width: 8rem;
     margin-top: 1rem;
-    padding: 0.8rem 0.6rem;
   }
 }
 
 @media (max-width: 768px) {
-  .hero {
-    height: auto;
-    margin-top: 3rem;
-  }
   .line1 {
-    font-size: 4.2rem;
-    line-height: 3.5rem;
-    max-width: 85%;
+    font-size: 5rem;
+    line-height: 4rem;
   }
-  .and {
-    font-size: 4.2rem;
-  }
+
   .line2 {
-    font-size: 4.2rem;
-    line-height: 3.5rem;
+    font-size: 6rem;
+    line-height: 5rem;
   }
   .getStartedButton {
-    width: 8rem;
-    margin-top: 3rem;
-    padding: 0.8rem 0.7rem;
-    font-size: 0.8rem;
     background-color: white;
     color: black;
   }
 }
 
-@media (max-width: 618px) {
+/* @media (max-width: 618px) {
   .line1 {
-    font-size: 4.1rem;
-    line-height: 3.5rem;
-    width: 80%;
+    font-size: 5rem;
+    line-height: 4rem;
   }
-  .and {
-    font-size: 4.2rem;
-  }
-  .bg::after {
-    display: none;
-  }
+
   .line2 {
     font-size: 4rem;
     line-height: 3.2rem;
@@ -194,26 +171,17 @@
   .getStartedButton {
     margin-top: 2rem;
   }
-}
+} */
 
-@media (max-width: 576px) {
-  .hero {
-    margin-top: 4rem;
-    height: auto;
-  }
+/* @media (max-width: 576px) {
   .line1 {
     font-size: 3.8rem;
     line-height: 3.2rem;
   }
-  .and {
-    font-size: 3.8rem;
-  }
+
   .line2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     line-height: 2.9rem;
-  }
-  .bg::after {
-    display: none;
   }
 
   .getStartedButton {
@@ -229,95 +197,42 @@
     font-size: 0.7rem;
     padding: 0 15px;
   }
-}
+} */
 
 @media (max-width: 480px) {
-  .page {
-    position: relative;
-  }
   .hero {
-    margin-top: 7rem;
-    height: auto;
-    max-width: 100%;
-    overflow: hidden;
+    padding: 20rem 4% 2rem;
+  }
+
+  .line1 {
+    padding: 0;
+    font-size: 4.5rem;
+    line-height: 8rem;
   }
 
   .line2 {
-    font-size: 3.6rem;
-    letter-spacing: -1px;
+    font-size: 4.5rem;
+    line-height: 4rem;
     white-space: normal;
-    word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
-  .line1 {
-    padding-top: 1rem;
-    font-size: 4.2rem;
-    line-height: 4rem;
-  }
-
-  .line2 {
-    line-height: 3rem;
-    padding-top: 0.3rem;
-  }
-
-  .and {
-    font-size: 4rem;
-  }
-
-  .bg::after {
-    display: none;
-  }
-
   .getStartedButton {
-    margin: 0;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding-top: 0.8rem;
-    font-size: 3.5rem;
-    color: var(--crimson);
-    background-color: #131313;
+    width: 85%;
+    font-size: 1rem;
+    color: var(--wheat);
+    background-color: black;
   }
 }
 
-@media (max-width: 400px) {
-  .line1 {
-    width: 80%;
-    font-size: 4rem;
-    line-height: 3.5rem;
-  }
-
-  .line2 {
-    font-size: 3.2rem;
-    line-height: 2rem;
-  }
-
-  .and {
-    font-size: 4rem;
-    text-align: start;
-  }
-  .marqueeItem {
-    font-size: 0.7rem;
-  }
-}
 @media (max-width: 380px) {
-  .hero {
-    margin-top: 9rem;
-    height: auto;
-  }
   .line1 {
-    font-size: 3.4rem;
-    line-height: 3.4rem;
+    font-size: 4rem;
+    line-height: 7rem;
   }
+
   .line2 {
-    font-size: 3.2rem;
-    letter-spacing: 1-rem;
-    line-height: 3.4rem;
-  }
-  .getStartedButton {
-    font-size: 2.5rem;
+    font-size: 4rem;
+    line-height: 4rem;
   }
 }

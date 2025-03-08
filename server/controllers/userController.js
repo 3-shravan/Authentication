@@ -82,7 +82,7 @@ export const verifyOTP = catchAsyncError(async (req, res, next) => {
    if (!otp) return next(new ErrorHandler(400, 'OTP is required.'))
    if (!phone && !email) return next(new ErrorHandler(400, 'Either phone number or email is required for verification'))
 
-   //check if phone number is i valid format 
+   //check if phone number is invalid format 
    if (phone && !validatePhoneNo(phone)) {
       return next(new ErrorHandler(400, 'Invalid phone number'))
    }
@@ -157,7 +157,7 @@ export const login = catchAsyncError(async (req, res, next) => {
 
    //user can only login with either phone number or email address
    if ((!email && !phone) || !password) {
-      return next(new ErrorHandler(400, "Either Phone number or Email is required with password"))
+      return next(new ErrorHandler(400, "Credentials are required"))
    }
    if (email && phone) {
       return next(new ErrorHandler(400, "Please provide either Email or Phone number, not both."));
@@ -169,11 +169,11 @@ export const login = catchAsyncError(async (req, res, next) => {
    //find user using phone or email ...as user must exist to login 
    if (phone) {
       user = await User.findOne({ phone, accountVerified: true }).select("+password")
-      if (!user) return next(new ErrorHandler(404, "No user found with this phone number or account is not verified."))
+      if (!user) return next(new ErrorHandler(404, "Invalid user or unverified account."))
    }
    if (email) {
       user = await User.findOne({ email, accountVerified: true }).select("+password")
-      if (!user) return next(new ErrorHandler(404, "No user found with this email address or account is not verified."))
+      if (!user) return next(new ErrorHandler(404, "Invalid user or unverified account."))
    }
 
 
@@ -185,7 +185,7 @@ export const login = catchAsyncError(async (req, res, next) => {
    //send null value as password to client 
    user.password = ""
 
-   sendToken(user, 200, 'Login Successfull', res)
+   sendToken(user, 200, 'Login Successfull🚀.', res)
 })
 
 
@@ -211,7 +211,7 @@ export const logout = catchAsyncError(async (req, res, next) => {
       expires: new Date(Date.now()), httpOnly: true
    })
 
-   res.status(200).json({ success: true, message: "Logged out Successfully" })
+   res.status(200).json({ success: true, message: "Logged out Successfully." })
 })
 
 
@@ -232,7 +232,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
    //user can req for verification code either via phone number or verification link via Email address
    if (!phone && !email) {
-      return next(new ErrorHandler(400, "Either provide registered email or phone number"));
+      return next(new ErrorHandler(400, "Credentials are required."));
    }
    //validate the phone number is in correct format
    if (phone && !validatePhoneNo(phone)) {
@@ -243,7 +243,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
    //when user want to reset the password by verification link via email address
    if (email) {
       const user = await User.findOne({ email, accountVerified: true })
-      if (!user) return next(new ErrorHandler(404, 'No user is registered with this email address'))
+      if (!user) return next(new ErrorHandler(404, 'Invalid email address ❌.'))
 
       //generate a token (resetToken) store the hashed password in database for later verification and send the unhashed token as params in reset password link
       const resetToken = await user.generateResetPasswordToken()
@@ -271,7 +271,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
    else if (phone) {
 
       const user = await User.findOne({ phone, accountVerified: true })
-      if (!user) return next(new ErrorHandler(404, 'No user is registered with this phone number'))
+      if (!user) return next(new ErrorHandler(404, 'Invalid phone number❌.'))
 
       //generate verification code
       const resetPasswordOTP = await user.generateResetPasswordOTP()
@@ -289,7 +289,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
          user.resetPasswordOTPExpire = undefined
          await user.save({ validateBeforeSave: false })
 
-         return next(new ErrorHandler(400, error.message || 'Failed to make call for verification Code | Phone Nu,ber invalid'))
+         return next(new ErrorHandler(400, error.message || 'Failed to make call for verification Code | Invalid phone number'))
       }
    }
 })
@@ -300,7 +300,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
 export const verifyResetPasswordOTP = catchAsyncError(async (req, res, next) => {
    const { phone, otp } = req.body
-   if (!otp || !phone) return next(new ErrorHandler(400, "phone number and OTP are required for verification"))
+   if (!otp || !phone) return next(new ErrorHandler(400, "Credentials are required."))
 
    const user = await User.findOne({ phone, resetPasswordOTP: otp, resetPasswordOTPExpire: { $gt: Date.now() } })
    if (!user) return next(new ErrorHandler(400, "Invalid OTP"))
@@ -324,7 +324,7 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
 
    const { phone, newPassword, confirmPassword } = req.body
 
-   if (!newPassword || !confirmPassword) return next(new ErrorHandler(400, "Plaese provide your new password as well as confirm password"))
+   if (!newPassword || !confirmPassword) return next(new ErrorHandler(400, "Plaese provide your new password and confirm password"))
 
    if (newPassword !== confirmPassword) return next(new ErrorHandler(400, 'New password and confirm Password do not match'))
 
@@ -359,7 +359,7 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
    user.password = newPassword
    await user.save()
 
-   handleSuccessResponse(res, 200, "Password Reset Successfully")
+   handleSuccessResponse(res, 200, "Password Reset Successfully🗽.")
 
 })
 

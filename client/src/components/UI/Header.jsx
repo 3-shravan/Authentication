@@ -1,117 +1,81 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CiHeart } from "react-icons/ci";
-import { TbMenu } from "react-icons/tb";
 import "../../assets/styles/header.css";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState("/");
+
+  useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location]);
+
   return (
     <div className="header">
-
-      {/***********  
-           * @LOGO
-        *  *********** / */}
-
-
+      {/* Logo */}
       <motion.div
         className="logo"
-        initial={{ y: -100 }}
+        initial={{ y: -50 }}
         animate={{ y: 0 }}
-        transition={{ delay: 1, ease: "linear" }}
+        transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
       >
         <motion.span
-          initial={{ y: -100 }}
+          initial={{ y: -30 }}
           animate={{ y: 0 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1.5, duration: 0.3 }}
           className="the"
         >
           its
         </motion.span>
-        <motion.span
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          className="letters"
-        >
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="letter"
-          >
-            L
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 1.6 }}
-            className="letter"
-          >
-            O
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 1.7 }}
-            className="letter"
-          >
-            G
-          </motion.span>
-          <motion.span
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 1.8 }}
-            className="letter"
-          >
-            O
-          </motion.span>
+        <motion.span className="letters">
+          {["L", "O", "G", "O"].map((letter, index) => (
+            <motion.span
+              key={index}
+              initial={{ y: -30 }}
+              animate={{ y: 0 }}
+              transition={{
+                delay: 1.5 + (index * 0.1),
+                duration: 0.3
+              }}
+              className="letter"
+            >
+              {letter}
+            </motion.span>
+          ))}
         </motion.span>
       </motion.div>
 
-
-
-
-      {/***********  
-           * @navBar
-        *  *********** / */}
-
-
-
+      {/* Navigation */}
       <nav className="nav">
-
-        {/***********  
-           * @dropdown 
-        *  *********** / */}
-
+        {/* Dropdown Section */}
         <div className="dropdown">
-          {/* DropDown | DropDown */}
+          {/* Dropdown content goes here */}
         </div>
 
-
-        {/***********  
-             * @MenuBar
-          *  *********** / */}
-
-
+        {/* Menu Bar */}
         <div className="menuBar">
-          {/* {window.location.pathname === "/" && ( */}
-            <span onClick={() => navigate("/login", { replace: true })} className="menuButton">
+          {currentPath === "/" && (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="menuButton"
+              onClick={() => navigate("/login", { replace: true })}
+            >
               Login
-            </span>
-          {/* )} */}
-          <span className="menuButton" >
+            </motion.span>
+          )}
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="menuButton"
+          >
             Menu
-          </span>
-          <span className="menuButton selected"
-            onClick={() => {
-              navigate("/", { replace: true })
-            }
-            }>
-            Home
-          </span>
+          </motion.span>
         </div>
-
       </nav>
     </div>
   );
