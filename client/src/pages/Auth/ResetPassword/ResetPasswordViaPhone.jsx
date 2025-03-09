@@ -1,5 +1,5 @@
 import React from "react";
-import authStyles from "../authcomponents.module.css";
+import authStyles from "../AuthComponents.module.css";
 import styles from "./Reset.module.css";
 import FormContainer from "./FormContainer";
 import AuthButton from "../../../components/UI/AuthButton";
