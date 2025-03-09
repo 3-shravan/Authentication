@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Reset.module.css";
-import authStyles from "../authcomponents.module.css";
+import authStyles from "../AuthComponents.module.css";
 import FormContainer from "./FormContainer";
 import AuthButton from "../../../components/UI/AuthButton";
 import Header from "../../../components/UI/Header";
