@@ -8,13 +8,15 @@ import VerifyOtp from "./ForgetPasswordComponents/VerifyOtp";
 import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
 import Header from "../../../components/UI/Header"
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useApi } from "../../../hooks/useApi";
 import { errorToast } from "../../../utils/ToastNotifications";
 import { validForgetEmail, validForgetPhone } from "../../../utils/Validation";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { MdMotionPhotosOn } from "react-icons/md";
+import { useMenu } from "../../../context/MenuContext";
+import Menu from "../../../components/UI/Menu";
 
 const initialData = {
   email: "",
@@ -22,6 +24,7 @@ const initialData = {
 };
 const RESEND_TIME = 30
 const ForgetPassword = () => {
+  const { menu } = useMenu()
   const [formData, setFormData] = React.useState(initialData);
   const [byEmail, setByEmail] = React.useState(true);
   const [stage, setStage] = React.useState(0);
@@ -106,77 +109,86 @@ const ForgetPassword = () => {
   return (
     <>
       <Header />
-      <motion.div
-        className={styles.container}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.1, ease: "linear" }}
-      >
-        <form
-          action=""
-          onSubmit={(e) => submitHandler(e)}
-          className={styles.formContainer}
+
+      <AnimatePresence>
+        {menu && <Menu />}
+      </AnimatePresence>
+
+      {
+        !menu &&
+
+        <motion.div
+          className={styles.container}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, ease: "linear" }}
         >
-          <h1 className={authStyles.heading1}>
-            <Link to={"/login"}>
-              <IoIosArrowBack className={authStyles.backIcon} />
-            </Link>
-          </h1>
-          {stage === 0 && (
-            <>
-              <motion.h1
-                className={authStyles.heading1}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.25, ease: "linear" }}
-              >
-                Forget Your Password ?{" "}
-              </motion.h1>
-              <span
-                className={authStyles.spanLine}
-                onClick={() => handleMethod()}
-              >
-                Verify via
-                <h2>{byEmail ? "Phone Number" : "Email"}</h2>
-              </span>
-
-              {byEmail ? (
-                <ByEmail handleChange={handleChange} formData={formData} />
-              ) : (
-                <ByPhone handleChange={handleChange} formData={formData} />
-              )}
-
-              <AuthButton
-                text={isResend ? "Verify" : `Resend in ${resendTimer}s`}
-                type="submit"
-                handleNext={submitHandler}
-                loading={!isResend && loading}
-                icon={
-                  <MdMotionPhotosOn className="text-m pl-1 text-black" />
-                }
-              />
-            </>
-          )}
-        </form>
-        {stage === 1 && (
-          <motion.div
-            initial={{ opacity: 5 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, ease: "linear" }}
+          <form
+            action=""
+            onSubmit={(e) => submitHandler(e)}
             className={styles.formContainer}
           >
-            <VerifyOtp
-              text={isResend ? "Resend OTP" : `Resend in ${resendTimer}s`}
-              resendLoading={loading}
-              showError={showError}
-              resendHandler={resendHandler}
-              isResend={isResend}
-              formData={formData}
-              setStage={setStage} />
-          </motion.div>
-        )}
-        <PrivacyTermsAndConditions />
-      </motion.div>
+            <h1 className={authStyles.heading1}>
+              <Link to={"/login"}>
+                <IoIosArrowBack className={authStyles.backIcon} />
+              </Link>
+            </h1>
+            {stage === 0 && (
+              <>
+                <motion.h1
+                  className={authStyles.heading1}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.25, ease: "linear" }}
+                >
+                  Forget Your Password ?{" "}
+                </motion.h1>
+                <span
+                  className={authStyles.spanLine}
+                  onClick={() => handleMethod()}
+                >
+                  Verify via
+                  <h2>{byEmail ? "Phone Number" : "Email"}</h2>
+                </span>
+
+                {byEmail ? (
+                  <ByEmail handleChange={handleChange} formData={formData} />
+                ) : (
+                  <ByPhone handleChange={handleChange} formData={formData} />
+                )}
+
+                <AuthButton
+                  text={isResend ? "Verify" : `Resend in ${resendTimer}s`}
+                  type="submit"
+                  handleNext={submitHandler}
+                  loading={!isResend && loading}
+                  icon={
+                    <MdMotionPhotosOn className="text-m pl-1 text-black" />
+                  }
+                />
+              </>
+            )}
+          </form>
+          {stage === 1 && (
+            <motion.div
+              initial={{ opacity: 5 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1, ease: "linear" }}
+              className={styles.formContainer}
+            >
+              <VerifyOtp
+                text={isResend ? "Resend OTP" : `Resend in ${resendTimer}s`}
+                resendLoading={loading}
+                showError={showError}
+                resendHandler={resendHandler}
+                isResend={isResend}
+                formData={formData}
+                setStage={setStage} />
+            </motion.div>
+          )}
+          <PrivacyTermsAndConditions />
+        </motion.div>
+      }
     </>
   );
 };

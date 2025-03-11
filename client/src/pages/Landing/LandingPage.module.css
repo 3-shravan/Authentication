@@ -39,10 +39,10 @@
   font-size: 0.9rem;
   font-family: "Gilroy Bold";
   color: var(--dark-300);
-  border: 1px solid var(--dark-300);
+  border: 1px solid var(--wheat);
   border-radius: 50px;
   cursor: pointer;
-  background-color: #131313;
+  background-color: var(--black);
   transition: all 0.3s ease-in-out;
   &:hover {
     transition: all 0.3s linear;

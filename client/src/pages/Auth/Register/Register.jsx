@@ -1,6 +1,6 @@
 import React from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { errorToast, successToast } from "../../../utils/ToastNotifications";
 import { useApi } from "../../../hooks/useApi";
 import { RegisterInitialFormData } from "../../../utils/Constants";
@@ -16,10 +16,13 @@ import GoToLogin from "./RegisterComponents/GoToLogin";
 import PrivacyTermsAndConditions from "../../../components/UI/PrivacyToc";
 import { PiArrowSquareInDuotone } from "react-icons/pi";
 import Header from "../../../components/UI/Header";
+import Menu from "../../../components/UI/Menu";
+import { useMenu } from "../../../context/MenuContext";
 
 const RESEND_TIME = 30
 
 const Register = () => {
+  const { menu } = useMenu()
   const [stage, setStage] = React.useState(1);
   const [formData, setFormData] = React.useState(RegisterInitialFormData);
   const [isResend, setIsResend] = React.useState(true)
@@ -119,74 +122,80 @@ const Register = () => {
   return (
     <>
       <Header />
-      <motion.div
-        className={styles.container}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.1, ease: "linear" }}
-      >
-        <form
-          action=""
-          onSubmit={(e) => submitHandler(e)}
-          className={styles.formContainer}
+
+      <AnimatePresence>
+        {menu && <Menu />}
+      </AnimatePresence>
+      {!menu &&
+        <motion.div
+          className={styles.container}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, ease: "linear" }}
         >
-          {stage === 1 && (
-            <Fullname
-              handleNext={handleNext}
-              formData={formData}
-              handleChange={handleChange}
-            />
-          )}
+          <form
+            action=""
+            onSubmit={(e) => submitHandler(e)}
+            className={styles.formContainer}
+          >
+            {stage === 1 && (
+              <Fullname
+                handleNext={handleNext}
+                formData={formData}
+                handleChange={handleChange}
+              />
+            )}
 
-          {stage === 2 && (
-            <Password
-              handleNext={handleNext}
-              formData={formData}
-              handleChange={handleChange}
-              handlePrevious={handlePrevious}
-            />
-          )}
-
-          {stage === 3 && (
-            <>
-              <VerifyPhoneEmail
+            {stage === 2 && (
+              <Password
                 handleNext={handleNext}
                 formData={formData}
                 handleChange={handleChange}
                 handlePrevious={handlePrevious}
-                submitHandler={submitHandler}
               />
-              <AuthButton
+            )}
 
-                handleNext={submitHandler}
-                type="submit"
-                text={isResend ? "Send OTP" : `Resend in ${resendTimer}s`}
-                loading={!isResend && loading}
-                register={true}
-                icon={<PiArrowSquareInDuotone className="text-2xl pl-1" />}
+            {stage === 3 && (
+              <>
+                <VerifyPhoneEmail
+                  handleNext={handleNext}
+                  formData={formData}
+                  handleChange={handleChange}
+                  handlePrevious={handlePrevious}
+                  submitHandler={submitHandler}
+                />
+                <AuthButton
+
+                  handleNext={submitHandler}
+                  type="submit"
+                  text={isResend ? "Send OTP" : `Resend in ${resendTimer}s`}
+                  loading={!isResend && loading}
+                  register={true}
+                  icon={<PiArrowSquareInDuotone className="text-2xl pl-1" />}
+                />
+                <GoToLogin />
+              </>
+            )}
+          </form>
+
+          {stage === 4 && (
+            <div className={styles.formContainer}>
+              <VerifyOTP
+                text={isResend ? "Resend OTP" : `Resend in ${resendTimer}s`}
+                resendLoading={loading}
+                showError={showError}
+                resendHandler={resendHandler}
+                isResend={isResend}
+                formData={formData}
+                handleChange={handleChange}
+                handlePrevious={handlePrevious}
               />
-              <GoToLogin />
-            </>
+            </div>
           )}
-        </form>
 
-        {stage === 4 && (
-          <div className={styles.formContainer}>
-            <VerifyOTP
-              text={isResend ? "Resend OTP" : `Resend in ${resendTimer}s`}
-              resendLoading={loading}
-              showError={showError}
-              resendHandler={resendHandler}
-              isResend={isResend}
-              formData={formData}
-              handleChange={handleChange}
-              handlePrevious={handlePrevious}
-            />
-          </div>
-        )}
-
-        <PrivacyTermsAndConditions />
-      </motion.div>
+          <PrivacyTermsAndConditions />
+        </motion.div>
+      }
     </>
   );
 };

@@ -1,0 +1,67 @@
+.container {
+  position: absolute;
+  background-color: var(--bg);
+  display: flex;
+  height: 100%;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  position: absolute;
+  height: 10%;
+  background-color: var(--font);
+}
+
+.text {
+  color: var(--font);
+  font-weight: 700;
+  white-space: nowrap;
+  mix-blend-mode: difference;
+}
+
+/***********  
+     * @ Spinner
+  *  *********** / */
+
+.circle {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.letterLoading {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  font-family: "Gilroy Bold", sans-serif;
+  /* color: #75bf36; */
+  color: var(--font);
+}
+
+/***********  
+     * @Loader2
+  *  *********** / */
+
+.container2 {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.spinner {
+  position: absolute;
+}
+
+.spinner-1 {
+  right: -535px;
+  bottom: -840px;
+}
+.spinner-2 {
+  right: -385px;
+  bottom: -695px;
+}
+.spinner-3 {
+  right: -200px;
+  bottom: -510px;
+}

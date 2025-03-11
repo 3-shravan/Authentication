@@ -2,11 +2,12 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../context/AuthContext";
+import {Loader, Loader2} from "../components/UI/Loader";
 
 const ProtectedRoutes = () => {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
-  const { execute, loading ,error } = useApi("/profile", "GET", "/feeds");
+  const { execute, loading, error } = useApi("/profile", "GET", "/feeds");
 
   React.useEffect(() => {
     if (auth.token === "undefined" || !auth.isAuthenticated) {
@@ -21,7 +22,7 @@ const ProtectedRoutes = () => {
           ...prev,
           profile: response.data.user,
         }));
-      }else{
+      } else {
         localStorage.removeItem('token')
         localStorage.removeItem('isAuthenticated')
       }
@@ -32,7 +33,7 @@ const ProtectedRoutes = () => {
   }, [auth.isAuthenticated, auth.token, navigate]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader2 />;
   }
 
   return <Outlet />;

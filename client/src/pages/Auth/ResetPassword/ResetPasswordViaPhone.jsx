@@ -10,6 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import { motion } from "framer-motion";
 import { RiRestartFill } from "react-icons/ri";
+import { useMenu } from "../../../context/MenuContext";
 
 const initialFormData = {
   newPassword: "",
@@ -18,9 +19,17 @@ const initialFormData = {
 };
 
 const ResetPasswordViaPhone = () => {
+  const { disableMenu, enableMenu } = useMenu();
+
+
   const [formData, setFormData] = React.useState(initialFormData);
   const params = useParams();
   const { execute, loading } = useApi("/resetPassword/phone", "PUT", "/login");
+
+  React.useEffect(() => {
+    disableMenu();
+    return enableMenu;
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();

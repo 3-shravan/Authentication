@@ -5,13 +5,18 @@ import App from "./App.jsx";
 import "./global.css";
 import { ContextProvider } from "./context/AuthContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { MenuProvider } from "./context/MenuContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider >
         <ContextProvider>
-          <App />
+          <MenuProvider>
+
+            <App />
+
+          </MenuProvider>
         </ContextProvider>
       </ThemeProvider>
     </BrowserRouter>

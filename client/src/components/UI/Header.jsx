@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../../assets/styles/header.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, replace } from "react-router-dom";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { useMenu } from "../../context/MenuContext";
+
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [currentPath, setCurrentPath] = useState("/");
-
-  useEffect(() => {
-    setCurrentPath(location.pathname);
-  }, [location]);
+  const { menu, toggleMenu, isMenuDisabled } = useMenu()
 
   return (
     <div className="header">
@@ -27,10 +26,10 @@ const Header = () => {
           transition={{ delay: 1.5, duration: 0.3 }}
           className="the"
         >
-          its
+          Auth
         </motion.span>
         <motion.span className="letters">
-          {["L", "O", "G", "O"].map((letter, index) => (
+          {["A", "P", "P", "."].map((letter, index) => (
             <motion.span
               key={index}
               initial={{ y: -30 }}
@@ -55,27 +54,49 @@ const Header = () => {
         </div>
 
         {/* Menu Bar */}
-        <div className="menuBar">
-          {currentPath === "/" && (
+
+        {!isMenuDisabled &&
+          <div className="menuBar">
+
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="menuButton"
-              onClick={() => navigate("/login", { replace: true })}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="menuButton menuButtonIcon"
+              onClick={() => {
+                navigate('/', { replace: true })
+              }
+              }
+
             >
-              Login
+              <MdKeyboardDoubleArrowLeft />
+
             </motion.span>
-          )}
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="menuButton"
-          >
-            Menu
-          </motion.span>
-        </div>
+
+
+            {location.pathname === "/" && !menu && (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="menuButton"
+                onClick={() => navigate("/login", { replace: true })}
+              >
+                Login
+              </motion.span>
+            )}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="menuButton"
+              onClick={toggleMenu}
+            >
+              {menu ? "Close" : "Menu"}
+            </motion.span>
+
+          </div>
+        }
       </nav>
     </div>
   );

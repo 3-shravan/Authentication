@@ -57,13 +57,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   border-radius: 50px;
-  height: 42px;
-  padding: 0 15px;
+  height: 35px;
+  padding: 0 10px;
   color: var(--dark-300);
   font-family: "Gilroy Bold";
   background-color: #131313;
+  margin: 0 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 .selected {
@@ -73,8 +74,8 @@
 }
 
 .menuButton {
-  padding: 6px 16px;
-  font-size: 0.8rem;
+  padding: 2px 7px;
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,9 +87,12 @@
   transition: all 0.2s ease-in-out;
 }
 
+.menuButtonIcon {
+  font-size: 1rem;
+}
+
 .menuButton:hover {
-  background-color: #e5e5e5;
-  color: #131313;
+  color: var(--wheat);
 }
 
 @media screen and (max-width: 1200px) {
