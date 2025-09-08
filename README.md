@@ -1,3 +1,6 @@
+
+[Click here to see how preview](https://auth-app-frontend-m3gb.onrender.com/)
+
 # 🛡️ **User Authentication API Documentation**
 
 This documentation provides an overview of the user authentication API, including the available endpoints, request/response formats, and error handling. The API is designed to handle user registration, login, logout, password reset, and other related functionalities.
